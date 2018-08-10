@@ -8,11 +8,13 @@ namespace LD42
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        GameState gameState;
         
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            gameState = GameState.Menu;
         }
 
         protected override void Initialize()
@@ -29,13 +31,17 @@ namespace LD42
 
         protected override void UnloadContent()
         {
-           
+            Content.Unload();
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+
+
+
 
             base.Update(gameTime);
         }
