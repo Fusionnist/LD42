@@ -20,6 +20,8 @@ namespace LD42
             base.Initialize();
         }
 
+        //dick
+
         protected override void LoadContent()
         { 
             spriteBatch = new SpriteBatch(GraphicsDevice);  
