@@ -11,6 +11,7 @@ using MonoGame.FZT.Physics;
 using MonoGame.FZT.Sound;
 using MonoGame.FZT.UI;
 using MonoGame.FZT.XML;
+using System;
 using System.Collections.Generic;
 
 namespace LD42
@@ -21,6 +22,7 @@ namespace LD42
         Point vdims;
         public Texture2D[] tileTexes;
         ContentManager content;
+        string nextFloorType;
 
         public NotTechnicallyATileset(Texture2D[] tileTexes_, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
@@ -28,14 +30,16 @@ namespace LD42
             vdims = vdims_;
             ebuilder = ebuilder_;
             content = content_;
+            nextFloorType = "rand";
             SetupTiles();
             EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
             EntityCollection.CreateGroup(new Property("isCollectible", "isCollectible", "isCollectible"), "pickups");
         }
 
-        public void AddTileGroup(string groupId_, float xpos_)
+        public void AddTileGroup(string groupId_, string itemId_, float xpos_)
         {
             List<Entity> ents = new List<Entity>();
+            ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(xpos_, 0), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
             switch (groupId_)
             {
                 case "basic":
@@ -46,12 +50,15 @@ namespace LD42
                     break;
                 case "void":
                     break;
+            }
+            switch(itemId_)
+            {
                 case "gold":
-                    for (int i = 7; i < 10; i++)
-                    {
-                        ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(xpos_, i * vdims.X / 14), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
-                    }
-                    ents.Add(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderPickup"), new Vector2(xpos_, 3 * vdims.X / 7), content, ebuilder));
+                    Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef("placeholderPickup"), new Vector2(xpos_, 3 * vdims.X / 7), content, ebuilder);
+                    ent.AddProperty(new Property("isCollectible", "isCollectible", "isCollectible"));
+                    ents.Add(ent);
+                    break;
+                case "none":
                     break;
             }
             EntityCollection.AddEntities(ents);
@@ -87,7 +94,7 @@ namespace LD42
         {
             for (int i = 0; i < 15; i++)
             {
-                AddTileGroup("basic", i * vdims.X / 14);
+                AddTileGroup("basic", "none", i * vdims.X / 14);
             }
         }
 
@@ -106,12 +113,40 @@ namespace LD42
             foreach (var ent in EntityCollection.GetGroup("tiles"))
             {
                 if (ent.pos.X <= camPos_ - vdims.X / 14)
-                { ent.exists = false; x = true; }
+                    ent.exists = false;
+                if (ent.pos.X >= camPos_ + 13 * vdims.X / 14)
+                    x = true;
             }
-            if (x)
+            if (!x)
             {
-                AddTileGroup("basic", vdims.X + camPos_);
+                HandleNewTileSpawns(camPos_);
             }
+        }
+
+        public void HandleNewTileSpawns(float camPos_)
+        {
+            string groupStuff = "basic", itemStuff = "none";
+            if (nextFloorType == "rand")
+            {
+                Random r = new Random();
+                int x = r.Next(10);
+                if (x == 0)
+                    itemStuff = "gold";
+                else if (x == 1)
+                {
+                    groupStuff = "void";
+                    nextFloorType = "void2";
+                }
+            }
+            else if (nextFloorType.StartsWith("void"))
+            {
+                groupStuff = "void";
+                if (int.Parse(nextFloorType.Substring(4)) < 10)
+                    nextFloorType = "void" + (int.Parse(nextFloorType.Substring(4)) + 1).ToString();
+                else
+                    nextFloorType = "rand";
+            }
+            AddTileGroup(groupStuff, itemStuff, vdims.X + camPos_);
         }
 
         public void Draw(SpriteBatch sb_)

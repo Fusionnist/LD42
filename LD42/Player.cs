@@ -32,8 +32,8 @@ namespace LD42
 
         public override void Move()
         {
-            mov.X += 16;
-            vel.Y += 1;
+            mov.X += 32;
+            vel.Y += 2;
             base.Move();
         }
 
