@@ -24,6 +24,8 @@ namespace LD42
         SceneCollection scenes;
         InputProfile ipp;
 
+        GameState gameState;
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -36,6 +38,7 @@ namespace LD42
             graphics.PreferredBackBufferWidth = wdims.X;
             graphics.PreferredBackBufferHeight = wdims.Y;
             graphics.ApplyChanges();
+            gameState = GameState.Menu;
         }
 
         protected override void Initialize()
@@ -55,6 +58,8 @@ namespace LD42
             KeyManager[] keyManagers = new KeyManager[] { };
             ipp = new InputProfile(keyManagers);
         }
+
+        //dick
 
         protected override void LoadContent()
         { 
@@ -80,7 +85,7 @@ namespace LD42
 
         protected override void UnloadContent()
         {
-           
+            Content.Unload();
         }
 
         protected override void Update(GameTime gameTime)
@@ -94,6 +99,10 @@ namespace LD42
             //END
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+
+
+
 
             base.Update(gameTime);
         }
