@@ -32,8 +32,6 @@ namespace LD42
         UISystem[] uis;
         int currentUInb;
 
-        
-
         Point vdims, wdims;
         double windowDivider;
         SceneCollection scenes;
@@ -78,6 +76,13 @@ namespace LD42
                 "UI"
                 ));
 
+            scenes.scenes.Add(new Scene(
+               new RenderTarget2D(GraphicsDevice, vdims.X, vdims.Y),
+               new Rectangle(0, 0, vdims.X, vdims.Y),
+               new Rectangle(0, 0, vdims.X, vdims.Y),
+               "game"
+               ));
+
             cursorManager = new CursorManager();
             KeyManager[] keyManagers = new KeyManager[] { };
             ipp = new InputProfile(keyManagers);
@@ -114,7 +119,7 @@ namespace LD42
         {
             ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed") }, vdims, ebuilder);
 
-            inven = new Inventory();
+            inven = new Inventory(Content);
         }
         protected void SetupUISystems()
         {
