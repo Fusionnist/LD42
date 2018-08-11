@@ -244,7 +244,8 @@ namespace LD42
                     }
                 }
                 if (x)
-                { inven.AddItem(pickup); pickup.exists = false; }
+                {
+                    inven.AddItem(pickup); pickup.exists = false; }
 
             }
         }

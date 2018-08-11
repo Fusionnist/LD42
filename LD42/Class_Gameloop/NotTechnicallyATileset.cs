@@ -22,6 +22,7 @@ namespace LD42
         Point vdims;
         public Texture2D[] tileTexes;
         ContentManager content;
+        string nextFloorType;
 
         public NotTechnicallyATileset(Texture2D[] tileTexes_, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
@@ -29,6 +30,7 @@ namespace LD42
             vdims = vdims_;
             ebuilder = ebuilder_;
             content = content_;
+            nextFloorType = "rand";
             SetupTiles();
             EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
             EntityCollection.CreateGroup(new Property("isCollectible", "isCollectible", "isCollectible"), "pickups");
@@ -37,6 +39,7 @@ namespace LD42
         public void AddTileGroup(string groupId_, string itemId_, float xpos_)
         {
             List<Entity> ents = new List<Entity>();
+            ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(xpos_, 0), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
             switch (groupId_)
             {
                 case "basic":
@@ -51,7 +54,9 @@ namespace LD42
             switch(itemId_)
             {
                 case "gold":
-                    ents.Add(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderPickup"), new Vector2(xpos_, 3 * vdims.X / 7), content, ebuilder));
+                    Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef("placeholderPickup"), new Vector2(xpos_, 3 * vdims.X / 7), content, ebuilder);
+                    ent.AddProperty(new Property("isCollectible", "isCollectible", "isCollectible"));
+                    ents.Add(ent);
                     break;
                 case "none":
                     break;
@@ -121,9 +126,26 @@ namespace LD42
         public void HandleNewTileSpawns(float camPos_)
         {
             string groupStuff = "basic", itemStuff = "none";
-            Random r = new Random();
-            if (r.Next(3) == 3)
-                itemStuff = "gold";
+            if (nextFloorType == "rand")
+            {
+                Random r = new Random();
+                int x = r.Next(10);
+                if (x == 0)
+                    itemStuff = "gold";
+                else if (x == 1)
+                {
+                    groupStuff = "void";
+                    nextFloorType = "void2";
+                }
+            }
+            else if (nextFloorType.StartsWith("void"))
+            {
+                groupStuff = "void";
+                if (int.Parse(nextFloorType.Substring(4)) < 10)
+                    nextFloorType = "void" + (int.Parse(nextFloorType.Substring(4)) + 1).ToString();
+                else
+                    nextFloorType = "rand";
+            }
             AddTileGroup(groupStuff, itemStuff, vdims.X + camPos_);
         }
 
