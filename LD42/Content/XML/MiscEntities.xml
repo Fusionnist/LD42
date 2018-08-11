@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Entities>
   <Entity type="slot" name="slot">
-    <Textures name ="textures">
+    <Textures name ="default">
       <Texture name="itemframe" id="itemframe" sheetName="placeholderSheet"></Texture>
     </Textures>
     <Properties></Properties>

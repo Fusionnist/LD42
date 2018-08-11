@@ -42,9 +42,9 @@ namespace LD42
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             //GAME VALUES
-            windowDivider = 0.5;
+            windowDivider = 2;
             vdims = new Point(224, 160);
-            wdims = new Point((int)(1920 * windowDivider), (int)(1080 * windowDivider));
+            wdims = new Point((int)(vdims.X * windowDivider), (int)(vdims.Y * windowDivider));
 
             graphics.PreferredBackBufferWidth = wdims.X;
             graphics.PreferredBackBufferHeight = wdims.Y;
@@ -116,6 +116,10 @@ namespace LD42
         //SETUP
         void SetupGame()
         {
+            //CREATE GROUPS
+            EntityCollection.Flush();
+            EntityCollection.CreateGroup("slot", "slots");
+            
             uis = new UISystem[]
             {
                 new UISystem(new List<Button>()
@@ -162,8 +166,6 @@ namespace LD42
             uis[currentUInb].HandleMouseInput(cursorManager, scenes.GetScene("main").ToVirtualPos(cursorManager.RawPos()));
 
             HandleGameStateChanges();
-
-
 
             base.Update(gameTime);
         }
@@ -216,6 +218,7 @@ namespace LD42
                     break;
                 case GameState.Game:
                     scenes.DrawScene(spriteBatch, "game");
+                    scenes.DrawScene(spriteBatch, "UI");
                     break;
             }
 
@@ -257,8 +260,9 @@ namespace LD42
             scenes.SelectScene("UI");
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
-            GraphicsDevice.Clear(Color.Red);
+            GraphicsDevice.Clear(Color.TransparentBlack);
             //draw slots
+            EntityCollection.DrawGroup("slots", spriteBatch);
 
             spriteBatch.End();
         }

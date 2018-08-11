@@ -23,11 +23,16 @@ namespace LD42
 
         public Inventory(ContentManager content_)
         {
+            slots = new List<Entity>();
+            minSize = 7;
+            maxSize = 32;
             content = content_;
             for(int x = 0; x < 7; x++)
             {
                 AddSlot();
             }
+
+
         }
 
         public void AddItem()

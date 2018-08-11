@@ -49,6 +49,7 @@ namespace LD42
             }
             EntityCollection.AddEntities(ents);
             EntityCollection.CreateGroup(new Property("posIs", lastGroupNb.ToString(), "tilePos"), "posIs" + lastGroupNb.ToString());
+
         }
 
         public DrawerCollection GetDrawerCollection(int id_)
