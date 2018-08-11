@@ -112,7 +112,6 @@ namespace LD42
             {
                 AddTileGroup("basic", vdims.X + camPos_);
             }
-            EntityCollection.RecycleAll();
         }
 
         public void Draw(SpriteBatch sb_)
