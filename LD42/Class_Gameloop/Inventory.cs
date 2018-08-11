@@ -28,15 +28,22 @@ namespace LD42
             maxSize = 32;
             taken = new int[7, 5];
             content = content_;
-            for(int x = 0; x < 32; x++)
+            for(int x = 0; x < 7; x++)
             {
                 AddSlot();
             }
         }
 
-        public void AddItem()
+        public void AddItem(Entity item_)
         {
-
+            foreach(Entity slot in slots)
+            {
+                if (slot.Answer("empty"))
+                {
+                    slot.FeedEntity(item_, "eat my ass");
+                    break;
+                }
+            }
         }
 
         Point GetSlotPos(int index)
@@ -47,20 +54,29 @@ namespace LD42
             Point innerLimits = Point.Zero;
             Point outerLimits = new Point(6, 4);
 
-            if (taken[0,3] == 1) {
-                innerLimits = new Point(1, 1);
-                outerLimits = new Point(5, 3);
-            }
+           
 
             for (int x = 1; x < index; x++)
             {
-                dir = Point.Zero;
+                if (pos == new Point(0,3))
+                {
+                    innerLimits = new Point(0, 1);
+                    outerLimits = new Point(5, 3);
+                }
+                if (pos == new Point(1, 3))
+                {
+                    innerLimits = new Point(1, 1);
 
-                if (pos.X == outerLimits.X && pos.Y == outerLimits.Y) { dir.Y = -1; }
-                if (pos.X == outerLimits.X && pos.Y == innerLimits.Y) { dir.X = -1; }
-                if (pos.X == innerLimits.X && pos.Y == outerLimits.Y) { dir.X = 1; }
-                if (pos.X == innerLimits.X && pos.Y == innerLimits.Y) { dir.Y = 1; }
+                }
 
+                if (pos.X == outerLimits.X && pos.Y == outerLimits.Y) {
+                    dir = new Point(0, -1); }
+                if (pos.X == outerLimits.X && pos.Y == innerLimits.Y) {
+                    dir = new Point(-1, 0); }
+                if (pos.X == innerLimits.X && pos.Y == outerLimits.Y) {
+                    dir = new Point(1, 0); }
+                if (pos.X == innerLimits.X && pos.Y == innerLimits.Y) {
+                    dir = new Point(0, 1); }
 
                 pos += dir;
             }

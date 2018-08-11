@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 using MonoGame.FZT;
 using MonoGame.FZT.Assets;
@@ -134,6 +135,7 @@ namespace LD42
                 );
 
             inven = new Inventory(Content);
+            inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderItem"), new Vector2(0, 0), Content, ebuilder));
         }
         protected void SetupUISystems()
         {
@@ -211,8 +213,17 @@ namespace LD42
         }
         protected void UpdateGame(float es_)
         {
-            player.Update(ipp, es_, 10);
+            Vector2 input = Vector2.Zero;
+            if (ipp.JustPressed("w"))
+                input.Y = -1;
+
+            player.Input(input);
+            player.Move();
+            player.MultMov(es_);
+            player.Update(es_);
+
             ts.Update(es_, player.pos.X - 64);
+
             inven.Update(es_);
             foreach (var tile in EntityCollection.GetGroup("tiles"))
             {

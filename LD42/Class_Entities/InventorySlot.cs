@@ -13,7 +13,7 @@ namespace LD42
 {
     public class InventorySlot : Entity
     {
-        Item item;
+        Entity item;
 
         public InventorySlot(DrawerCollection texes_, Vector2 pos_, List<Property> props_) : base(texes_, pos_, props_)
         {
@@ -22,7 +22,8 @@ namespace LD42
 
         public override void FeedEntity(Entity e_, string context_)
         {
-            e_ = item;
+            item = e_;
+            item.pos = pos;
             base.FeedEntity(e_, context_);
         }
 
@@ -38,6 +39,15 @@ namespace LD42
                 item = null;
             }
             base.React(id_);
+        }
+
+        public override bool Answer(string question_)
+        {
+            if(question_ == "empty")
+            {
+                return item == null;
+            }
+            return base.Answer(question_);
         }
     }
 }
