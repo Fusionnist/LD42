@@ -2,13 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.FZT;
-using MonoGame.FZT.Data;
-using MonoGame.FZT.Drawing;
-using MonoGame.FZT.Input;
-using MonoGame.FZT.UI;
-using System.Collections.Generic;
-
-using MonoGame.FZT;
 using MonoGame.FZT.Assets;
 using MonoGame.FZT.Data;
 using MonoGame.FZT.Drawing;
@@ -17,6 +10,7 @@ using MonoGame.FZT.Physics;
 using MonoGame.FZT.Sound;
 using MonoGame.FZT.UI;
 using MonoGame.FZT.XML;
+using System.Collections.Generic;
 
 namespace LD42
 {
@@ -27,7 +21,7 @@ namespace LD42
         GraphicsDeviceManager graphics;
         int currentUInb;
         SpriteBatch spriteBatch;
-        GameState gameState;
+        UISystem[] uis;
         
 
         Point vdims, wdims;
