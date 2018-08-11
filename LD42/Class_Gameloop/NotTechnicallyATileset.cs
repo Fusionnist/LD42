@@ -120,6 +120,11 @@ namespace LD42
                 if (ent.pos.X >= camPos_ + 13 * vdims.X / 14)
                     x = true;
             }
+            foreach (var ent in EntityCollection.GetGroup("pickups"))
+            {
+                if (ent.pos.X <= camPos_ - vdims.X / 14)
+                    ent.exists = false;
+            }
             if (!x)
             {
                 HandleNewTileSpawns(camPos_);
@@ -161,7 +166,7 @@ namespace LD42
                 {
                     u = true;
                     groupStuff = "void";
-                    if (int.Parse(nextFloorType.Substring(4)) < 5)
+                    if (int.Parse(nextFloorType.Substring(4)) < 3)
                         nextFloorType = "void" + (int.Parse(nextFloorType.Substring(4)) + 1).ToString();
                     else
                     { nextFloorType = "rand"; voidCooldown = 20; }
