@@ -41,7 +41,7 @@ namespace LD42
 
                 string result = recipe.Element("Result").Value;
 
-                int resultworth = int.Parse(recipe.Element("Result").Value);
+                int resultworth = int.Parse(recipe.Element("ResultWorth").Value);
 
                 recipes.Add(new Recipe(ingredients, result, resultworth));
             }

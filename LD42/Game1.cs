@@ -126,7 +126,8 @@ namespace LD42
             //CREATE GROUPS
             EntityCollection.Flush();
             EntityCollection.CreateGroup("slot", "slots");
-            
+            EntityCollection.CreateGroup("item", "items");
+
             SetupUISystems();
             ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed"), Content.Load<Texture2D>("Placeholder/placeholder1") }, vdims, ebuilder, Content);
             player = new Player
@@ -247,7 +248,7 @@ namespace LD42
                 }
                 if (x)
                 {
-                    inven.AddItem(pickup); pickup.exists = false; }
+                    inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderItem"), new Vector2(0, 0), Content, ebuilder)); pickup.exists = false; }
 
             }
         }
@@ -319,6 +320,7 @@ namespace LD42
             GraphicsDevice.Clear(Color.TransparentBlack);
             //draw slots
             EntityCollection.DrawGroup("slots", spriteBatch);
+            EntityCollection.DrawGroup("items", spriteBatch);
 
             spriteBatch.End();
         }

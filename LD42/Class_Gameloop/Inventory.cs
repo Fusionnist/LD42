@@ -20,12 +20,13 @@ namespace LD42
         bool reverse;
         //not test
         ContentManager content;
-        List<Entity> slots;
+        List<Entity> slots, items;
         int[,] taken;
         int size, minSize, maxSize;
 
         public Inventory(ContentManager content_)
         {
+            items = new List<Entity>();
             slots = new List<Entity>();
             minSize = 7;
             maxSize = 32;
@@ -39,14 +40,18 @@ namespace LD42
 
         public void AddItem(Entity item_)
         {
-            foreach(Entity slot in slots)
+            items.Add(item_);
+            CheckRecipes(GetPool());
+        }
+
+        List<string> GetPool()
+        {
+            List<string> pool = new List<string>();
+            foreach(Entity e in items)
             {
-                if (slot.Answer("empty"))
-                {
-                    slot.FeedEntity(item_, "eat my ass");
-                    break;
-                }
+                pool.Add(e.Name);
             }
+            return pool;
         }
 
         Point GetSlotPos(int index)
@@ -116,17 +121,30 @@ namespace LD42
 
         public void Update(float es_)
         {
-            
+            SortItems();
         }
 
-        void UpdatePool()
+        void SortItems()
         {
-
+            for(int x = items.Count-1; x >= 0; x--)
+            {
+                if(items[x] == null || items[x].exists == false)
+                {
+                    items.RemoveAt(x);
+                }
+                if (x >= 0)
+                    items[x].pos = GetSlotPos(x).ToVector2() * 16;
+            }
         }
 
-        void CheckRecipes(List<Entity> pool)
+        void CheckRecipes(List<string> pool)
         {
+            Recipe r = RecipeBook.FindRecipe(pool);
 
+            if (r != null)
+            {
+                //do stuff
+            }
         }
     }
 }
