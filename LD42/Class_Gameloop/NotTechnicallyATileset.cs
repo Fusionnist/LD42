@@ -17,33 +17,30 @@ namespace LD42
     public class NotTechnicallyATileset
     {
         EntBuilder42 ebuilder;
-        float firstTilePos, movementSpeed;
         Point vdims;
         public Texture2D[] tileTexes;
 
         public NotTechnicallyATileset(Texture2D[] tileTexes_, Point vdims_, EntBuilder42 ebuilder_)
         {
-            firstTilePos = 0;
             tileTexes = tileTexes_;
             vdims = vdims_;
             ebuilder = ebuilder_;
-            movementSpeed = 10;
             SetupTiles();
             EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
         }
 
-        public void AddTileGroup(int groupId_, float xpos_)
+        public void AddTileGroup(string groupId_, float xpos_)
         {
             List<Entity> ents = new List<Entity>();
             switch (groupId_)
             {
-                case 0:
+                case "basic":
                     for (int i = 7; i < 10; i++)
                     {
                         ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(xpos_, i * vdims.X / 14), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
                     }
                     break;
-                case 1:
+                case "void":
                     break;
             }
             EntityCollection.AddEntities(ents);
@@ -65,31 +62,24 @@ namespace LD42
         {
             for (int i = 0; i < 15; i++)
             {
-                AddTileGroup(0, i * vdims.X / 14);
+                AddTileGroup("basic", i * vdims.X / 14);
             }
         }
 
-        public void Update(float es_)
+        public void Update(float es_, float camPos_)
         {
-            firstTilePos -= es_ * movementSpeed;
-            foreach (var tile in EntityCollection.GetGroup("tiles"))
-            {
-                tile.pos.X -= es_ * movementSpeed;
-            }
-            if (firstTilePos <= -16)
-                RemoveFirstTileGroup();
+            RemoveTiles(camPos_);
         }
 
-        public void RemoveFirstTileGroup()
+        public void RemoveTiles(float camPos_)
         {
             foreach (var ent in EntityCollection.GetGroup("tiles"))
             {
-                if (ent.pos.X <= firstTilePos + 2)
+                if (ent.pos.X <= camPos_)
                     ent.exists = false;
             }
             EntityCollection.RecycleAll();
-            firstTilePos += 16;
-            AddTileGroup(0, vdims.X + firstTilePos);
+            AddTileGroup("basic", vdims.X + camPos_);
         }
 
         public void Draw(SpriteBatch sb_)
