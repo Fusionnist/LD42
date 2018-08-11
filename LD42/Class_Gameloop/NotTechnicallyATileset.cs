@@ -23,6 +23,7 @@ namespace LD42
         public Texture2D[] tileTexes;
         ContentManager content;
         string nextFloorType;
+        int voidCooldown, goldCooldown;
 
         public NotTechnicallyATileset(Texture2D[] tileTexes_, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
@@ -31,6 +32,8 @@ namespace LD42
             ebuilder = ebuilder_;
             content = content_;
             nextFloorType = "rand";
+            voidCooldown = 0;
+            goldCooldown = 0;
             SetupTiles();
             EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
             EntityCollection.CreateGroup(new Property("isCollectible", "isCollectible", "isCollectible"), "pickups");
@@ -125,28 +128,50 @@ namespace LD42
 
         public void HandleNewTileSpawns(float camPos_)
         {
-            string groupStuff = "basic", itemStuff = "none";
-            if (nextFloorType == "rand")
+            string groupStuff = null, itemStuff = null;
+            bool u = false;
+            while (!u)
             {
-                Random r = new Random();
-                int x = r.Next(10);
-                if (x == 0)
-                    itemStuff = "gold";
-                else if (x == 1)
+                if (nextFloorType == "rand")
                 {
-                    groupStuff = "void";
-                    nextFloorType = "void2";
+                    Random r = new Random();
+                    int x = r.Next(10);
+                    if (x == 0 && goldCooldown == 0)
+                    {
+                        groupStuff = "basic";
+                        itemStuff = "gold";
+                        u = true;
+                        goldCooldown = 3;
+                    }
+                    else if (x == 1 && voidCooldown == 0)
+                    {
+                        groupStuff = "void";
+                        itemStuff = "none";
+                        nextFloorType = "void2";
+                        u = true;
+                    }
+                    else if (x >= 2)
+                    {
+                        groupStuff = "basic";
+                        itemStuff = "none";
+                        u = true;
+                    }
                 }
+                else if (nextFloorType.StartsWith("void"))
+                {
+                    u = true;
+                    groupStuff = "void";
+                    if (int.Parse(nextFloorType.Substring(4)) < 5)
+                        nextFloorType = "void" + (int.Parse(nextFloorType.Substring(4)) + 1).ToString();
+                    else
+                    { nextFloorType = "rand"; voidCooldown = 20; }
+                }
+                AddTileGroup(groupStuff, itemStuff, vdims.X + camPos_);
             }
-            else if (nextFloorType.StartsWith("void"))
-            {
-                groupStuff = "void";
-                if (int.Parse(nextFloorType.Substring(4)) < 10)
-                    nextFloorType = "void" + (int.Parse(nextFloorType.Substring(4)) + 1).ToString();
-                else
-                    nextFloorType = "rand";
-            }
-            AddTileGroup(groupStuff, itemStuff, vdims.X + camPos_);
+            if (voidCooldown > 0)
+                voidCooldown--;
+            if (goldCooldown > 0)
+                goldCooldown--;
         }
 
         public void Draw(SpriteBatch sb_)

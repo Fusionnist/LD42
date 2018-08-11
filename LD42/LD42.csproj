@@ -121,6 +121,7 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Placeholder\barint.png" />
     <Content Include="Content\Placeholder\placeholder1.png" />
     <Content Include="Content\XML\Items.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
