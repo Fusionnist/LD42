@@ -116,16 +116,7 @@ namespace LD42
 
         public void Update(float es_)
         {
-            if (size == 32)
-            { reverse = true; }
-            if (size == 7)
-            { reverse = false; }
-
-            if (!reverse)
-                AddSlot();
-
-            if(reverse)
-                RemoveSlot();            
+            
         }
 
         void UpdatePool()
