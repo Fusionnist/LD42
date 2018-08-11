@@ -16,6 +16,9 @@ namespace LD42
 {
     public class Inventory
     {
+        //test
+        bool reverse;
+        //not test
         ContentManager content;
         List<Entity> slots;
         int[,] taken;
@@ -53,8 +56,6 @@ namespace LD42
 
             Point innerLimits = Point.Zero;
             Point outerLimits = new Point(6, 4);
-
-           
 
             for (int x = 1; x < index; x++)
             {
@@ -106,13 +107,22 @@ namespace LD42
             if (size != minSize)
             {
                 size--;
+                slots[size - 1].exists = false;
                 slots.RemoveAt(size - 1);
             }
         }
 
         public void Update(float es_)
         {
+            if (size == 32)
+            { reverse = true; }
+            if (size == 7)
+            { reverse = false; }
 
+            if (!reverse)
+                AddSlot();
+            else
+                RemoveSlot();            
         }
 
         void UpdatePool()

@@ -230,6 +230,11 @@ namespace LD42
             ts.Update(es_, player.pos.X - 64);
 
             inven.Update(es_);
+            foreach (var tile in EntityCollection.GetGroup("tiles"))
+            {
+                CollisionSolver.SolveEntTileCollision(player, tile);
+                CollisionSolver.SecondPassCollision(player, tile);
+            }
         }
         //DRAW
         protected override void Draw(GameTime gameTime)
@@ -263,7 +268,7 @@ namespace LD42
 
             //DRAW TO SCREEN
             GraphicsDevice.SetRenderTarget(null);
-            spriteBatch.Begin();
+            spriteBatch.Begin(samplerState: SamplerState.PointWrap);
 
             scenes.DrawScene(spriteBatch, "main");
 
