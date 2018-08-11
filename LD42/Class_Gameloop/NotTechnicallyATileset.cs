@@ -113,6 +113,7 @@ namespace LD42
         public void RemoveTiles(float camPos_)
         {
             bool x = false;
+            List<Entity> ents = EntityCollection.GetGroup("tiles");
             foreach (var ent in EntityCollection.GetGroup("tiles"))
             {
                 if (ent.pos.X <= camPos_ - vdims.X / 14)
@@ -171,8 +172,8 @@ namespace LD42
                     else
                     { nextFloorType = "rand"; voidCooldown = 20; }
                 }
-                AddTileGroup(groupStuff, itemStuff, vdims.X + camPos_);
             }
+            AddTileGroup(groupStuff, itemStuff, vdims.X + camPos_);
             if (voidCooldown > 0)
                 voidCooldown--;
             if (goldCooldown > 0)
