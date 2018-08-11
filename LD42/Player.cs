@@ -28,6 +28,10 @@ namespace LD42
             mov.X += speed_;
             if (ipp.JustPressed("w"))
                 vel.Y -= 10;
+            else if (vel.Y < 0)
+                vel.Y += 1;
+            else if (vel.Y > 0)
+                vel.Y = 0;
             MultMov(es_);
             base.Update(es_);
         }
