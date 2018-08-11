@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 using MonoGame.FZT;
 using MonoGame.FZT.Assets;
@@ -134,6 +135,7 @@ namespace LD42
                 );
 
             inven = new Inventory(Content);
+            inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderItem"), new Vector2(0, 0), Content, ebuilder));
         }
         protected void SetupUISystems()
         {
