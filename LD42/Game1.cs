@@ -208,6 +208,8 @@ namespace LD42
         }
         protected void UpdateGame(float es_)
         {
+            ts.Update(es_);
+            player.Update(es_);
             ts.Update(es_, player.pos.X - 64);
             inven.Update(es_);
         }
@@ -268,6 +270,7 @@ namespace LD42
             scenes.SetupScene(spriteBatch, GraphicsDevice);
             //DRAW HERE
             ts.Draw(spriteBatch);
+            player.Draw(spriteBatch);
             spriteBatch.End();
         }
         void DrawInventory()
