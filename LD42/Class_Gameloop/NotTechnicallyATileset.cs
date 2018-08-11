@@ -11,6 +11,7 @@ using MonoGame.FZT.Physics;
 using MonoGame.FZT.Sound;
 using MonoGame.FZT.UI;
 using MonoGame.FZT.XML;
+using System;
 using System.Collections.Generic;
 
 namespace LD42
@@ -33,7 +34,7 @@ namespace LD42
             EntityCollection.CreateGroup(new Property("isCollectible", "isCollectible", "isCollectible"), "pickups");
         }
 
-        public void AddTileGroup(string groupId_, float xpos_)
+        public void AddTileGroup(string groupId_, string itemId_, float xpos_)
         {
             List<Entity> ents = new List<Entity>();
             switch (groupId_)
@@ -46,12 +47,13 @@ namespace LD42
                     break;
                 case "void":
                     break;
+            }
+            switch(itemId_)
+            {
                 case "gold":
-                    for (int i = 7; i < 10; i++)
-                    {
-                        ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(xpos_, i * vdims.X / 14), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
-                    }
                     ents.Add(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderPickup"), new Vector2(xpos_, 3 * vdims.X / 7), content, ebuilder));
+                    break;
+                case "none":
                     break;
             }
             EntityCollection.AddEntities(ents);
@@ -87,7 +89,7 @@ namespace LD42
         {
             for (int i = 0; i < 15; i++)
             {
-                AddTileGroup("basic", i * vdims.X / 14);
+                AddTileGroup("basic", "none", i * vdims.X / 14);
             }
         }
 
@@ -110,8 +112,17 @@ namespace LD42
             }
             if (x)
             {
-                AddTileGroup("basic", vdims.X + camPos_);
+                HandleNewTileSpawns(camPos_);
             }
+        }
+
+        public void HandleNewTileSpawns(float camPos_)
+        {
+            string groupStuff = "basic", itemStuff = "none";
+            Random r = new Random();
+            if (r.Next(3) == 3)
+                itemStuff = "gold";
+            AddTileGroup(groupStuff, itemStuff, vdims.X + camPos_);
         }
 
         public void Draw(SpriteBatch sb_)
