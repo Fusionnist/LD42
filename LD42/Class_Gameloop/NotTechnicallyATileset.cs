@@ -36,7 +36,7 @@ namespace LD42
             goldCooldown = 0;
             SetupTiles();
             EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
-            EntityCollection.CreateGroup(new Property("isCollectible", "isCollectible", "isCollectible"), "pickups");
+            //EntityCollection.CreateGroup(new Property("isCollectible", "isCollectible", "isCollectible"), "pickups");
         }
 
         public void AddTileGroup(string groupId_, string itemId_, float xpos_)

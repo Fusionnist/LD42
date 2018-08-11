@@ -28,14 +28,15 @@
        <SourceRect x="0" y="32" w="16" h="16"></SourceRect>
        <Center x="0" y="0"></Center>
      </Frame>
+     <Hitboxes>
+       <Collection type="collision">
+         <Frame>
+           <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+         </Frame>
+       </Collection>
+     </Hitboxes>
     </Texture>
-    <Hitboxes>
-      <Collection type="collision">
-        <Frame>
-          <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
-        </Frame>
-      </Collection>
-    </Hitboxes>
+    
   </Spritesheet>
   <Spritesheet name="placeholderSheet2" source="Placeholder/barint">
     //spikes
