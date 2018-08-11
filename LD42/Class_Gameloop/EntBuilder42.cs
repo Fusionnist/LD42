@@ -21,18 +21,19 @@ namespace LD42
         {
             if(type_ == "item")
             {
-                return new Item(dc_, pos_, props_);
+                return new Item(dc_, pos_, props_, name_);
             }
 
             if (type_ == "pickup")
             {
-                return new Pickup(dc_, pos_, props_);
+                return new Pickup(dc_, pos_, props_, name_);
             }
 
             if (type_ == "slot")
             {
-                return new InventorySlot(dc_, pos_, props_);
+                return new InventorySlot(dc_, pos_, props_, name_);
             }
+
             if (type_ == "tile")
             {
                 return new Tile(dc_, pos_, props_);

@@ -124,6 +124,12 @@ namespace LD42
             SortItems();
         }
 
+       public void UpdateSlots()
+        {
+            if(size < items.Count) { AddSlot(); }
+            if(size > items.Count) { RemoveSlot(); }
+        }
+
         void SortItems()
         {
             for(int x = items.Count-1; x >= 0; x--)
@@ -144,6 +150,19 @@ namespace LD42
             if (r != null)
             {
                 //do stuff
+                foreach(string rname in r.ingredients)
+                {
+                    for(int x=items.Count-1; x >= 0; x--)
+                    {
+                        if(items[x].Name == rname)
+                        {
+                            items[x].exists = false;
+                            items.RemoveAt(x);
+                        }
+                    }
+                }
+
+                AddItem(Assembler.GetEnt(ElementCollection.GetEntRef(r.result), Vector2.Zero, content, new EntBuilder42()));
             }
         }
     }

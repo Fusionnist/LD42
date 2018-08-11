@@ -17,7 +17,35 @@ namespace LD42
 
             foreach(Recipe r in recipes)
             {
-               if( Enumerable.SequenceEqual(names_.OrderBy(t => t), r.ingredients.OrderBy(t => t)))
+                bool match = true;
+
+                bool[] paired = new bool[names_.Count];
+
+                foreach(string rname in r.ingredients)
+                {
+                    bool pairFound = false;
+
+                    for(int x = 0; x < names_.Count; x++)
+                    {
+                        if (!paired[x])
+                        {
+                            if(names_[x] == rname)
+                            {
+                                paired[x] = true;
+                                pairFound = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (!pairFound)
+                    {
+                        match = false;
+                        break;
+                    }
+                }
+
+
+                if (match) 
                 {
                     if(r.resultWorth > record)
                     {

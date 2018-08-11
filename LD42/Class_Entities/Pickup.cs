@@ -15,7 +15,7 @@ namespace LD42
     {
         Entity item;
 
-        public Pickup(DrawerCollection texes_, Vector2 pos_, List<Property> props_):base(texes_, pos_, props_)
+        public Pickup(DrawerCollection texes_, Vector2 pos_, List<Property> props_, string name_) :base(texes_, pos_, props_, name_)
         {
             type = "pickup";
         }
