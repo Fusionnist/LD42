@@ -162,10 +162,6 @@ namespace LD42
 
             //UPDATE INPUT
             ipp.Update(Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
-            if (ipp.JustPressed("w"))
-            {
-                int x = 1;
-            }
             cursorManager.Update();
             //self-explanatory
             UpdateUIStuff();
@@ -220,18 +216,37 @@ namespace LD42
             player.Input(input);
             player.Move();
             player.MultMov(es_);
-            foreach (var tile in EntityCollection.GetGroup("tiles"))
-            {
-                CollisionSolver.SolveEntTileCollision(player, tile);
-                CollisionSolver.SecondPassCollision(player, tile);
-            }
+            HandleCollisions();
             player.Update(es_);
 
             ts.Update(es_, player.pos.X - 64);
 
             inven.Update(es_);
+        }
+        protected void HandleCollisions()
+        {
+            foreach (var tile in EntityCollection.GetGroup("tiles"))
+            {
+                CollisionSolver.SolveEntTileCollision(player, tile);
+                CollisionSolver.SecondPassCollision(player, tile);
+            }
+            foreach (var pickup in EntityCollection.GetGroup("pickups"))
+            {
+                bool x = false;
+                foreach (FRectangle rect in player.MovHB())
+                {
+                    foreach (FRectangle rect2 in pickup.MovHB())
+                    {
+                        if (rect.Intersects(rect2))
+                        {
+                            x = true;
+                        }
+                    }
+                }
+                if (x)
+                { inven.AddItem(pickup); pickup.exists = false; }
 
-            EntityCollection.RecycleAll();
+            }
         }
         //DRAW
         protected override void Draw(GameTime gameTime)

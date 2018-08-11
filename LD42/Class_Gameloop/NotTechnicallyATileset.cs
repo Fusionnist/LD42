@@ -27,6 +27,7 @@ namespace LD42
             tileTexes = tileTexes_;
             vdims = vdims_;
             ebuilder = ebuilder_;
+            content = content_;
             SetupTiles();
             EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
             EntityCollection.CreateGroup(new Property("isCollectible", "isCollectible", "isCollectible"), "pickups");

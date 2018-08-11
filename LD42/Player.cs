@@ -17,6 +17,7 @@ namespace LD42
     class Player : Entity
     {
         float speed;
+
         public Player(DrawerCollection texes_, Vector2 pos_, List<Property> props_, string name_ = null): base(texes_, pos_, props_, name_, "player")
         {
 
@@ -36,7 +37,7 @@ namespace LD42
             base.Move();
         }
 
-        public void Update(float es_)
+        public override void Update(float es_)
         {
             textures.Update(es_);
             
