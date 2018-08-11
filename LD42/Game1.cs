@@ -237,10 +237,6 @@ namespace LD42
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
             }
-
-            GraphicsDevice.Clear(Color.Red);
-            
-
             spriteBatch.End();
 
             //DRAW TO SCREEN
@@ -265,7 +261,7 @@ namespace LD42
         }
         void DrawGame()
         {
-            scenes.SelectScene("UI");
+            scenes.SelectScene("game");
             scenes.SetupScene(spriteBatch, GraphicsDevice);
             //DRAW HERE
             ts.Draw(spriteBatch);
