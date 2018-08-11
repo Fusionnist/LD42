@@ -25,8 +25,8 @@ namespace LD42
         CursorManager cursorManager;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        EntityBuilder ebuilder;
-        Tileset ts;
+        EntBuilder42 ebuilder;
+        NotTechnicallyATileset ts;
         Inventory inven;
 
         UISystem[] uis;
@@ -58,12 +58,10 @@ namespace LD42
             gameState = GameState.Menu;
             currentUInb = 0;
             IsMouseVisible = true;
-
-            base.Initialize();
             //VALUES
 
             //UTILITY
-            ebuilder = new EntityBuilder();
+            ebuilder = new EntBuilder42();
 
             scenes = new SceneCollection();
             scenes.scenes.Add(new Scene(
@@ -83,6 +81,8 @@ namespace LD42
             cursorManager = new CursorManager();
             KeyManager[] keyManagers = new KeyManager[] { };
             ipp = new InputProfile(keyManagers);
+
+            base.Initialize();
         }
         protected override void LoadContent()
         { 
@@ -99,6 +99,7 @@ namespace LD42
             //LOAD ENTITIES
 
             //LOAD UR MOM
+            SetupUISystems();
 
             //END - SETUP THE GAME!
             SetupGame();
@@ -111,15 +112,7 @@ namespace LD42
         //SETUP
         void SetupGame()
         {
-            uis = new UISystem[]
-            {
-                new UISystem(new List<Button>()
-                {
-                    new Button("startGame", new Rectangle(vdims.X / 7, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 7, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
-                }),
-                new UISystem(new List<Button>())
-            };
-            SetupUISystems();
+            ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed") }, vdims, ebuilder);
 
             inven = new Inventory();
         }
@@ -129,12 +122,12 @@ namespace LD42
             {
                 new UISystem(new List<Button>()
                 {
-                    new Button("startGame", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
+                    new Button("startGame", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new Point(vdims.X / 10, vdims.Y / 20))))
                 }),
                 new UISystem(new List<Button>()),
                 new UISystem(new List<Button>()
                 {
-                    new Button("returnToMenu", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
+                    new Button("returnToMenu", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new Point(vdims.X / 10, vdims.Y / 20))))
                 })
             };
 
@@ -150,15 +143,15 @@ namespace LD42
             ipp.Update(Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
             cursorManager.Update();
 
+            //self-explanatory
+            UpdateUIStuff();
+
+            if (gameState == GameState.Game)
+                UpdateGame(es);
+
             //END
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            uis[currentUInb].HandleMouseInput(cursorManager, scenes.GetScene("main").ToVirtualPos(cursorManager.RawPos()));
-
-            HandleGameStateChanges();
-
-
 
             base.Update(gameTime);
         }
@@ -185,7 +178,15 @@ namespace LD42
                 currentUInb = 0;
             }
         }
-
+        protected void UpdateUIStuff()
+        {
+            uis[currentUInb].HandleMouseInput(cursorManager, scenes.GetScene("main").ToVirtualPos(cursorManager.RawPos()));
+            HandleGameStateChanges();
+        }
+        protected void UpdateGame(float es_)
+        {
+            ts.Update(es_);
+        }
         //DRAW
         protected override void Draw(GameTime gameTime)
         {
@@ -244,7 +245,7 @@ namespace LD42
             scenes.SelectScene("UI");
             scenes.SetupScene(spriteBatch, GraphicsDevice);
             //DRAW HERE
-
+            ts.Draw(spriteBatch);
             spriteBatch.End();
         }
         void DrawInventory()
