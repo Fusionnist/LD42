@@ -133,7 +133,7 @@ namespace LD42
                     items.RemoveAt(x);
                 }
                 if (x >= 0)
-                    items[x].pos = GetSlotPos(x).ToVector2() * 16;
+                    items[x].pos = GetSlotPos(x+1).ToVector2() * 32;
             }
         }
 

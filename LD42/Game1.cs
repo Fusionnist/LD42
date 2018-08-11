@@ -16,6 +16,7 @@ using MonoGame.FZT.XML;
 using System.Collections.Generic;
 
 using System.Xml.Linq;
+using System;
 
 namespace LD42
 {
@@ -127,6 +128,7 @@ namespace LD42
             EntityCollection.Flush();
             EntityCollection.CreateGroup("slot", "slots");
             EntityCollection.CreateGroup("item", "items");
+            EntityCollection.CreateGroup("pickup", "pickups");
 
             SetupUISystems();
             ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed"), Content.Load<Texture2D>("Placeholder/placeholder1") }, vdims, ebuilder, Content);
@@ -312,7 +314,7 @@ namespace LD42
         void DrawGame()
         {
             scenes.SelectScene("game");
-            scenes.CurrentScene.TranslateTo(new Vector2(player.pos.X - 8, 0), false);
+            scenes.CurrentScene.TranslateTo(new Vector2((float)Math.Round(player.pos.X) - 8, 0), false);
             scenes.SetupScene(spriteBatch, GraphicsDevice);
             //DRAW HERE
             ts.Draw(spriteBatch);
