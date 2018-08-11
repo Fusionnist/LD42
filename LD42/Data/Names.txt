@@ -15,5 +15,6 @@ Pickup:
 ========================================
 
 React: "empty" -> for emptying a slot
+Feed: pickups and slots don't take a keyword and will always use the entity as their new item
 
 ========================================

@@ -16,13 +16,17 @@ namespace LD42
 {
     public class Game1 : Game
     {
-        CursorManager cursorManager;
         GameState gameState;
+
+        CursorManager cursorManager;
         GraphicsDeviceManager graphics;
-        int currentUInb;
         SpriteBatch spriteBatch;
+        EntityBuilder ebuilder;
         Tileset ts;
+
         UISystem[] uis;
+        int currentUInb;
+
         
 
         Point vdims, wdims;
@@ -54,6 +58,8 @@ namespace LD42
             //VALUES
 
             //UTILITY
+            ebuilder = new EntityBuilder();
+
             scenes = new SceneCollection();
             scenes.scenes.Add(new Scene(
                 new RenderTarget2D(GraphicsDevice, vdims.X, vdims.Y),
@@ -62,6 +68,7 @@ namespace LD42
                 "main"
                 ));
 
+            cursorManager = new CursorManager();
             KeyManager[] keyManagers = new KeyManager[] { };
             ipp = new InputProfile(keyManagers);
         }
@@ -80,8 +87,7 @@ namespace LD42
             //LOAD ENTITIES
 
             //LOAD UR MOM
-            cursorManager = new CursorManager();
-
+           
             //END - SETUP THE GAME!
             SetupGame();
         }

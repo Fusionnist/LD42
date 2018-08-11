@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Class_Gameloop\EntBuilder42.cs" />
     <Compile Include="Class_Gameloop\InventorySlot.cs" />
     <Compile Include="Data\Enums.cs" />
     <Compile Include="Game1.cs" />
