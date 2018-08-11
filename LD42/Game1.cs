@@ -42,7 +42,7 @@ namespace LD42
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             //GAME VALUES
-            windowDivider = 2;
+            windowDivider = 4;
             vdims = new Point(224, 160);
             wdims = new Point((int)(vdims.X * windowDivider), (int)(vdims.Y * windowDivider));
 
@@ -97,6 +97,8 @@ namespace LD42
             ElementCollection.ReadDocument(XDocument.Load("Content/XML/MiscEntities.xml"));
             ElementCollection.ReadDocument(XDocument.Load("Content/XML/Pickups.xml"));
             ElementCollection.ReadDocument(XDocument.Load("Content/XML/Spritesheets.xml"));
+
+            SpriteSheetCollection.LoadSheet(ElementCollection.GetSpritesheetRef("placeholderSheet"), Content);
             //LOAD TEXTURES
 
             //LOAD SOUND
@@ -208,6 +210,7 @@ namespace LD42
         protected void UpdateGame(float es_)
         {
             ts.Update(es_);
+            inven.Update(es_);
         }
         //DRAW
         protected override void Draw(GameTime gameTime)
