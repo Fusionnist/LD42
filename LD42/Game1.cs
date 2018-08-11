@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
 using MonoGame.FZT;
 using MonoGame.FZT.Assets;
 using MonoGame.FZT.Data;
@@ -11,14 +10,18 @@ using MonoGame.FZT.Physics;
 using MonoGame.FZT.Sound;
 using MonoGame.FZT.UI;
 using MonoGame.FZT.XML;
+using System.Collections.Generic;
 
 namespace LD42
 {
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        CursorManager cursorManager;
         GameState gameState;
+        GraphicsDeviceManager graphics;
+        int currentUInb;
+        SpriteBatch spriteBatch;
+        UISystem[] uis;
         
 
         Point vdims, wdims;
@@ -42,6 +45,10 @@ namespace LD42
 
         protected override void Initialize()
         {
+            gameState = GameState.Menu;
+            currentUInb = 0;
+            IsMouseVisible = true;
+
             base.Initialize();
             //VALUES
 
@@ -72,6 +79,7 @@ namespace LD42
             //LOAD ENTITIES
 
             //LOAD UR MOM
+            cursorManager = new CursorManager();
 
             //END - SETUP THE GAME!
             SetupGame();
@@ -79,7 +87,14 @@ namespace LD42
 
         void SetupGame()
         {
-
+            uis = new UISystem[]
+            {
+                new UISystem(new List<Button>()
+                {
+                    new Button("startGame", new Rectangle(vdims.X / 7, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 7, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
+                }),
+                new UISystem(new List<Button>())
+            };
         }
 
         protected override void UnloadContent()
@@ -94,12 +109,15 @@ namespace LD42
 
             //UPDATE INPUT
             ipp.Update(Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
+            cursorManager.Update();
 
             //END
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            uis[currentUInb].HandleMouseInput(cursorManager);
 
+            HandleGameStateChanges();
 
 
 
@@ -108,11 +126,14 @@ namespace LD42
 
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
             //DRAW TO MAIN
             scenes.SelectScene("main");
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             GraphicsDevice.Clear(Color.Red);
+            uis[currentUInb].Draw(spriteBatch);
 
             spriteBatch.End();
 
@@ -125,6 +146,15 @@ namespace LD42
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        protected void HandleGameStateChanges()
+        {
+            if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("startGame"))
+            {
+                gameState = GameState.Game;
+                currentUInb = 1;
+            }
         }
     }
 }
