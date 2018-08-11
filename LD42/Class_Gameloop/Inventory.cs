@@ -63,11 +63,6 @@ namespace LD42
 
 
                 pos += dir;
-
-                if (pos.X >= 7) { pos.X = 6; }
-                if (pos.X < 0) { pos.X = 0; }
-                if (pos.Y >= 5) { pos.Y = 4; }
-                if (pos.Y < 0) { pos.Y = 0; }
             }
 
             return pos;

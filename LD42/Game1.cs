@@ -208,7 +208,7 @@ namespace LD42
         }
         protected void UpdateGame(float es_)
         {
-            ts.Update(es_);
+            ts.Update(es_, player.pos.X - 64);
             inven.Update(es_);
         }
         //DRAW
@@ -264,6 +264,7 @@ namespace LD42
         void DrawGame()
         {
             scenes.SelectScene("game");
+            scenes.CurrentScene.TranslateTo(new Vector2(player.pos.X - 8, 0), false);
             scenes.SetupScene(spriteBatch, GraphicsDevice);
             //DRAW HERE
             ts.Draw(spriteBatch);
