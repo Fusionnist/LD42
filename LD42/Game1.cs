@@ -8,6 +8,16 @@ using MonoGame.FZT.Input;
 using MonoGame.FZT.UI;
 using System.Collections.Generic;
 
+using MonoGame.FZT;
+using MonoGame.FZT.Assets;
+using MonoGame.FZT.Data;
+using MonoGame.FZT.Drawing;
+using MonoGame.FZT.Input;
+using MonoGame.FZT.Physics;
+using MonoGame.FZT.Sound;
+using MonoGame.FZT.UI;
+using MonoGame.FZT.XML;
+
 namespace LD42
 {
     public class Game1 : Game
@@ -17,14 +27,26 @@ namespace LD42
         GraphicsDeviceManager graphics;
         int currentUInb;
         SpriteBatch spriteBatch;
-        UISystem[] uis;
-
+        GameState gameState;
         
+
+        Point vdims, wdims;
+        int windowDivider;
+        SceneCollection scenes;
+        InputProfile ipp;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            //GAME VALUES
+            windowDivider = 2;
+            vdims = new Point(200, 200);
+            wdims = new Point(1920 / windowDivider, 1080 / windowDivider);
+
+            graphics.PreferredBackBufferWidth = wdims.X;
+            graphics.PreferredBackBufferHeight = wdims.Y;
+            graphics.ApplyChanges();
         }
 
         protected override void Initialize()
@@ -33,6 +55,19 @@ namespace LD42
             currentUInb = 0;
 
             base.Initialize();
+            //VALUES
+
+            //UTILITY
+            scenes = new SceneCollection();
+            scenes.scenes.Add(new Scene(
+                new RenderTarget2D(GraphicsDevice, vdims.X, vdims.Y),
+                new Rectangle(0,0,vdims.X, vdims.Y),
+                new Rectangle(0,0,wdims.X, wdims.Y),
+                "main"
+                ));
+
+            KeyManager[] keyManagers = new KeyManager[] { };
+            ipp = new InputProfile(keyManagers);
         }
 
         //dick
@@ -40,15 +75,23 @@ namespace LD42
         protected override void LoadContent()
         { 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            cursorManager = new CursorManager();
-            uis = new UISystem[]
-            {
-                new UISystem(new List<Button>()
-                {
-                    new Button("startGame", new Rectangle(0, 0, 800, 400), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(0, 0, 800, 400), new Point(400, 200))), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")))
-                }),
-                new UISystem()
-            };
+            //LOAD XML
+
+            //LOAD TEXTURES
+
+            //LOAD SOUND
+
+            //LOAD ENTITIES
+
+            //LOAD UR MOM
+
+            //END - SETUP THE GAME!
+            SetupGame();
+        }
+
+        void SetupGame()
+        {
+
         }
 
         protected override void UnloadContent()
@@ -58,6 +101,13 @@ namespace LD42
 
         protected override void Update(GameTime gameTime)
         {
+            //GENERATE VALUES
+            float es = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            //UPDATE INPUT
+            ipp.Update(Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
+
+            //END
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -79,6 +129,22 @@ namespace LD42
             spriteBatch.Begin();
 
             uis[currentUInb].Draw(spriteBatch);
+
+            spriteBatch.End();
+
+            //DRAW TO MAIN
+            scenes.SelectScene("main");
+            scenes.SetupScene(spriteBatch, GraphicsDevice);
+
+            GraphicsDevice.Clear(Color.Red);
+
+            spriteBatch.End();
+
+            //DRAW TO SCREEN
+            GraphicsDevice.SetRenderTarget(null);
+            spriteBatch.Begin();
+
+            scenes.DrawScene(spriteBatch, "main");
 
             spriteBatch.End();
 
