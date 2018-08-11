@@ -15,7 +15,7 @@ namespace LD42
     {
         public Item(DrawerCollection texes_, Vector2 pos_, List<Property> props_) : base(texes_, pos_, props_)
         {
-
+            type = "item";
         }
     }
 }

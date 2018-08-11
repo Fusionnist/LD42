@@ -138,7 +138,10 @@ namespace LD42
                 );
 
             inven = new Inventory(Content);
-            inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderItem"), new Vector2(0, 0), Content, ebuilder));
+            for (int x = 0; x < 7; x++)
+            {
+                inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderItem"), new Vector2(0, 0), Content, ebuilder));
+            }
         }
         protected void SetupUISystems()
         {
@@ -225,6 +228,8 @@ namespace LD42
             ts.Update(es_, player.pos.X - 64);
 
             inven.Update(es_);
+
+            EntityCollection.RecycleAll();
         }
         protected void HandleCollisions()
         {
@@ -248,7 +253,9 @@ namespace LD42
                 }
                 if (x)
                 {
-                    inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderItem"), new Vector2(0, 0), Content, ebuilder)); pickup.exists = false; }
+                    inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderItem"), new Vector2(0, 0), Content, ebuilder));
+                    pickup.exists = false;
+                }
 
             }
         }
