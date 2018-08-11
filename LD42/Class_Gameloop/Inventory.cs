@@ -106,9 +106,11 @@ namespace LD42
         {
             if (size != minSize)
             {
-                size--;
                 slots[size - 1].exists = false;
+
                 slots.RemoveAt(size - 1);
+
+                size--;
             }
         }
 
@@ -121,7 +123,8 @@ namespace LD42
 
             if (!reverse)
                 AddSlot();
-            else
+
+            if(reverse)
                 RemoveSlot();            
         }
 

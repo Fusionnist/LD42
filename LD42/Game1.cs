@@ -230,11 +230,8 @@ namespace LD42
             ts.Update(es_, player.pos.X - 64);
 
             inven.Update(es_);
-            foreach (var tile in EntityCollection.GetGroup("tiles"))
-            {
-                CollisionSolver.SolveEntTileCollision(player, tile);
-                CollisionSolver.SecondPassCollision(player, tile);
-            }
+
+            EntityCollection.RecycleAll();
         }
         //DRAW
         protected override void Draw(GameTime gameTime)
