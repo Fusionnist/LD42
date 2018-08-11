@@ -126,10 +126,10 @@ namespace LD42
             EntityCollection.CreateGroup("slot", "slots");
             
             SetupUISystems();
-            ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed") }, vdims, ebuilder);
+            ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed"), Content.Load<Texture2D>("Placeholder/placeholder1") }, vdims, ebuilder, Content);
             player = new Player
                 (
-                new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, vdims.X / 28, vdims.Y / 7) } }, "collision") }) }, "texes"), 
+                new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 50, 20) } }, "collision") }) }, "texes"), 
                 new Vector2(2 * vdims.X / 7, 3 * vdims.Y / 7), 
                 new List<Property>()
                 );
@@ -220,6 +220,11 @@ namespace LD42
             player.Input(input);
             player.Move();
             player.MultMov(es_);
+            foreach (var tile in EntityCollection.GetGroup("tiles"))
+            {
+                CollisionSolver.SolveEntTileCollision(player, tile);
+                CollisionSolver.SecondPassCollision(player, tile);
+            }
             player.Update(es_);
 
             ts.Update(es_, player.pos.X - 64);
@@ -230,8 +235,6 @@ namespace LD42
                 CollisionSolver.SolveEntTileCollision(player, tile);
                 CollisionSolver.SecondPassCollision(player, tile);
             }
-
-            EntityCollection.RecycleAll();
         }
         //DRAW
         protected override void Draw(GameTime gameTime)
