@@ -47,6 +47,7 @@ namespace LD42
         {
             gameState = GameState.Menu;
             currentUInb = 0;
+            IsMouseVisible = true;
 
             base.Initialize();
             //VALUES
@@ -78,6 +79,7 @@ namespace LD42
             //LOAD ENTITIES
 
             //LOAD UR MOM
+            cursorManager = new CursorManager();
 
             //END - SETUP THE GAME!
             SetupGame();
@@ -85,7 +87,14 @@ namespace LD42
 
         void SetupGame()
         {
-
+            uis = new UISystem[]
+            {
+                new UISystem(new List<Button>()
+                {
+                    new Button("startGame", new Rectangle(vdims.X / 7, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 7, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
+                }),
+                new UISystem(new List<Button>())
+            };
         }
 
         protected override void UnloadContent()
@@ -100,12 +109,11 @@ namespace LD42
 
             //UPDATE INPUT
             ipp.Update(Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
+            cursorManager.Update();
 
             //END
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            cursorManager.Update();
 
             uis[currentUInb].HandleMouseInput(cursorManager);
 
@@ -120,17 +128,12 @@ namespace LD42
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-
-            uis[currentUInb].Draw(spriteBatch);
-
-            spriteBatch.End();
-
             //DRAW TO MAIN
             scenes.SelectScene("main");
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             GraphicsDevice.Clear(Color.Red);
+            uis[currentUInb].Draw(spriteBatch);
 
             spriteBatch.End();
 
