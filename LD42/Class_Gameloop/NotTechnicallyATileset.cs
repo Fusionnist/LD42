@@ -81,7 +81,6 @@ namespace LD42
             }
             if (x)
             {
-                EntityCollection.RecycleAll();
                 AddTileGroup("basic", vdims.X + camPos_);
             }
         }

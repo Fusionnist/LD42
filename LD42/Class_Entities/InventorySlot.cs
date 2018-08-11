@@ -8,6 +8,7 @@ using MonoGame.FZT.Assets;
 using MonoGame.FZT.Drawing;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace LD42
 {
@@ -48,6 +49,14 @@ namespace LD42
                 return item == null;
             }
             return base.Answer(question_);
+        }
+
+        public override void Draw(SpriteBatch sb_, bool flipH_ = false, bool flipV_ = false, float angle_ = 0)
+        {
+            base.Draw(sb_, flipH_, flipV_, angle_);
+            if (item!=null)
+            item.Draw(sb_);
+
         }
     }
 }

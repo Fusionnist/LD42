@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Entities>
-<Entity type="pickup" name="placeholderItem">
+<Entity type="pickup" name="placeholderPickup">
   <Textures name ="textures">
     <Texture name="pickup" id="pickup" sheetName="placeholderSheet"></Texture>
   </Textures>
