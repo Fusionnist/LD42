@@ -16,20 +16,30 @@ namespace LD42
 {
     class Player : Entity
     {
+        float speed;
         public Player(DrawerCollection texes_, Vector2 pos_, List<Property> props_, string name_ = null): base(texes_, pos_, props_, name_, "player")
         {
 
         }
 
-        public void Update(InputProfile ipp, float es_, float speed_)
+        public override void Input(Vector2 input_)
+        {
+            if (input_.Y == -1) ;
+                vel.Y = -75;
+            base.Input(input_);
+        }
+
+        public override void Move()
+        {
+            mov.X += 16;
+            vel.Y += 1;
+            base.Move();
+        }
+
+        public void Update(float es_)
         {
             textures.Update(es_);
-
-            mov.X += speed_;
-            vel.Y += 1;
-            MultMov(es_);
-            if (ipp.JustPressed("w"))
-                vel.Y = -75;
+            
             base.Update(es_);
         }
 

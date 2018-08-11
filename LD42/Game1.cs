@@ -213,8 +213,17 @@ namespace LD42
         }
         protected void UpdateGame(float es_)
         {
-            player.Update(ipp, es_, 10);
+            Vector2 input = Vector2.Zero;
+            if (ipp.JustPressed("w"))
+                input.Y = -1;
+
+            player.Input(input);
+            player.Move();
+            player.MultMov(es_);
+            player.Update(es_);
+
             ts.Update(es_, player.pos.X - 64);
+
             inven.Update(es_);
             foreach (var tile in EntityCollection.GetGroup("tiles"))
             {
