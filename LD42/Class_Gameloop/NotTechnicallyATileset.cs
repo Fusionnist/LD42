@@ -108,9 +108,11 @@ namespace LD42
             foreach (var ent in EntityCollection.GetGroup("tiles"))
             {
                 if (ent.pos.X <= camPos_ - vdims.X / 14)
-                { ent.exists = false; x = true; }
+                    ent.exists = false;
+                if (ent.pos.X >= camPos_ + 13 * vdims.X / 14)
+                    x = true;
             }
-            if (x)
+            if (!x)
             {
                 HandleNewTileSpawns(camPos_);
             }
