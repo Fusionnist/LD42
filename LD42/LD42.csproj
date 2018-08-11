@@ -43,8 +43,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Class_Gameloop\EntBuilder42.cs" />
-    <Compile Include="Class_Gameloop\InventorySlot.cs" />
-    <Compile Include="Class_Gameloop\Tile.cs" />
+    <Compile Include="Class_Entities\InventorySlot.cs" />
+    <Compile Include="Class_Entities\Tile.cs" />
     <Compile Include="Data\Enums.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Class_Gameloop\Inventory.cs" />

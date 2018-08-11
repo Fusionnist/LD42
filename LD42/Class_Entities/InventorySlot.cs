@@ -17,7 +17,7 @@ namespace LD42
 
         public InventorySlot(DrawerCollection texes_, Vector2 pos_, List<Property> props_) : base(texes_, pos_, props_)
         {
-
+            type = "slot";
         }
 
         public override void FeedEntity(Entity e_, string context_)
