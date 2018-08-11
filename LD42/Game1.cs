@@ -86,7 +86,7 @@ namespace LD42
 
             cursorManager = new CursorManager();
             KeyManager[] keyManagers = new KeyManager[] { };
-            ipp = new InputProfile(keyManagers);
+            ipp = InputProfile.GetLetterProfile();
 
             base.Initialize();
         }
@@ -128,8 +128,8 @@ namespace LD42
             ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed") }, vdims, ebuilder);
             player = new Player
                 (
-                new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, vdims.X / 28, vdims.Y / 14) } }, "collision") }) }, "texes"), 
-                new Vector2(3 * vdims.X / 7, 3 * vdims.Y / 7), 
+                new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, vdims.X / 28, vdims.Y / 7) } }, "collision") }) }, "texes"), 
+                new Vector2(2 * vdims.X / 7, 3 * vdims.Y / 7), 
                 new List<Property>()
                 );
 
@@ -160,8 +160,11 @@ namespace LD42
 
             //UPDATE INPUT
             ipp.Update(Keyboard.GetState(), GamePad.GetState(PlayerIndex.One));
+            if (ipp.JustPressed("w"))
+            {
+                int x = 1;
+            }
             cursorManager.Update();
-
             //self-explanatory
             UpdateUIStuff();
 
@@ -208,9 +211,14 @@ namespace LD42
         }
         protected void UpdateGame(float es_)
         {
-            player.Update(es_);
+            player.Update(ipp, es_, 10);
             ts.Update(es_, player.pos.X - 64);
             inven.Update(es_);
+            foreach (var tile in EntityCollection.GetGroup("tiles"))
+            {
+                CollisionSolver.SolveEntTileCollision(player, tile);
+                CollisionSolver.SecondPassCollision(player, tile);
+            }
         }
         //DRAW
         protected override void Draw(GameTime gameTime)

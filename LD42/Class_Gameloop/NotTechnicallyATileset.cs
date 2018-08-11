@@ -52,7 +52,7 @@ namespace LD42
             switch (id_)
             {
                 case 0:
-                    dc = new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(tileTexes[0], new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, vdims.X / 14, vdims.Y / 10) } }, "draw") }) }, "tileDrawer");
+                    dc = new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(tileTexes[0], new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, vdims.X / 14, vdims.Y / 10) } }, "collision") }) }, "tileDrawer");
                     break;
             }
             return dc;
@@ -73,13 +73,17 @@ namespace LD42
 
         public void RemoveTiles(float camPos_)
         {
+            bool x = false;
             foreach (var ent in EntityCollection.GetGroup("tiles"))
             {
-                if (ent.pos.X <= camPos_)
-                    ent.exists = false;
+                if (ent.pos.X <= camPos_ - vdims.X / 14)
+                { ent.exists = false; x = true; }
             }
-            EntityCollection.RecycleAll();
-            AddTileGroup("basic", vdims.X + camPos_);
+            if (x)
+            {
+                EntityCollection.RecycleAll();
+                AddTileGroup("basic", vdims.X + camPos_);
+            }
         }
 
         public void Draw(SpriteBatch sb_)

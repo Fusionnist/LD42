@@ -26,13 +26,10 @@ namespace LD42
             textures.Update(es_);
 
             mov.X += speed_;
-            if (ipp.JustPressed("w"))
-                vel.Y -= 10;
-            else if (vel.Y < 0)
-                vel.Y += 1;
-            else if (vel.Y > 0)
-                vel.Y = 0;
+            vel.Y += 1;
             MultMov(es_);
+            if (ipp.JustPressed("w"))
+                vel.Y = -75;
             base.Update(es_);
         }
 
