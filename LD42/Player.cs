@@ -36,7 +36,7 @@ namespace LD42
             base.Move();
         }
 
-        public void Update(float es_)
+        public override void Update(float es_)
         {
             textures.Update(es_);
             
