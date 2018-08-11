@@ -18,7 +18,6 @@ namespace LD42
     {
         EntBuilder42 ebuilder;
         float firstTilePos, movementSpeed;
-        int firstGroupNb, lastGroupNb;
         Point vdims;
         public Texture2D[] tileTexes;
 
@@ -28,27 +27,26 @@ namespace LD42
             tileTexes = tileTexes_;
             vdims = vdims_;
             ebuilder = ebuilder_;
-            firstGroupNb = 0;
-            lastGroupNb = -1;
             movementSpeed = 10;
             SetupTiles();
+            EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
         }
 
-        public void AddTileGroup(int groupId_)
+        public void AddTileGroup(int groupId_, float xpos_)
         {
-            lastGroupNb++;
             List<Entity> ents = new List<Entity>();
             switch (groupId_)
             {
                 case 0:
                     for (int i = 7; i < 10; i++)
                     {
-                        ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(firstTilePos + (lastGroupNb - firstGroupNb) * 16, i * 16), new List<Property>() { new Property("posIs", lastGroupNb.ToString(), "tilePos") }, "tile"));
+                        ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(xpos_, i * vdims.X / 14), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
                     }
+                    break;
+                case 1:
                     break;
             }
             EntityCollection.AddEntities(ents);
-            EntityCollection.CreateGroup(new Property("posIs", lastGroupNb.ToString(), "tilePos"), "posIs" + lastGroupNb.ToString());
         }
 
         public DrawerCollection GetDrawerCollection(int id_)
@@ -65,38 +63,39 @@ namespace LD42
 
         public void SetupTiles()
         {
-            for (int i = 0; i < 14; i++)
+            for (int i = 0; i < 15; i++)
             {
-                AddTileGroup(0);
+                AddTileGroup(0, i * vdims.X / 14);
             }
         }
 
         public void Update(float es_)
         {
             firstTilePos -= es_ * movementSpeed;
+            foreach (var tile in EntityCollection.GetGroup("tiles"))
+            {
+                tile.pos.X -= es_ * movementSpeed;
+            }
             if (firstTilePos <= -16)
                 RemoveFirstTileGroup();
-
         }
 
         public void RemoveFirstTileGroup()
         {
-            foreach(var ent in EntityCollection.GetGroup("posIs" + firstGroupNb.ToString()))
+            foreach (var ent in EntityCollection.GetGroup("tiles"))
             {
-                ent.exists = false;
+                if (ent.pos.X <= firstTilePos + 2)
+                    ent.exists = false;
             }
             EntityCollection.RecycleAll();
-            firstGroupNb++;
-            AddTileGroup(0);
+            firstTilePos += 16;
+            AddTileGroup(0, vdims.X + firstTilePos);
         }
 
         public void Draw(SpriteBatch sb_)
         {
-            for (int i = firstGroupNb; i <= lastGroupNb; i++)
-            {
-                foreach (var ent in EntityCollection.GetGroup("posIs" + i.ToString()))
-                    ent.Draw(sb_);
-            }
+            foreach (var ent in EntityCollection.GetGroup("tiles"))
+                ent.Draw(sb_);
         }
     }
 }
