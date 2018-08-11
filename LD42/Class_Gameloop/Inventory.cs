@@ -106,23 +106,17 @@ namespace LD42
         {
             if (size != minSize)
             {
-                size--;
                 slots[size - 1].exists = false;
+
                 slots.RemoveAt(size - 1);
+
+                size--;
             }
         }
 
         public void Update(float es_)
         {
-            if (size == 32)
-            { reverse = true; }
-            if (size == 7)
-            { reverse = false; }
-
-            if (!reverse)
-                AddSlot();
-            else
-                RemoveSlot();            
+            
         }
 
         void UpdatePool()
