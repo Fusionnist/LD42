@@ -17,17 +17,14 @@ namespace LD42
     public class NotTechnicallyATileset
     {
         EntBuilder42 ebuilder;
-        float firstTilePos, movementSpeed;
         Point vdims;
         public Texture2D[] tileTexes;
 
         public NotTechnicallyATileset(Texture2D[] tileTexes_, Point vdims_, EntBuilder42 ebuilder_)
         {
-            firstTilePos = 0;
             tileTexes = tileTexes_;
             vdims = vdims_;
             ebuilder = ebuilder_;
-            movementSpeed = 10;
             SetupTiles();
             EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
         }
@@ -69,27 +66,20 @@ namespace LD42
             }
         }
 
-        public void Update(float es_)
+        public void Update(float es_, float camPos_)
         {
-            firstTilePos -= es_ * movementSpeed;
-            foreach (var tile in EntityCollection.GetGroup("tiles"))
-            {
-                tile.pos.X -= es_ * movementSpeed;
-            }
-            if (firstTilePos <= -16)
-                RemoveFirstTileGroup();
+            RemoveTiles(camPos_);
         }
 
-        public void RemoveFirstTileGroup()
+        public void RemoveTiles(float camPos_)
         {
             foreach (var ent in EntityCollection.GetGroup("tiles"))
             {
-                if (ent.pos.X <= firstTilePos + 2)
+                if (ent.pos.X <= camPos_)
                     ent.exists = false;
             }
             EntityCollection.RecycleAll();
-            firstTilePos += 16;
-            AddTileGroup("basic", vdims.X + firstTilePos);
+            AddTileGroup("basic", vdims.X + camPos_);
         }
 
         public void Draw(SpriteBatch sb_)

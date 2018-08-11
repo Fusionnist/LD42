@@ -28,6 +28,7 @@ namespace LD42
         EntBuilder42 ebuilder;
         NotTechnicallyATileset ts;
         Inventory inven;
+        Player player;
 
         UISystem[] uis;
         int currentUInb;
@@ -121,16 +122,14 @@ namespace LD42
             EntityCollection.Flush();
             EntityCollection.CreateGroup("slot", "slots");
             
-            uis = new UISystem[]
-            {
-                new UISystem(new List<Button>()
-                {
-                    new Button("startGame", new Rectangle(vdims.X / 7, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 7, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
-                }),
-                new UISystem(new List<Button>())
-            };
             SetupUISystems();
             ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed") }, vdims, ebuilder);
+            player = new Player
+                (
+                new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, vdims.X / 28, vdims.Y / 14) } }, "collision") }) }, "texes"), 
+                new Vector2(3 * vdims.X / 7, 3 * vdims.Y / 7), 
+                new List<Property>()
+                );
 
             inven = new Inventory(Content);
         }
