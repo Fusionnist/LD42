@@ -16,13 +16,17 @@ namespace LD42
 {
     public class Game1 : Game
     {
-        CursorManager cursorManager;
         GameState gameState;
+
+        CursorManager cursorManager;
         GraphicsDeviceManager graphics;
-        int currentUInb;
         SpriteBatch spriteBatch;
+        EntityBuilder ebuilder;
         Tileset ts;
+
         UISystem[] uis;
+        int currentUInb;
+
         
 
         Point vdims, wdims;
@@ -54,6 +58,8 @@ namespace LD42
             //VALUES
 
             //UTILITY
+            ebuilder = new EntityBuilder();
+
             scenes = new SceneCollection();
             scenes.scenes.Add(new Scene(
                 new RenderTarget2D(GraphicsDevice, vdims.X, vdims.Y),
@@ -62,6 +68,7 @@ namespace LD42
                 "main"
                 ));
 
+            cursorManager = new CursorManager();
             KeyManager[] keyManagers = new KeyManager[] { };
             ipp = new InputProfile(keyManagers);
         }
@@ -80,14 +87,21 @@ namespace LD42
             //LOAD ENTITIES
 
             //LOAD UR MOM
-            cursorManager = new CursorManager();
-
+           
             //END - SETUP THE GAME!
             SetupGame();
         }
 
         void SetupGame()
         {
+            uis = new UISystem[]
+            {
+                new UISystem(new List<Button>()
+                {
+                    new Button("startGame", new Rectangle(vdims.X / 3, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 7, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
+                }),
+                new UISystem(new List<Button>())
+            };
             SetupUISystems();
         }
 
