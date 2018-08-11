@@ -151,7 +151,7 @@ namespace LD42
             {
                 new UISystem(new List<Button>()
                 {
-                    new Button("startGame", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new Point(vdims.X / 10, vdims.Y / 20))))
+                    new Button("startGame", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 3, vdims.Y / 3), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 3, vdims.Y / 3), new Point(vdims.X / 10, vdims.Y / 20))))
                 }),
                 new UISystem(new List<Button>()),
                 new UISystem(new List<Button>()
@@ -181,10 +181,6 @@ namespace LD42
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            uis[currentUInb].HandleMouseInput(cursorManager, scenes.GetScene("main").ToVirtualPos(cursorManager.RawPos()));
-
-            HandleGameStateChanges();
-
             base.Update(gameTime);
         }
         protected void HandleGameStateChanges()
@@ -194,17 +190,17 @@ namespace LD42
                 gameState = GameState.Game;
                 currentUInb = 1;
             }
-            if (gameState == GameState.Game && ipp.JustPressed("p"))
+            else if (gameState == GameState.Game && ipp.JustPressed("p"))
             {
                 gameState = GameState.Pause;
                 currentUInb = 2;
             }
-            if (gameState == GameState.Pause && ipp.JustPressed("p"))
+            else if (gameState == GameState.Pause && ipp.JustPressed("p"))
             {
                 gameState = GameState.Game;
                 currentUInb = 1;
             }
-            if (gameState == GameState.Pause && uis[currentUInb].IssuedCommand("returnToMenu"))
+            else if (gameState == GameState.Pause && uis[currentUInb].IssuedCommand("returnToMenu"))
             {
                 gameState = GameState.Menu;
                 currentUInb = 0;
@@ -273,6 +269,11 @@ namespace LD42
                     DrawInventory();
                     DrawGame();
                     break;
+                case GameState.Pause:
+                    DrawGame();
+                    DrawInventory();
+                    DrawUI();
+                    break;
             }
 
             //DRAW TO MAIN
@@ -285,6 +286,10 @@ namespace LD42
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
                 case GameState.Game:
+                    scenes.DrawScene(spriteBatch, "game");
+                    scenes.DrawScene(spriteBatch, "UI");
+                    break;
+                case GameState.Pause:
                     scenes.DrawScene(spriteBatch, "game");
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
@@ -306,7 +311,6 @@ namespace LD42
             scenes.SelectScene("UI");
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
-            GraphicsDevice.Clear(Color.Red);
             uis[currentUInb].Draw(spriteBatch);
 
             spriteBatch.End();
