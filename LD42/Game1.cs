@@ -101,6 +101,8 @@ namespace LD42
             ElementCollection.ReadDocument(XDocument.Load("Content/XML/Spritesheets.xml"));
 
             SpriteSheetCollection.LoadSheet(ElementCollection.GetSpritesheetRef("placeholderSheet"), Content);
+
+            RecipeBook.ReadDocument(XDocument.Load("Content/XML/Recipes.xml"));
             //LOAD TEXTURES
 
             //LOAD SOUND
