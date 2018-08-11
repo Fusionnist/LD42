@@ -42,6 +42,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Class_Entities\Recipe.cs" />
+    <Compile Include="Class_Entities\RecipeBook.cs" />
     <Compile Include="Class_Gameloop\EntBuilder42.cs" />
     <Compile Include="Class_Entities\InventorySlot.cs" />
     <Compile Include="Class_Entities\Tile.cs" />
@@ -129,6 +131,7 @@
     <Content Include="Content\XML\Pickups.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\XML\Recipes.xml" />
     <Content Include="Content\XML\Spritesheets.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
