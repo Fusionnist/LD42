@@ -131,7 +131,9 @@
     <Content Include="Content\XML\Pickups.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\XML\Recipes.xml" />
+    <Content Include="Content\XML\Recipes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\XML\Spritesheets.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
