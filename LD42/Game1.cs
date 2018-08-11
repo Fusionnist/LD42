@@ -245,6 +245,7 @@ namespace LD42
                     {
                         if (rect.Intersects(rect2))
                         {
+                            if(pickup.exists)
                             x = true;
                         }
                     }
@@ -332,6 +333,7 @@ namespace LD42
 
             GraphicsDevice.Clear(Color.TransparentBlack);
             //draw slots
+            inven.UpdateSlots();
             EntityCollection.DrawGroup("slots", spriteBatch);
             EntityCollection.DrawGroup("items", spriteBatch);
 

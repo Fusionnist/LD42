@@ -13,7 +13,7 @@ namespace LD42
 {
     public class Item : Entity
     {
-        public Item(DrawerCollection texes_, Vector2 pos_, List<Property> props_) : base(texes_, pos_, props_)
+        public Item(DrawerCollection texes_, Vector2 pos_, List<Property> props_, string name_) : base(texes_, pos_, props_, name_)
         {
             type = "item";
         }
