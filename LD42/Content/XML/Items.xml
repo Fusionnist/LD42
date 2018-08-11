@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Entities>
+  <Entity type="item" name="placeholderItem">
+    <Textures name ="textures">
+      <Texture name="item" id="item" sheetName="placeholderSheet"></Texture>
+    </Textures>
+  <Properties></Properties>
+  </Entity>
+</Entities>

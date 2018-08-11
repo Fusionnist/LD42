@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+
 using MonoGame.FZT;
 using MonoGame.FZT.Assets;
 using MonoGame.FZT.Data;
@@ -10,7 +11,10 @@ using MonoGame.FZT.Physics;
 using MonoGame.FZT.Sound;
 using MonoGame.FZT.UI;
 using MonoGame.FZT.XML;
+
 using System.Collections.Generic;
+
+using System.Xml.Linq;
 
 namespace LD42
 {
@@ -79,7 +83,10 @@ namespace LD42
         { 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             //LOAD XML
-
+            ElementCollection.ReadDocument(XDocument.Load("Content/XML/Items.xml"));
+            ElementCollection.ReadDocument(XDocument.Load("Content/XML/MiscEntities.xml"));
+            ElementCollection.ReadDocument(XDocument.Load("Content/XML/Pickups.xml"));
+            ElementCollection.ReadDocument(XDocument.Load("Content/XML/Spritesheets.xml"));
             //LOAD TEXTURES
 
             //LOAD SOUND
@@ -87,7 +94,7 @@ namespace LD42
             //LOAD ENTITIES
 
             //LOAD UR MOM
-           
+
             //END - SETUP THE GAME!
             SetupGame();
         }

@@ -13,7 +13,7 @@ namespace LD42
 {
     public class Pickup : Entity
     {
-        Item item;
+        Entity item;
 
         public Pickup(DrawerCollection texes_, Vector2 pos_, List<Property> props_):base(texes_, pos_, props_)
         {
