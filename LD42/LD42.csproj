@@ -43,7 +43,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Class_Gameloop\InventorySlot.cs" />
-    <Compile Include="Enums.cs" />
+    <Compile Include="Data\Enums.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Class_Gameloop\Inventory.cs" />
     <Compile Include="Class_Entities\Item.cs" />
@@ -115,6 +115,7 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Data\Names.txt" />
     <Content Include="temp\yesnpressed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

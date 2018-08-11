@@ -14,7 +14,7 @@ namespace LD42
     {
         List<InventorySlot> slots;
         int[,] taken;
-        int size;
+        int size, minSize, maxSize;
 
         public Inventory()
         {
@@ -28,7 +28,20 @@ namespace LD42
 
         void AddSlot()
         {
+            if(size != maxSize)
+            {
+                size++;
+                AddSlotTo(Vector2.Zero);
+            }
+        }
 
+        void RemoveSlot()
+        {
+            if(size != minSize)
+            {
+                size--;
+                slots.RemoveAt(size - 1);
+            }
         }
 
         void AddSlotTo(Vector2 target)
@@ -50,7 +63,5 @@ namespace LD42
         {
 
         }
-
-
     }
 }
