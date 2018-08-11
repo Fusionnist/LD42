@@ -52,7 +52,7 @@ namespace LD42
             switch (id_)
             {
                 case 0:
-                    dc = new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(tileTexes[0], new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, vdims.X / 14, vdims.Y / 10) } }, "collision") }) }, "tileDrawer");
+                    dc = new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(tileTexes[0], new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 50, 20) } }, "collision") }) }, "tileDrawer");
                     break;
             }
             return dc;
