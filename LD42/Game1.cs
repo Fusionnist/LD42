@@ -18,14 +18,14 @@ namespace LD42
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        GameState gameState;
+        
 
         Point vdims, wdims;
         int windowDivider;
         SceneCollection scenes;
         InputProfile ipp;
 
-        GameState gameState;
-        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -38,7 +38,6 @@ namespace LD42
             graphics.PreferredBackBufferWidth = wdims.X;
             graphics.PreferredBackBufferHeight = wdims.Y;
             graphics.ApplyChanges();
-            gameState = GameState.Menu;
         }
 
         protected override void Initialize()
