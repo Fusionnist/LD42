@@ -21,11 +21,12 @@ namespace LD42
         GraphicsDeviceManager graphics;
         int currentUInb;
         SpriteBatch spriteBatch;
+        Tileset ts;
         UISystem[] uis;
         
 
         Point vdims, wdims;
-        int windowDivider;
+        double windowDivider;
         SceneCollection scenes;
         InputProfile ipp;
 
@@ -34,9 +35,9 @@ namespace LD42
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             //GAME VALUES
-            windowDivider = 2;
-            vdims = new Point(200, 200);
-            wdims = new Point(1920 / windowDivider, 1080 / windowDivider);
+            windowDivider = 0.5;
+            vdims = new Point(224, 160);
+            wdims = new Point((int)(1920 * windowDivider), (int)(1080 * windowDivider));
 
             graphics.PreferredBackBufferWidth = wdims.X;
             graphics.PreferredBackBufferHeight = wdims.Y;
@@ -95,6 +96,7 @@ namespace LD42
                 }),
                 new UISystem(new List<Button>())
             };
+            SetupUISystems();
         }
 
         protected override void UnloadContent()
@@ -155,6 +157,38 @@ namespace LD42
                 gameState = GameState.Game;
                 currentUInb = 1;
             }
+            if (gameState == GameState.Game && ipp.JustPressed("p"))
+            {
+                gameState = GameState.Pause;
+                currentUInb = 2;
+            }
+            if (gameState == GameState.Pause && ipp.JustPressed("p"))
+            {
+                gameState = GameState.Game;
+                currentUInb = 1;
+            }
+            if (gameState == GameState.Pause && uis[currentUInb].IssuedCommand("returnToMenu"))
+            {
+                gameState = GameState.Menu;
+                currentUInb = 0;
+            }
+        }
+
+        protected void SetupUISystems()
+        {
+            uis = new UISystem[]
+            {
+                new UISystem(new List<Button>()
+                {
+                    new Button("startGame", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
+                }),
+                new UISystem(new List<Button>()),
+                new UISystem(new List<Button>()
+                {
+                    new Button("returnToMenu", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
+                })
+            };
+
         }
     }
 }
