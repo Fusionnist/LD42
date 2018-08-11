@@ -27,6 +27,7 @@ namespace LD42
         SpriteBatch spriteBatch;
         EntityBuilder ebuilder;
         Tileset ts;
+        Inventory inven;
 
         UISystem[] uis;
         int currentUInb;
@@ -72,13 +73,17 @@ namespace LD42
                 "main"
                 ));
 
+            scenes.scenes.Add(new Scene(
+                new RenderTarget2D(GraphicsDevice, vdims.X, vdims.Y),
+                new Rectangle(0, 0, vdims.X, vdims.Y),
+                new Rectangle(0, 0, vdims.X, vdims.Y),
+                "UI"
+                ));
+
             cursorManager = new CursorManager();
             KeyManager[] keyManagers = new KeyManager[] { };
             ipp = new InputProfile(keyManagers);
         }
-
-        //dick
-
         protected override void LoadContent()
         { 
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -98,7 +103,12 @@ namespace LD42
             //END - SETUP THE GAME!
             SetupGame();
         }
+        protected override void UnloadContent()
+        {
+            Content.Unload();
+        }
 
+        //SETUP
         void SetupGame()
         {
             uis = new UISystem[]
@@ -110,13 +120,27 @@ namespace LD42
                 new UISystem(new List<Button>())
             };
             SetupUISystems();
-        }
 
-        protected override void UnloadContent()
+            inven = new Inventory();
+        }
+        protected void SetupUISystems()
         {
-            Content.Unload();
+            uis = new UISystem[]
+            {
+                new UISystem(new List<Button>()
+                {
+                    new Button("startGame", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
+                }),
+                new UISystem(new List<Button>()),
+                new UISystem(new List<Button>()
+                {
+                    new Button("returnToMenu", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
+                })
+            };
+
         }
 
+        //UPDATE
         protected override void Update(GameTime gameTime)
         {
             //GENERATE VALUES
@@ -130,7 +154,7 @@ namespace LD42
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            uis[currentUInb].HandleMouseInput(cursorManager);
+            uis[currentUInb].HandleMouseInput(cursorManager, scenes.GetScene("main").ToVirtualPos(cursorManager.RawPos()));
 
             HandleGameStateChanges();
 
@@ -138,31 +162,6 @@ namespace LD42
 
             base.Update(gameTime);
         }
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            //DRAW TO MAIN
-            scenes.SelectScene("main");
-            scenes.SetupScene(spriteBatch, GraphicsDevice);
-
-            GraphicsDevice.Clear(Color.Red);
-            uis[currentUInb].Draw(spriteBatch);
-
-            spriteBatch.End();
-
-            //DRAW TO SCREEN
-            GraphicsDevice.SetRenderTarget(null);
-            spriteBatch.Begin();
-
-            scenes.DrawScene(spriteBatch, "main");
-
-            spriteBatch.End();
-
-            base.Draw(gameTime);
-        }
-
         protected void HandleGameStateChanges()
         {
             if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("startGame"))
@@ -187,21 +186,76 @@ namespace LD42
             }
         }
 
-        protected void SetupUISystems()
+        //DRAW
+        protected override void Draw(GameTime gameTime)
         {
-            uis = new UISystem[]
+            switch (gameState)
             {
-                new UISystem(new List<Button>()
-                {
-                    new Button("startGame", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
-                }),
-                new UISystem(new List<Button>()),
-                new UISystem(new List<Button>()
-                {
-                    new Button("returnToMenu", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 5, vdims.Y / 10), new Point(vdims.X / 10, vdims.Y / 20))))
-                })
-            };
+                case GameState.Menu:
+                    DrawUI();
+                    break;
+                case GameState.Game:
+                    DrawInventory();
+                    DrawGame();
+                    break;
+            }
 
+            //DRAW TO MAIN
+            scenes.SelectScene("main");
+            scenes.SetupScene(spriteBatch, GraphicsDevice);
+
+            switch (gameState)
+            {
+                case GameState.Menu:
+                    scenes.DrawScene(spriteBatch, "UI");
+                    break;
+                case GameState.Game:
+                    scenes.DrawScene(spriteBatch, "game");
+                    break;
+            }
+
+            GraphicsDevice.Clear(Color.Red);
+            
+
+            spriteBatch.End();
+
+            //DRAW TO SCREEN
+            GraphicsDevice.SetRenderTarget(null);
+            spriteBatch.Begin();
+
+            scenes.DrawScene(spriteBatch, "main");
+
+            spriteBatch.End();
+
+            base.Draw(gameTime);
+        }
+        void DrawUI()
+        {
+            scenes.SelectScene("UI");
+            scenes.SetupScene(spriteBatch, GraphicsDevice);
+
+            GraphicsDevice.Clear(Color.Red);
+            uis[currentUInb].Draw(spriteBatch);
+
+            spriteBatch.End();
+        }
+        void DrawGame()
+        {
+            scenes.SelectScene("UI");
+            scenes.SetupScene(spriteBatch, GraphicsDevice);
+            //DRAW HERE
+
+            spriteBatch.End();
+        }
+        void DrawInventory()
+        {
+            scenes.SelectScene("UI");
+            scenes.SetupScene(spriteBatch, GraphicsDevice);
+
+            GraphicsDevice.Clear(Color.Red);
+            //draw slots
+
+            spriteBatch.End();
         }
     }
 }
