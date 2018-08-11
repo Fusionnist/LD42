@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Entities>
-  <Entity type="slot" name="placeholderItem">
+  <Entity type="slot" name="slot">
     <Textures name ="textures">
       <Texture name="itemframe" id="itemframe" sheetName="placeholderSheet"></Texture>
     </Textures>
