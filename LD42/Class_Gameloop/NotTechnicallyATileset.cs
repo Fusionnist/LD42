@@ -141,7 +141,7 @@ namespace LD42
             else if (nextFloorType.StartsWith("void"))
             {
                 groupStuff = "void";
-                if (int.Parse(nextFloorType.Substring(4)) < 10)
+                if (int.Parse(nextFloorType.Substring(4)) < 5)
                     nextFloorType = "void" + (int.Parse(nextFloorType.Substring(4)) + 1).ToString();
                 else
                     nextFloorType = "rand";

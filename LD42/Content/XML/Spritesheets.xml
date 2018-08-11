@@ -1,31 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Spritesheet name="placeholderSheet" source="Placeholder/placeholder1">
-  //ITEM FRAME
-  <Texture name="itemframe" id="itemframe">
-    <Frame displayTime="0.1">
-      <SourceRect x="0" y="0" w="32" h="32"></SourceRect>
-      <Center x="0" y="0"></Center>
-    </Frame>
-    <Hitboxes>
-      <Collection type="collision">
-        <Frame>
-          <Hitbox x="0" y="0" w="32" h="32"></Hitbox>
-        </Frame>
-      </Collection>
-    </Hitboxes>
-  </Texture>
-  //ITEM
-  <Texture name="item" id="item">
-    <Frame displayTime="0.1">
-      <SourceRect x="32" y="0" w="32" h="32"></SourceRect>
-      <Center x="0" y="0"></Center>
-    </Frame>
-  </Texture>
-  //PICKUP
-  <Texture name="pickup" id="pickup">
-    <Frame displayTime="0.1">
-      <SourceRect x="0" y="32" w="16" h="16"></SourceRect>
-      <Center x="0" y="0"></Center>
-    </Frame>
-  </Texture>
-</Spritesheet>
+<Spritesheets>
+  <Spritesheet name="placeholderSheet" source="Placeholder/placeholder1">
+    //ITEM FRAME
+    <Texture name="itemframe" id="itemframe">
+     <Frame displayTime="0.1">
+       <SourceRect x="0" y="0" w="32" h="32"></SourceRect>
+       <Center x="0" y="0"></Center>
+     </Frame>
+     <Hitboxes>
+       <Collection type="collision">
+         <Frame>
+            <Hitbox x="0" y="0" w="32" h="32"></Hitbox>
+          </Frame>
+        </Collection>
+     </Hitboxes>
+    </Texture>
+   //ITEM
+   <Texture name="item" id="item">
+     <Frame displayTime="0.1">
+        <SourceRect x="32" y="0" w="32" h="32"></SourceRect>
+       <Center x="0" y="0"></Center>
+      </Frame>
+    </Texture>
+   //PICKUP
+   <Texture name="pickup" id="pickup">
+      <Frame displayTime="0.1">
+       <SourceRect x="0" y="32" w="16" h="16"></SourceRect>
+       <Center x="0" y="0"></Center>
+     </Frame>
+    </Texture>
+  </Spritesheet>
+  <Spritesheet name="placeholderSheet2" source="Placeholder/barint">
+    //spikes
+    <Texture name="spikes" id="spikes">
+      <Frame displayTime="0.1">
+        <SourceRect x="0" y="0" w="20" h="3"></SourceRect>
+        <Center x="0" y="0"></Center>
+      </Frame>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="20" h="3"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+  </Spritesheet>
+</Spritesheets>

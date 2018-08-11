@@ -26,7 +26,7 @@ namespace LD42
         public override void Input(Vector2 input_)
         {
             if (input_.Y == -1)
-                vel.Y = -75;
+                vel.Y = -120;
             base.Input(input_);
         }
 
