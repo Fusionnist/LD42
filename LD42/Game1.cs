@@ -135,7 +135,7 @@ namespace LD42
             player = new Player
                 (
                 new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 50, 20) } }, "collision") }) }, "texes"), 
-                new Vector2(2 * vdims.X / 7, 3 * vdims.Y / 7), 
+                new Vector2(68, 68), 
                 new List<Property>()
                 );
 
@@ -236,6 +236,11 @@ namespace LD42
                 CollisionSolver.SolveEntTileCollision(player, tile);
                 CollisionSolver.SecondPassCollision(player, tile);
             }
+            foreach (var tile in EntityCollection.GetGroup("slots"))
+            {
+                CollisionSolver.SolveEntTileCollision(player, tile, tileTranslation_: new Vector2(player.pos.X + player.mov.X- 65,0));
+                CollisionSolver.SecondPassCollision(player, tile, tileTranslation_: new Vector2(player.pos.X + player.mov.X - 65, 0));
+            }
             foreach (var pickup in EntityCollection.GetGroup("pickups"))
             {
                 bool x = false;
@@ -319,7 +324,7 @@ namespace LD42
         void DrawGame()
         {
             scenes.SelectScene("game");
-            scenes.CurrentScene.TranslateTo(new Vector2((float)Math.Round(player.pos.X) - 8, 0), false);
+            scenes.CurrentScene.TranslateTo(new Vector2((float)Math.Round(player.pos.X) - 64, 0), false);
             scenes.SetupScene(spriteBatch, GraphicsDevice);
             //DRAW HERE
             ts.Draw(spriteBatch);

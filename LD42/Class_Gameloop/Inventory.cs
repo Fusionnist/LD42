@@ -32,7 +32,7 @@ namespace LD42
             maxSize = 32;
             taken = new int[7, 5];
             content = content_;
-            for(int x = 0; x < 7; x++)
+            for(int x = 0; x < minSize; x++)
             {
                 AddSlot();
             }
@@ -41,7 +41,7 @@ namespace LD42
         public void AddItem(Entity item_)
         {
             items.Add(item_);
-            CheckRecipes(GetPool());
+            CheckRecipes(GetPool());           
         }
 
         List<string> GetPool()
@@ -109,7 +109,7 @@ namespace LD42
 
         void RemoveSlot()
         {
-            if (size != minSize)
+            if (size > minSize)
             {
                 slots[size - 1].exists = false;
 
