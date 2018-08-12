@@ -153,16 +153,20 @@ namespace LD42
             {
                 new UISystem(new List<Button>()
                 {
-                    new Button("startGame", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 3, vdims.Y / 3), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 3, vdims.Y / 3), new Point(vdims.X / 10, vdims.Y / 20))))
+                    new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/actualtitle"))),
+                    new Button("startGame", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"))),
+                    new Button("quit", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"))),
                 }),
                 new UISystem(new List<Button>()),
                 new UISystem(new List<Button>()
                 {
-                    new Button("returnToMenu", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new Point(vdims.X / 10, vdims.Y / 20))))
+                    new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/pause"))),
+                    new Button("returnToMenu", new Rectangle(80, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(0, 0, 50, 20), new Point(0, 0))))
                 }),
                 new UISystem(new List<Button>()
                 {
-                    new Button("returnToMenu", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new Point(vdims.X / 10, vdims.Y / 20))))
+                    new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/dead"))),
+                    new Button("returnToMenu", new Rectangle(80, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(0, 0, 50, 20), new Point(0, 0))))
                 }),
             };
 
@@ -197,6 +201,10 @@ namespace LD42
             if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("startGame"))
             {
                 gameState = GameState.TransitionM;
+            }
+            else if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("quit"))
+            {
+                Exit();
             }
             else if (inven.PlayerDead() && gameState == GameState.Game)
             {
