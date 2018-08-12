@@ -181,6 +181,18 @@
 /processorParam:TextureFormat=Color
 /build:UI/title.png
 
+#begin UI/invenappear.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/invenappear.png
+
 #begin Placeholder/title.png
 /importer:TextureImporter
 /processor:TextureProcessor

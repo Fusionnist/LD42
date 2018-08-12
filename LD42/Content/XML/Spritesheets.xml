@@ -118,10 +118,10 @@
   </Spritesheet>
   <Spritesheet name="fishappears" source="Sprite/fishwakeup">
     <Texture name="appear" id="fish" loop="false">
-      <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
+      <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="5" cx="0" cy="0"></Frameset>
       <Hitboxes>
         <Collection type="collision">
-          <Frameset x="8" y="0" w="16" h="32" amt="4"></Frameset>
+          <Frameset x="8" y="0" w="16" h="32" amt="5"></Frameset>
         </Collection>
       </Hitboxes>
     </Texture>
@@ -135,6 +135,11 @@
           <Frameset x="8" y="0" w="16" h="32" amt="1"></Frameset>
         </Collection>
       </Hitboxes>
+    </Texture>
+  </Spritesheet>
+  <Spritesheet name="slotappears" source="UI/invenappear">
+    <Texture name="appear" id="slot" loop="false">
+      <Frameset delay="0.05" x="0" y="0" w="64" h="64" amt="5" cx="0" cy="0"></Frameset>     
     </Texture>
   </Spritesheet>
 </Spritesheets>
