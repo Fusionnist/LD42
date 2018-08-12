@@ -38,6 +38,35 @@ namespace LD42
             }
         }
 
+        public bool PlayerDead()
+        {
+            return (GetHP() == 0 || size == 32);
+        }
+
+        public int GetHP()
+        {
+            int hp = 0;
+            foreach (Entity i in items)
+            {
+                if (i.Name == "heart")
+                    hp++;
+            }
+             return hp;
+        }
+
+        public void LoseHP()
+        {
+            for (int x = items.Count - 1; x >= 0; x--)
+            {
+                if (items[x].Name == "heart")
+                {
+                    items[x].exists = false;
+                    items.RemoveAt(x);
+                    break;
+                }
+            }
+        }
+
         public void AddItem(Entity item_)
         {
             items.Add(item_);

@@ -1,9 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <Entities>
+  //PLACEHOLDER
   <Entity type="item" name="placeholderItem">
     <Textures name ="textures">
       <Texture name="item" id="item" sheetName="placeholderSheet"></Texture>
     </Textures>
   <Properties></Properties>
+  </Entity>
+  //HEART
+  <Entity type="item" name="heart">
+    <Textures name ="textures">
+      <Texture name="heart" id="item" sheetName="placeholderSheet"></Texture>
+    </Textures>
+    <Properties></Properties>
   </Entity>
 </Entities>

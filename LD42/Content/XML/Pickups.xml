@@ -6,4 +6,10 @@
   </Textures>
   <Properties></Properties>
 </Entity>
+  <Entity type="pickup" name="heart">
+    <Textures name ="textures">
+      <Texture name="heart" id="pickup" sheetName="placeholderSheet"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
 </Entities>

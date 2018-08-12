@@ -25,7 +25,7 @@ namespace LD42
 
         public override void Input(Vector2 input_)
         {
-            if (input_.Y == -1)
+            if (input_.Y == -1 && touchWallD)
                 vel.Y = -120;
             base.Input(input_);
         }

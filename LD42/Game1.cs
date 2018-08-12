@@ -89,6 +89,7 @@ namespace LD42
             cursorManager = new CursorManager();
             KeyManager[] keyManagers = new KeyManager[] { };
             ipp = InputProfile.GetLetterProfile();
+            ipp.AddArrowInput();
 
             base.Initialize();
         }
@@ -140,9 +141,9 @@ namespace LD42
                 );
 
             inven = new Inventory(Content);
-            for (int x = 0; x < 7; x++)
+            for (int x = 0; x < 3; x++)
             {
-                inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderItem"), new Vector2(0, 0), Content, ebuilder));
+                inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("heart"), new Vector2(0, 0), Content, ebuilder));
             }
         }
         protected void SetupUISystems()
@@ -214,7 +215,7 @@ namespace LD42
         protected void UpdateGame(float es_)
         {
             Vector2 input = Vector2.Zero;
-            if (ipp.JustPressed("w"))
+            if (ipp.Pressed("w"))
                 input.Y = -1;
 
             player.Input(input);
