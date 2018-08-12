@@ -287,49 +287,52 @@ namespace LD42
 
         public void HandleNewTileSpawns(float camPos_)
         {
-            string groupStuff = null, itemStuff = null;
-            double y = 80;
-            totalProbs = 0;
-            totalGroupProbs = 0;
-            if (nextFloorType == "rand")
+            if (globalCooldown == 0)
             {
-                AddPossibilitiesToLists();
-                Random r = new Random();
-
-                double x = r.NextDouble() * totalProbs;
-                for (int i = 0; x > 0; i++)
+                string groupStuff = null, itemStuff = null;
+                double y = 80;
+                totalProbs = 0;
+                totalGroupProbs = 0;
+                if (nextFloorType == "rand")
                 {
-                    x -= tempItemProbs[i];
-                    if (x <= 0)
+                    AddPossibilitiesToLists();
+                    Random r = new Random();
+
+                    double x = r.NextDouble() * totalProbs;
+                    for (int i = 0; x > 0; i++)
                     {
-                        itemStuff = tempItems[i];
-                        y = tempYs[i];
-                        for (int j = 0; j < items.Count; j++)
+                        x -= tempItemProbs[i];
+                        if (x <= 0)
                         {
-                            if (items[j] == tempItems[i])
-                                itemCooldowns[j] = baseicds[j];
+                            itemStuff = tempItems[i];
+                            y = tempYs[i];
+                            for (int j = 0; j < items.Count; j++)
+                            {
+                                if (items[j] == tempItems[i])
+                                { itemCooldowns[j] = baseicds[j]; globalCooldown = baseglobalcds[j]; }
+                            }
                         }
                     }
-                }
 
-                x = r.NextDouble() * totalGroupProbs;
-                for (int i = 0; x > 0; i++)
+                    x = r.NextDouble() * totalGroupProbs;
+                    for (int i = 0; x > 0; i++)
+                    {
+                        x -= tempGroupProbs[i];
+                        if (x <= 0)
+                            groupStuff = tempGroups[i];
+                    }
+                }
+                else if (nextFloorType.StartsWith("void"))
                 {
-                    x -= tempGroupProbs[i];
-                    if (x <= 0)
-                        groupStuff = tempGroups[i];
+                    groupStuff = "void";
+                    itemStuff = "none";
                 }
-            }
-            else if (nextFloorType.StartsWith("void"))
-            {
-                groupStuff = "void";
-                itemStuff = "none";
-            }
 
-            if (globalCooldown != 0)
-                itemStuff = "none";
+                if (globalCooldown != 0)
+                    itemStuff = "none";
 
-            AddTileGroup(groupStuff, itemStuff, camPos_, (float)y);
+                AddTileGroup(groupStuff, itemStuff, camPos_, (float)y);
+            }
 
 
             HandleCooldowns();
@@ -406,7 +409,7 @@ namespace LD42
                     itemYs.Add(double.Parse(xel.Attribute("y").Value));
                 }
                 else
-                    itemYs.Add(80);
+                    itemYs.Add(96);
             }
         }
 
