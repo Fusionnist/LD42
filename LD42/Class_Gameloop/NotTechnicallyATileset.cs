@@ -25,7 +25,7 @@ namespace LD42
         ContentManager content;
         string nextFloorType;
         List<string> groups, items, tempGroups, tempItems;
-        List<double> groupProbs, itemProbs, tempGroupProbs, tempItemProbs, groupCooldowns, itemCooldowns;
+        List<double> groupProbs, itemProbs, tempGroupProbs, tempItemProbs, groupCooldowns, itemCooldowns, itemYs, tempYs, basegcds, baseicds;
         double totalProbs, totalGroupProbs;
 
         public NotTechnicallyATileset(Texture2D[] tileTexes_, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
@@ -41,7 +41,7 @@ namespace LD42
             //EntityCollection.CreateGroup(new Property("isCollectible", "isCollectible", "isCollectible"), "pickups");
         }
 
-        public void AddTileGroup(string groupId_, string itemId_, float xpos_)
+        public void AddTileGroup(string groupId_, string itemId_, float xpos_, float itemY_)
         {
             float height = 96;
             List<Entity> ents = new List<Entity>();
@@ -55,11 +55,17 @@ namespace LD42
                     }
                     break;
                 case "void":
+                    if (nextFloorType == "rand")
+                        nextFloorType = "void2";
+                    else if (int.Parse(nextFloorType.Substring(4)) < 10)
+                        nextFloorType = "void" + (int.Parse(nextFloorType.Substring(4)) + 1).ToString();
+                    else
+                    { nextFloorType = "rand"; groupCooldowns[1] = 20; }
                     break;
             }
             if (itemId_ != "none")
             {
-                Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef(itemId_), new Vector2(xpos_, height - 16), content, ebuilder);
+                Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef(itemId_), new Vector2(xpos_, itemY_), content, ebuilder);
                 ent.AddProperty(new Property("isCollectible", "isCollectible", "isCollectible"));
                 ents.Add(ent);
             }
@@ -96,7 +102,7 @@ namespace LD42
         {
             for (int i = 0; i < 15; i++)
             {
-                AddTileGroup("basic", "none", i * vdims.X / 14);
+                AddTileGroup("basic", "none", i * vdims.X / 14, 80);
             }
         }
 
@@ -134,6 +140,7 @@ namespace LD42
         public void HandleNewTileSpawns(float camPos_)
         {
             string groupStuff = null, itemStuff = null;
+            double y = 80;
             totalProbs = 0;
             totalGroupProbs = 0;
             if (nextFloorType == "rand")
@@ -146,7 +153,15 @@ namespace LD42
                 {
                     x -= tempItemProbs[i];
                     if (x <= 0)
+                    {
                         itemStuff = tempItems[i];
+                        y = tempYs[i];
+                        for (int j = 0; j < items.Count; j++)
+                        {
+                            if (items[j] == tempItems[i])
+                                itemCooldowns[j] = baseicds[j];
+                        }
+                    }
                 }
 
                 x = r.NextDouble() * totalGroupProbs;
@@ -160,12 +175,9 @@ namespace LD42
             else if (nextFloorType.StartsWith("void"))
             {
                 groupStuff = "void";
-                if (int.Parse(nextFloorType.Substring(4)) < 3)
-                    nextFloorType = "void" + (int.Parse(nextFloorType.Substring(4)) + 1).ToString();
-                else
-                { nextFloorType = "rand"; groupCooldowns[1] = 20; }
+                itemStuff = "none";
             }
-            AddTileGroup(groupStuff, itemStuff, vdims.X + camPos_);
+            AddTileGroup(groupStuff, itemStuff, vdims.X + camPos_, (float)y);
 
 
             HandleCooldowns();
@@ -194,7 +206,7 @@ namespace LD42
             for (int i = 0; i < itemCooldowns.Count; i++)
             {
                 if (itemCooldowns[i] == 0)
-                { tempItems.Add(items[i]); tempItemProbs.Add(itemProbs[i]); totalProbs += itemProbs[i]; }
+                { tempItems.Add(items[i]); tempItemProbs.Add(itemProbs[i]); totalProbs += itemProbs[i]; tempYs.Add(itemYs[i]); }
             }
             for (int i = 0; i < groupCooldowns.Count; i++)
             {
@@ -202,20 +214,25 @@ namespace LD42
                 { tempGroups.Add(groups[i]); tempGroupProbs.Add(groupProbs[i]); totalGroupProbs += groupProbs[i]; }
             }
         }
+
         public void InitialiseGroups()
         {
             tempGroups = new List<string>();
             tempItems = new List<string>();
             tempGroupProbs = new List<double>();
             tempItemProbs = new List<double>();
+            tempYs = new List<double>();
 
             groups = new List<string>() { "basic", "void" };
-            groupProbs = new List<double>() { .96, .04 };
-            groupCooldowns = new List<double>() { 0, 20 };
+            groupProbs = new List<double>() { .9, .1 };
+            groupCooldowns = new List<double>() { 0, 0 };
+            basegcds = new List<double>() { 0, 20 };
 
             items = new List<string>() { "none" };
             itemProbs = new List<double>() { 1 };
+            baseicds = new List<double>() { 0 };
             itemCooldowns = new List<double>() { 0 };
+            itemYs = new List<double>() { 80 };
 
             XDocument xdoc = new XDocument();
             xdoc = XDocument.Load("Content\\XML\\PickupInfo.xml");
@@ -225,7 +242,14 @@ namespace LD42
             {
                 items.Add(xel.Attribute("name").Value);
                 itemProbs.Add(double.Parse(xel.Attribute("prob").Value));
-                itemCooldowns.Add(double.Parse(xel.Attribute("cooldown").Value));
+                baseicds.Add(double.Parse(xel.Attribute("cooldown").Value));
+                itemCooldowns.Add(0);
+                if (xel.Attribute("y") != null)
+                {
+                    itemYs.Add(double.Parse(xel.Attribute("y").Value));
+                }
+                else
+                    itemYs.Add(80);
             }
         }
 
