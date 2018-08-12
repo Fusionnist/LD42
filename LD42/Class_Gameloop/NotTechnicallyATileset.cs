@@ -41,14 +41,15 @@ namespace LD42
 
         public void AddTileGroup(string groupId_, string itemId_, float xpos_)
         {
+            float height = 96;
             List<Entity> ents = new List<Entity>();
             ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(xpos_, 0), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
             switch (groupId_)
             {
                 case "basic":
-                    for (int i = 7; i < 10; i++)
+                    for (int i = 0; i < 2; i++)
                     {
-                        ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(xpos_, i * vdims.X / 14), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
+                        ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(xpos_, i*32 + height), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
                     }
                     break;
                 case "void":
@@ -57,7 +58,7 @@ namespace LD42
             switch(itemId_)
             {
                 case "gold":
-                    Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef("placeholderPickup"), new Vector2(xpos_, 3 * vdims.X / 7), content, ebuilder);
+                    Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef("placeholderPickup"), new Vector2(xpos_, height - 16), content, ebuilder);
                     ent.AddProperty(new Property("isCollectible", "isCollectible", "isCollectible"));
                     ents.Add(ent);
                     break;
