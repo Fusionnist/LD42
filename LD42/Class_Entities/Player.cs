@@ -41,7 +41,7 @@ namespace LD42
             if (input_.Y == -1 && touchWallD)
             {
                 state = PlayerState.jump;
-                vel.Y = -300;
+                vel.Y = -330;
             }
             if (queueJump)
             {
