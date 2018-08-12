@@ -31,6 +31,7 @@ namespace LD42
         bool addCeiling;
         float lastPos;
         Random r;
+        int ticktock;
 
         public NotTechnicallyATileset(Texture2D[] dick, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
@@ -44,6 +45,7 @@ namespace LD42
             SetupTexes();
             InitialiseGroups();
             SetupTiles();
+            ticktock = 0;
 
             EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
             EntityCollection.CreateGroup(new Property("isBG", "isBG", "isBG"), "backgrounds");
@@ -51,16 +53,18 @@ namespace LD42
 
         public void AddTileGroup(string groupId_, string itemId_, float xpos_, float itemY_)
         {
-            float height = 96;
+            float height = 112;
+            if (ticktock == 5)
+                ticktock = 0;
             List<Entity> ents = new List<Entity>();
             if (addCeiling)
                 ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(6), new Vector2(xpos_, 0), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
             addCeiling = !addCeiling;
-            int x = r.Next(7, 12);
             switch (groupId_)
             {
                 case "basic":
-                    ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(x), new Vector2(xpos_, height), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
+                    if (ticktock == 0)
+                        ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(12), new Vector2(xpos_, height), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
                     break;
                 case "void":
                     if (nextFloorType == "rand")
@@ -78,6 +82,7 @@ namespace LD42
                 ents.Add(ent);
             }
             EntityCollection.AddEntities(ents);
+            ticktock++;
         }
 
         public DrawerCollection GetDrawerCollection(int id_)
@@ -196,13 +201,27 @@ namespace LD42
                                 )
                             }, "tileDrawer");
                     break;
+                case 12:
+                    dc = new DrawerCollection(new List<TextureDrawer>()
+                            {
+                                new TextureDrawer
+                                (
+                                    tileTexes[2],
+                                    new TextureFrame(new Rectangle(0, 0, 160, 64), new Point(0, 0)),
+                                    new HitboxCollection[]
+                                    {
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 160, 68) } }, "collision")
+                                    }
+                                )
+                            }, "tileDrawer");
+                    break;
             }
             return dc;
         }
 
         public void SetupTiles()
         {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 30; i++)
             {
                 AddTileGroup("basic", "none", i * vdims.X / 14, 80);
             }
