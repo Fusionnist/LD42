@@ -122,6 +122,7 @@ namespace LD42
 
             SoundManager.AddSong(Content.Load<Song>("Music/dungeonrun"), "gamesong");
             SoundManager.AddSong(Content.Load<Song>("Music/menusong"), "menusong");
+            SoundManager.PlaySong("menusong");
 
             RecipeBook.ReadDocument(XDocument.Load("Content/XML/Recipes.xml"));
             //LOAD TEXTURES
@@ -218,6 +219,7 @@ namespace LD42
             if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("startGame"))
             {
                 gameState = GameState.TransitionM;
+                SoundManager.PlaySong("gamesong");
                 easeIn.Reset();
             }
             else if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("quit"))
@@ -242,6 +244,7 @@ namespace LD42
             else if (gameState == GameState.Pause && uis[currentUInb].IssuedCommand("returnToMenu"))
             {
                 gameState = GameState.TransitionP;
+                SoundManager.PlaySong("menusong");
                 goingToMenu = true;
             }
             else if (gameState == GameState.Pause && uis[currentUInb].IssuedCommand("retry"))
@@ -253,6 +256,7 @@ namespace LD42
             else if (gameState == GameState.Dead && uis[currentUInb].IssuedCommand("returnToMenu"))
             {
                 gameState = GameState.TransitionD;
+                SoundManager.PlaySong("menusong");
                 goingToMenu = true;
             }
             else if (gameState == GameState.Dead && uis[currentUInb].IssuedCommand("retry"))
