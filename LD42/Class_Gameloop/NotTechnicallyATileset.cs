@@ -22,23 +22,25 @@ namespace LD42
         EntBuilder42 ebuilder;
         Point vdims;
         public Texture2D[] tileTexes;
+        Texture2D bgtex;
         ContentManager content;
         string nextFloorType;
         List<string> groups, items, tempGroups, tempItems;
         List<double> groupProbs, itemProbs, tempGroupProbs, tempItemProbs, groupCooldowns, itemCooldowns, itemYs, tempYs, basegcds, baseicds;
         double totalProbs, totalGroupProbs;
 
-        public NotTechnicallyATileset(Texture2D[] tileTexes_, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
+        public NotTechnicallyATileset(Texture2D[] dick, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
-            tileTexes = tileTexes_;
             vdims = vdims_;
             ebuilder = ebuilder_;
             content = content_;
             nextFloorType = "rand";
+            SetupTexes();
             InitialiseGroups();
             SetupTiles();
+
             EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
-            //EntityCollection.CreateGroup(new Property("isCollectible", "isCollectible", "isCollectible"), "pickups");
+            EntityCollection.CreateGroup(new Property("isBG", "isBG", "isBG"), "backgrounds");
         }
 
         public void AddTileGroup(string groupId_, string itemId_, float xpos_, float itemY_)
@@ -78,9 +80,7 @@ namespace LD42
             switch (id_)
             {
                 case 0:
-                    dc = new DrawerCollection
-                        (
-                            new List<TextureDrawer>()
+                    dc = new DrawerCollection(new List<TextureDrawer>()
                             {
                                 new TextureDrawer
                                 (
@@ -90,10 +90,24 @@ namespace LD42
                                         new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 50, 20) } }, "collision")
                                     }
                                 )
-                            }, 
-                            "tileDrawer"
-                        );
+                            }, "tileDrawer");
                     break;
+                case 1:
+                    dc = new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(bgtex, new TextureFrame(new Rectangle(0, 0, 96, 96), new Point(48, 48))) }, "bg");
+                    break;
+                case 2:
+                    dc = new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(bgtex, new TextureFrame(new Rectangle(96, 0, 96, 96), new Point(48, 48))) }, "bg");
+                    break;
+                case 3:
+                    dc = new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(bgtex, new TextureFrame(new Rectangle(192, 0, 96, 96), new Point(48, 48))) }, "bg");
+                    break;
+                case 4:
+                    dc = new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(bgtex, new TextureFrame(new Rectangle(288, 0, 96, 96), new Point(48, 48))) }, "bg");
+                    break;
+                case 5:
+                    dc = new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(bgtex, new TextureFrame(new Rectangle(384, 0, 96, 96), new Point(48, 48))) }, "bg");
+                    break;
+
             }
             return dc;
         }
@@ -103,6 +117,13 @@ namespace LD42
             for (int i = 0; i < 15; i++)
             {
                 AddTileGroup("basic", "none", i * vdims.X / 14, 80);
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                Random r = new Random();
+                int x = r.Next(1, 5);
+                Entity ent = ebuilder.CreateEntity("bg", GetDrawerCollection(x), new Vector2(i * 96 + 48, 64), new List<Property>() { new Property("isBG", "isBG", "isBG") }, "bg");
+                EntityCollection.AddEntity(ent);
             }
         }
 
@@ -134,6 +155,19 @@ namespace LD42
             if (!x)
             {
                 HandleNewTileSpawns(camPos_);
+            }
+
+            x = false;
+            foreach (var bg in EntityCollection.GetGroup("backgrounds"))
+            {
+                if (bg.pos.X < camPos_ - 48)
+                    bg.exists = false;
+                if (bg.pos.X >= camPos_ + vdims.X)
+                    x = true;
+            }
+            if (!x)
+            {
+                HandleNewBgSpawns(camPos_);
             }
         }
 
@@ -255,10 +289,26 @@ namespace LD42
 
         public void Draw(SpriteBatch sb_)
         {
+            foreach (var ent in EntityCollection.GetGroup("backgrounds"))
+                ent.Draw(sb_);
             foreach (var ent in EntityCollection.GetGroup("tiles"))
                 ent.Draw(sb_);
             foreach (var ent in EntityCollection.GetGroup("pickups"))
                 ent.Draw(sb_);
+        }
+
+        public void SetupTexes()
+        {
+            tileTexes = new Texture2D[] { content.Load<Texture2D>("yesnpressed") };
+            bgtex = content.Load<Texture2D>("Tile/tilebg");
+        }
+
+        public void HandleNewBgSpawns(float camPos_)
+        {
+            Random r = new Random();
+            int x = r.Next(1, 5);
+            Entity ent = ebuilder.CreateEntity("bg", GetDrawerCollection(x), new Vector2(camPos_ + vdims.X + 95, 64), new List<Property>() { new Property("isBG", "isBG", "isBG") }, "bg");
+            EntityCollection.AddEntity(ent);
         }
     }
 }
