@@ -37,7 +37,7 @@ namespace LD42
         {
             vdims = vdims_;
             addCeiling = true;
-            globalCooldown = 0;
+            globalCooldown = 20;
             r = new Random();
             ebuilder = ebuilder_;
             content = content_;
@@ -315,10 +315,6 @@ namespace LD42
                             }
                         }
                     }
-                }
-                else
-                {
-                    int e = 5;
                 }
 
                     double z = r.NextDouble() * totalGroupProbs;

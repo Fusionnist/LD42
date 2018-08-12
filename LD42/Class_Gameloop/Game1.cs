@@ -41,7 +41,7 @@ namespace LD42
         SceneCollection scenes;
         InputProfile ipp;
         float blackness;
-        bool fading;
+        bool fading, goingToMenu;
 
         public Game1()
         {
@@ -67,6 +67,7 @@ namespace LD42
             IsMouseVisible = true;
             blackness = 0.5f;
             fading = true;
+            goingToMenu = false;
             //VALUES
 
             //UTILITY
@@ -165,12 +166,14 @@ namespace LD42
                 new UISystem(new List<Button>()
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/pause"))),
-                    new Button("returnToMenu", new Rectangle(80, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(0, 0, 50, 20), new Point(0, 0))))
+                    new Button("returnToMenu", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"))),
+                    new Button("retry", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")))
                 }),
                 new UISystem(new List<Button>()
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/dead"))),
-                    new Button("returnToMenu", new Rectangle(80, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(0, 0, 50, 20), new Point(0, 0))))
+                    new Button("returnToMenu", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"))),
+                    new Button("retry", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"))),
                 }),
             };
 
@@ -228,10 +231,22 @@ namespace LD42
             else if (gameState == GameState.Pause && uis[currentUInb].IssuedCommand("returnToMenu"))
             {
                 gameState = GameState.TransitionP;
+                goingToMenu = true;
+            }
+            else if (gameState == GameState.Pause && uis[currentUInb].IssuedCommand("retry"))
+            {
+                gameState = GameState.TransitionP;
+                goingToMenu = false;
             }
             else if (gameState == GameState.Dead && uis[currentUInb].IssuedCommand("returnToMenu"))
             {
                 gameState = GameState.TransitionD;
+                goingToMenu = true;
+            }
+            else if (gameState == GameState.Dead && uis[currentUInb].IssuedCommand("retry"))
+            {
+                gameState = GameState.TransitionD;
+                goingToMenu = false;
             }
         }
         protected void UpdateUIStuff()
@@ -348,8 +363,10 @@ namespace LD42
                     fading = false;
                     if (gameState == GameState.TransitionM)
                     { gameState = GameState.TransitionG; currentUInb = 1; }
-                    else
+                    else if (goingToMenu)
                     { gameState = GameState.TransitionM; currentUInb = 0; }
+                    else
+                    { gameState = GameState.TransitionG; currentUInb = 1; SetupGame();  }
                 }
             }
             else
