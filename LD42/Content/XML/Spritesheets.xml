@@ -97,10 +97,10 @@
   //walk enemy
   <Spritesheet name="walkenemys" source="Sprite/enemyspritesheet">
   <Texture name="walk" id="enemy">
-    <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
+    <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="8" cx="0" cy="0"></Frameset>
     <Hitboxes>
       <Collection type="collision">
-        <Frameset x="8" y="0" w="16" h="32" amt="4"></Frameset>
+        <Frameset x="8" y="0" w="16" h="32" amt="8"></Frameset>
       </Collection>
     </Hitboxes>
   </Texture>
