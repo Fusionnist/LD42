@@ -30,11 +30,13 @@ namespace LD42
         double totalProbs, totalGroupProbs;
         bool addCeiling;
         float lastPos;
+        Random r;
 
         public NotTechnicallyATileset(Texture2D[] dick, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
             vdims = vdims_;
             addCeiling = true;
+            r = new Random();
             ebuilder = ebuilder_;
             content = content_;
             nextFloorType = "rand";
@@ -53,13 +55,11 @@ namespace LD42
             if (addCeiling)
                 ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(6), new Vector2(xpos_, 0), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
             addCeiling = !addCeiling;
+            int x = r.Next(7, 12);
             switch (groupId_)
             {
                 case "basic":
-                    for (int i = 0; i < 2; i++)
-                    {
-                        ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(xpos_, i*32 + height), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
-                    }
+                    ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(x), new Vector2(xpos_, height), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
                     break;
                 case "void":
                     if (nextFloorType == "rand")
@@ -120,7 +120,77 @@ namespace LD42
                                     tileTexes[1],
                                     new HitboxCollection[]
                                     {
-                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 20) } }, "collision")
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 64, 32) } }, "collision")
+                                    }
+                                )
+                            }, "tileDrawer");
+                    break;
+                case 7:
+                    dc = new DrawerCollection(new List<TextureDrawer>()
+                            {
+                                new TextureDrawer
+                                (
+                                    tileTexes[2],
+                                    new TextureFrame(new Rectangle(0, 0, 32, 64), new Point(0, 0)),
+                                    new HitboxCollection[]
+                                    {
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 68) } }, "collision")
+                                    }
+                                )
+                            }, "tileDrawer");
+                    break;
+                case 8:
+                    dc = new DrawerCollection(new List<TextureDrawer>()
+                            {
+                                new TextureDrawer
+                                (
+                                    tileTexes[2],
+                                    new TextureFrame(new Rectangle(32, 0, 32, 64), new Point(0, 0)),
+                                    new HitboxCollection[]
+                                    {
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 68) } }, "collision")
+                                    }
+                                )
+                            }, "tileDrawer");
+                    break;
+                case 9:
+                    dc = new DrawerCollection(new List<TextureDrawer>()
+                            {
+                                new TextureDrawer
+                                (
+                                    tileTexes[2],
+                                    new TextureFrame(new Rectangle(64, 0, 32, 64), new Point(0, 0)),
+                                    new HitboxCollection[]
+                                    {
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 68) } }, "collision")
+                                    }
+                                )
+                            }, "tileDrawer");
+                    break;
+                case 10:
+                    dc = new DrawerCollection(new List<TextureDrawer>()
+                            {
+                                new TextureDrawer
+                                (
+                                    tileTexes[2],
+                                    new TextureFrame(new Rectangle(96, 0, 32, 64), new Point(0, 0)),
+                                    new HitboxCollection[]
+                                    {
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 68) } }, "collision")
+                                    }
+                                )
+                            }, "tileDrawer");
+                    break;
+                case 11:
+                    dc = new DrawerCollection(new List<TextureDrawer>()
+                            {
+                                new TextureDrawer
+                                (
+                                    tileTexes[2],
+                                    new TextureFrame(new Rectangle(128, 0, 32, 64), new Point(0, 0)),
+                                    new HitboxCollection[]
+                                    {
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 68) } }, "collision")
                                     }
                                 )
                             }, "tileDrawer");
@@ -169,6 +239,11 @@ namespace LD42
             foreach (var ent in EntityCollection.GetGroup("pickups"))
             {
                 if (ent.pos.X <= camPos_ - vdims.X / 14)
+                    ent.exists = false;
+            }
+            foreach (var ent in EntityCollection.GetGroup("enemies"))
+            {
+                if (ent.pos.X <= camPos_ - vdims.X)
                     ent.exists = false;
             }
             if (!x)
@@ -318,7 +393,7 @@ namespace LD42
 
         public void SetupTexes()
         {
-            tileTexes = new Texture2D[] { content.Load<Texture2D>("yesnpressed"), content.Load<Texture2D>("Tile/tileceiling") };
+            tileTexes = new Texture2D[] { content.Load<Texture2D>("yesnpressed"), content.Load<Texture2D>("Tile/tileceiling"), content.Load<Texture2D>("Tile/tilefloor") };
             bgtex = content.Load<Texture2D>("Tile/tilebg");
         }
 
