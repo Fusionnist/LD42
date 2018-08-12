@@ -42,18 +42,21 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Class_Entities\Enemy.cs" />
     <Compile Include="Class_Entities\Recipe.cs" />
     <Compile Include="Class_Entities\RecipeBook.cs" />
+    <Compile Include="Class_Entities\RunEnemy.cs" />
+    <Compile Include="Class_Entities\ShadowEnt.cs" />
     <Compile Include="Class_Gameloop\EntBuilder42.cs" />
     <Compile Include="Class_Entities\InventorySlot.cs" />
     <Compile Include="Class_Entities\Tile.cs" />
     <Compile Include="Data\Enums.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="Class_Gameloop\Game1.cs" />
     <Compile Include="Class_Gameloop\Inventory.cs" />
     <Compile Include="Class_Entities\Item.cs" />
     <Compile Include="Class_Entities\Pickup.cs" />
     <Compile Include="Class_Gameloop\NotTechnicallyATileset.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Class_Entities\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

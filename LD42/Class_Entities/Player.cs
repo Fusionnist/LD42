@@ -15,7 +15,7 @@ using System.Collections.Generic;
 namespace LD42
 {
     enum PlayerState { walk, jump, dash, slide }
-    class Player : Entity
+    class Player : ShadowEnt
     {
         float speed;
         PlayerState state;
@@ -41,15 +41,16 @@ namespace LD42
                 state = PlayerState.jump;
                 vel.Y = -120;
             }
-            if(input_.X == 1 && dashTimer.Complete())
+            if (input_.X == 1 && dashTimer.Complete())
             {
                 dashTimer.Reset();
-                state = PlayerState.dash;
                
+
             }
             if (!dashTimer.Complete())
             {
                 mov.X += 200 * dashTimer.timer;
+                state = PlayerState.dash;
             }
 
             base.Input(input_);
@@ -78,7 +79,12 @@ namespace LD42
             {
                 SetTexture("jump");
             }
-           
+
+            if (state == PlayerState.dash)
+            {
+                SetTexture("jump");
+            }
+
             base.Draw(sb_, flipH_, flipV_, angle_);
         }
     }

@@ -242,9 +242,15 @@ namespace LD42
 
                 player.Input(input);
                 player.Move();
+                EntityCollection.MoveGroup("enemies");
+
                 player.MultMov(es_);
+                EntityCollection.MultMovGroup("enemies", es_);
+
                 HandleCollisions();
+
                 player.Update(es_);
+                EntityCollection.UpdateGroup("enemies", es_);
             }
             
             ts.Update(es_, player.pos.X - 64);
@@ -258,8 +264,18 @@ namespace LD42
             foreach (var tile in EntityCollection.GetGroup("tiles"))
             {
                 CollisionSolver.SolveEntTileCollision(player, tile);
+                foreach(Entity enemy in EntityCollection.GetGroup("enemies"))
+                {
+                    CollisionSolver.SolveEntTileCollision(enemy, tile);
+                }
+
                 CollisionSolver.SecondPassCollision(player, tile);
+                foreach (Entity enemy in EntityCollection.GetGroup("enemies"))
+                {
+                    CollisionSolver.SecondPassCollision(enemy, tile);
+                }
             }
+            
             foreach (var tile in EntityCollection.GetGroup("slots"))
             {
                 CollisionSolver.SolveEntTileCollision(player, tile, tileTranslation_: new Vector2(player.pos.X + player.mov.X- 33,0));
@@ -426,6 +442,7 @@ namespace LD42
             scenes.SetupScene(spriteBatch, GraphicsDevice);
             //DRAW HERE
             ts.Draw(spriteBatch);
+            EntityCollection.DrawGroup("enemies", spriteBatch);
             player.Draw(spriteBatch);
             spriteBatch.End();
         }
