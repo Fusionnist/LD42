@@ -139,7 +139,7 @@ namespace LD42
 
             SetupUISystems();
             ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed"), Content.Load<Texture2D>("Placeholder/placeholder1") }, vdims, ebuilder, Content);
-            player = Assembler.GetEnt(ElementCollection.GetEntRef("player"), new Vector2(0, 65), Content, ebuilder);
+            player = Assembler.GetEnt(ElementCollection.GetEntRef("player"), new Vector2(64, 65), Content, ebuilder);
 
             inven = new Inventory(Content);
             for (int x = 0; x < 3; x++)

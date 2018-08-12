@@ -8,6 +8,7 @@ using MonoGame.FZT.Assets;
 using MonoGame.FZT.Drawing;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace LD42
 {
@@ -29,6 +30,13 @@ namespace LD42
         public override List<Entity> SubEntities(string specifics_ = "none")
         {
             return new List<Entity>() { item };
+        }
+
+        public override void Draw(SpriteBatch sb_, bool flipH_ = false, bool flipV_ = false, float angle_ = 0)
+        {
+            pos.Y -= 8;
+            base.Draw(sb_, flipH_, flipV_, angle_);
+            pos.Y += 8;
         }
     }
 }
