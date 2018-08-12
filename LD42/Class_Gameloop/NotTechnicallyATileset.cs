@@ -126,7 +126,7 @@ namespace LD42
                                     tileTexes[1],
                                     new HitboxCollection[]
                                     {
-                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 64, 32) } }, "collision")
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 32, 16) } }, "collision")
                                     }
                                 )
                             }, "tileDrawer");
@@ -140,7 +140,7 @@ namespace LD42
                                     new TextureFrame(new Rectangle(0, 0, 32, 64), new Point(0, 0)),
                                     new HitboxCollection[]
                                     {
-                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 68) } }, "collision")
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 16, 36) } }, "collision")
                                     }
                                 )
                             }, "tileDrawer");
@@ -154,7 +154,7 @@ namespace LD42
                                     new TextureFrame(new Rectangle(32, 0, 32, 64), new Point(0, 0)),
                                     new HitboxCollection[]
                                     {
-                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 68) } }, "collision")
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 16, 36) } }, "collision")
                                     }
                                 )
                             }, "tileDrawer");
@@ -168,7 +168,7 @@ namespace LD42
                                     new TextureFrame(new Rectangle(64, 0, 32, 64), new Point(0, 0)),
                                     new HitboxCollection[]
                                     {
-                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 68) } }, "collision")
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 16, 36) } }, "collision")
                                     }
                                 )
                             }, "tileDrawer");
@@ -182,7 +182,7 @@ namespace LD42
                                     new TextureFrame(new Rectangle(96, 0, 32, 64), new Point(0, 0)),
                                     new HitboxCollection[]
                                     {
-                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 68) } }, "collision")
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 16, 36) } }, "collision")
                                     }
                                 )
                             }, "tileDrawer");
@@ -196,7 +196,7 @@ namespace LD42
                                     new TextureFrame(new Rectangle(128, 0, 32, 64), new Point(0, 0)),
                                     new HitboxCollection[]
                                     {
-                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 68) } }, "collision")
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 16, 36) } }, "collision")
                                     }
                                 )
                             }, "tileDrawer");
@@ -287,9 +287,8 @@ namespace LD42
 
         public void HandleNewTileSpawns(float camPos_)
         {
-            if (globalCooldown == 0)
-            {
-                string groupStuff = null, itemStuff = null;
+
+                string groupStuff = null, itemStuff = "none";
                 double y = 80;
                 totalProbs = 0;
                 totalGroupProbs = 0;
@@ -298,6 +297,8 @@ namespace LD42
                     AddPossibilitiesToLists();
                     Random r = new Random();
 
+                if (globalCooldown == 0)
+                {
                     double x = r.NextDouble() * totalProbs;
                     for (int i = 0; x > 0; i++)
                     {
@@ -313,12 +314,13 @@ namespace LD42
                             }
                         }
                     }
+                }
 
-                    x = r.NextDouble() * totalGroupProbs;
-                    for (int i = 0; x > 0; i++)
+                    double z = r.NextDouble() * totalGroupProbs;
+                    for (int i = 0; z > 0; i++)
                     {
-                        x -= tempGroupProbs[i];
-                        if (x <= 0)
+                        z -= tempGroupProbs[i];
+                        if (z <= 0)
                             groupStuff = tempGroups[i];
                     }
                 }
@@ -328,11 +330,8 @@ namespace LD42
                     itemStuff = "none";
                 }
 
-                if (globalCooldown != 0)
-                    itemStuff = "none";
-
                 AddTileGroup(groupStuff, itemStuff, camPos_, (float)y);
-            }
+            
 
 
             HandleCooldowns();
