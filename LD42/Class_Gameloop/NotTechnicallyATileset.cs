@@ -29,10 +29,12 @@ namespace LD42
         List<double> groupProbs, itemProbs, tempGroupProbs, tempItemProbs, groupCooldowns, itemCooldowns, itemYs, tempYs, basegcds, baseicds;
         double totalProbs, totalGroupProbs;
         bool addCeiling;
+        float lastPos;
 
         public NotTechnicallyATileset(Texture2D[] dick, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
             vdims = vdims_;
+            addCeiling = true;
             ebuilder = ebuilder_;
             content = content_;
             nextFloorType = "rand";
@@ -129,11 +131,11 @@ namespace LD42
 
         public void SetupTiles()
         {
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 100; i++)
             {
                 AddTileGroup("basic", "none", i * vdims.X / 14, 80);
             }
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Random r = new Random();
                 int x = r.Next(1, 5);
@@ -157,9 +159,11 @@ namespace LD42
             List<Entity> ents = EntityCollection.GetGroup("tiles");
             foreach (var ent in EntityCollection.GetGroup("tiles"))
             {
-                if (ent.pos.X <= camPos_ - vdims.X / 14)
-                    ent.exists = false;
-                if (ent.pos.X >= camPos_ + 13 * vdims.X / 14)
+                if (ent.pos.X <= camPos_ - vdims.X)
+                {
+                    ent.exists = false;  lastPos = ent.pos.X - camPos_;
+                }
+                if (ent.pos.X >= camPos_ + vdims.X)
                     x = true;
             }
             foreach (var ent in EntityCollection.GetGroup("pickups"))
@@ -169,7 +173,7 @@ namespace LD42
             }
             if (!x)
             {
-                HandleNewTileSpawns(camPos_);
+                HandleNewTileSpawns(camPos_ + 2 * vdims.X + 16 + lastPos);
             }
 
             x = false;
@@ -182,7 +186,7 @@ namespace LD42
             }
             if (!x)
             {
-                HandleNewBgSpawns(camPos_);
+                HandleNewBgSpawns(camPos_ + vdims.X + 48);
             }
         }
 
@@ -226,7 +230,7 @@ namespace LD42
                 groupStuff = "void";
                 itemStuff = "none";
             }
-            AddTileGroup(groupStuff, itemStuff, vdims.X + camPos_, (float)y);
+            AddTileGroup(groupStuff, itemStuff, camPos_, (float)y);
 
 
             HandleCooldowns();
@@ -322,7 +326,7 @@ namespace LD42
         {
             Random r = new Random();
             int x = r.Next(1, 5);
-            Entity ent = ebuilder.CreateEntity("bg", GetDrawerCollection(x), new Vector2(camPos_ + vdims.X + 95, 64), new List<Property>() { new Property("isBG", "isBG", "isBG") }, "bg");
+            Entity ent = ebuilder.CreateEntity("bg", GetDrawerCollection(x), new Vector2(camPos_, 64), new List<Property>() { new Property("isBG", "isBG", "isBG") }, "bg");
             EntityCollection.AddEntity(ent);
         }
     }

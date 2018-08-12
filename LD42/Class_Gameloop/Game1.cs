@@ -253,7 +253,7 @@ namespace LD42
                 EntityCollection.UpdateGroup("enemies", es_);
             }
             
-            ts.Update(es_, player.pos.X - 64);
+            ts.Update(es_, player.pos.X - 32);
 
             inven.Update(es_);
 
