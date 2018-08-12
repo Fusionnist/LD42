@@ -53,7 +53,7 @@ namespace LD42
 
         public void AddTileGroup(string groupId_, string itemId_, float xpos_, float itemY_)
         {
-            float height = 112;
+            float height = 96;
             if (ticktock == 5)
                 ticktock = 0;
             List<Entity> ents = new List<Entity>();
@@ -413,7 +413,7 @@ namespace LD42
                     itemYs.Add(double.Parse(xel.Attribute("y").Value));
                 }
                 else
-                    itemYs.Add(96);
+                    itemYs.Add(80);
             }
         }
 
