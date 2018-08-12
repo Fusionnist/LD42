@@ -449,7 +449,7 @@ namespace LD42
                 x = r.Next(1, 5);
             } while (x == prevBg);
             prevBg = x;
-            Entity ent = ebuilder.CreateEntity("bg", GetDrawerCollection(x), new Vector2(camPos_, 64), new List<Property>() { new Property("isBG", "isBG", "isBG") }, "bg");
+            Entity ent = ebuilder.CreateEntity("bg", GetDrawerCollection(x), new Vector2((float)(Math.Floor(camPos_ / 16) * 16), 64), new List<Property>() { new Property("isBG", "isBG", "isBG") }, "bg");
             EntityCollection.AddEntity(ent);
         }
     }

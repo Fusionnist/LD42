@@ -35,5 +35,15 @@
     <Properties></Properties>
 
   </Entity>
+
+  <Entity type="flyenemy" name="flyenemy">
+    <Textures name ="default">
+      <Texture name="idle" id="fish" sheetName="fishidles"></Texture>
+      <Texture name="appear" id="fish" sheetName="fishappears"></Texture>
+      <Texture name="shadow" id="shadow" sheetName="shadows"></Texture>
+    </Textures>
+    <Properties></Properties>
+
+  </Entity>
   
 </Entities>
