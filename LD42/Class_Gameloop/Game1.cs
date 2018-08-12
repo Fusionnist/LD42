@@ -208,6 +208,7 @@ namespace LD42
             if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("startGame"))
             {
                 gameState = GameState.TransitionM;
+                easeIn.Reset();
             }
             else if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("quit"))
             {
@@ -226,7 +227,7 @@ namespace LD42
             else if (gameState == GameState.Pause && ipp.JustPressed("p"))
             {
                 gameState = GameState.Game;
-                currentUInb = 1;
+                currentUInb = 1;               
             }
             else if (gameState == GameState.Pause && uis[currentUInb].IssuedCommand("returnToMenu"))
             {
@@ -237,6 +238,7 @@ namespace LD42
             {
                 gameState = GameState.TransitionP;
                 goingToMenu = false;
+                easeIn.Reset();
             }
             else if (gameState == GameState.Dead && uis[currentUInb].IssuedCommand("returnToMenu"))
             {
@@ -247,6 +249,7 @@ namespace LD42
             {
                 gameState = GameState.TransitionD;
                 goingToMenu = false;
+                easeIn.Reset();
             }
         }
         protected void UpdateUIStuff()

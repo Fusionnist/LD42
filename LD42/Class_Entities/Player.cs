@@ -41,7 +41,7 @@ namespace LD42
             if (input_.Y == -1 && touchWallD)
             {
                 state = PlayerState.jump;
-                vel.Y = -330;
+                vel.Y = -280;
             }
             if (queueJump)
             {
@@ -65,7 +65,7 @@ namespace LD42
 
         public override void Move()
         {
-            mov.X += 100;
+            mov.X += 120;
             
             {
                 vel.Y += 15;
