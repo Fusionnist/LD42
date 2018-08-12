@@ -268,7 +268,8 @@ namespace LD42
             }
             if (!x)
             {
-                HandleNewTileSpawns(camPos_ + 2 * vdims.X + 16 + lastPos);
+                float n = (float)(Math.Floor(camPos_ / 16) * 16);
+                HandleNewTileSpawns(n + vdims.X + 16);
             }
 
             x = false;
@@ -314,6 +315,10 @@ namespace LD42
                             }
                         }
                     }
+                }
+                else
+                {
+                    int e = 5;
                 }
 
                     double z = r.NextDouble() * totalGroupProbs;
