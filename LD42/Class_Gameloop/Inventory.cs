@@ -28,7 +28,7 @@ namespace LD42
         {
             items = new List<Entity>();
             slots = new List<Entity>();
-            minSize = 7;
+            minSize = 1;
             maxSize = 32;
             taken = new int[7, 5];
             content = content_;
