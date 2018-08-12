@@ -31,7 +31,7 @@ namespace LD42
         bool addCeiling;
         float lastPos;
         Random r;
-        int ticktock, itemCount;
+        int ticktock, itemCount, prevBg;
 
         public NotTechnicallyATileset(Texture2D[] dick, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
@@ -47,6 +47,7 @@ namespace LD42
             InitialiseGroups();
             SetupTiles();
             ticktock = 0;
+            prevBg = 0;
 
             EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
             EntityCollection.CreateGroup(new Property("isBG", "isBG", "isBG"), "backgrounds");
@@ -78,10 +79,6 @@ namespace LD42
             }
             if (itemId_ != "none")
             {
-                if (itemId_ == "renemy" || itemId_ == "fenemy")
-                {
-                    int e = 0;
-                }
                 Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef(itemId_), new Vector2(xpos_, itemY_), content, ebuilder, false);
                 ent.AddProperty(new Property("isCollectible", "isCollectible", "isCollectible"));
                 ents.Add(ent);
@@ -447,7 +444,11 @@ namespace LD42
         public void HandleNewBgSpawns(float camPos_)
         {
             Random r = new Random();
-            int x = r.Next(1, 5);
+            int x;
+            do {
+                x = r.Next(1, 5);
+            } while (x == prevBg);
+            prevBg = x;
             Entity ent = ebuilder.CreateEntity("bg", GetDrawerCollection(x), new Vector2(camPos_, 64), new List<Property>() { new Property("isBG", "isBG", "isBG") }, "bg");
             EntityCollection.AddEntity(ent);
         }
