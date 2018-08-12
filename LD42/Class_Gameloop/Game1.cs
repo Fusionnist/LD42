@@ -24,6 +24,7 @@ namespace LD42
     {
         GameState gameState;
 
+        Timer easeIn, easeOut;
         CursorManager cursorManager;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -58,6 +59,9 @@ namespace LD42
 
         protected override void Initialize()
         {
+            easeOut = new Timer(5f);
+            easeIn = new Timer(2f);
+
             gameState = GameState.Menu;
             currentUInb = 0;
             IsMouseVisible = true;
@@ -237,6 +241,8 @@ namespace LD42
         }
         protected void UpdateGame(float es_)
         {
+            easeIn.Update(es_);
+            if (easeIn.Complete()) { easeIn.Stop(); }
             if (gameState == GameState.Game)
             {
                 Vector2 input = Vector2.Zero;
@@ -261,9 +267,10 @@ namespace LD42
                 player.Update(es_);
                 EntityCollection.UpdateGroup("enemies", es_);
 
-                ParticleSystem.UpdateAll(es_);
+                
             }
-            
+            ParticleSystem.UpdateAll(es_);
+
             ts.Update(es_, player.pos.X - 32);
 
             inven.Update(es_);
@@ -465,7 +472,7 @@ namespace LD42
         void DrawGame()
         {
             scenes.SelectScene("game");
-            scenes.CurrentScene.TranslateTo(new Vector2((float)Math.Round(player.pos.ToPoint().ToVector2().X, 1) - 32, 0), false);
+            scenes.CurrentScene.TranslateTo(new Vector2((float)Math.Round(player.pos.ToPoint().ToVector2().X, 1) - 32 + easeIn.timer*64, 0), false);
             scenes.SetupScene(spriteBatch, GraphicsDevice);
             //DRAW HERE
             ts.Draw(spriteBatch);
