@@ -26,8 +26,8 @@ namespace LD42
         ContentManager content;
         string nextFloorType;
         List<string> groups, items, tempGroups, tempItems;
-        List<double> groupProbs, itemProbs, tempGroupProbs, tempItemProbs, groupCooldowns, itemCooldowns, itemYs, tempYs, basegcds, baseicds;
-        double totalProbs, totalGroupProbs;
+        List<double> groupProbs, itemProbs, tempGroupProbs, tempItemProbs, groupCooldowns, itemCooldowns, tempGlobalCountdowns, itemYs, tempYs, basegcds, baseicds, baseglobalcds;
+        double totalProbs, totalGroupProbs, globalCooldown;
         bool addCeiling;
         float lastPos;
         Random r;
@@ -36,6 +36,7 @@ namespace LD42
         {
             vdims = vdims_;
             addCeiling = true;
+            globalCooldown = 0;
             r = new Random();
             ebuilder = ebuilder_;
             content = content_;
@@ -305,6 +306,10 @@ namespace LD42
                 groupStuff = "void";
                 itemStuff = "none";
             }
+
+            if (globalCooldown != 0)
+                itemStuff = "none";
+
             AddTileGroup(groupStuff, itemStuff, camPos_, (float)y);
 
 
@@ -327,6 +332,8 @@ namespace LD42
                 if (groupCooldowns[i] > 0)
                     groupCooldowns[i]--;
             }
+            if (globalCooldown > 0)
+                globalCooldown--;
         }
 
         public void AddPossibilitiesToLists()
@@ -334,7 +341,7 @@ namespace LD42
             for (int i = 0; i < itemCooldowns.Count; i++)
             {
                 if (itemCooldowns[i] == 0)
-                { tempItems.Add(items[i]); tempItemProbs.Add(itemProbs[i]); totalProbs += itemProbs[i]; tempYs.Add(itemYs[i]); }
+                { tempItems.Add(items[i]); tempItemProbs.Add(itemProbs[i]); totalProbs += itemProbs[i]; tempYs.Add(itemYs[i]); tempGlobalCountdowns.Add(baseglobalcds[i]); }
             }
             for (int i = 0; i < groupCooldowns.Count; i++)
             {
@@ -350,6 +357,7 @@ namespace LD42
             tempGroupProbs = new List<double>();
             tempItemProbs = new List<double>();
             tempYs = new List<double>();
+            tempGlobalCountdowns = new List<double>();
 
             groups = new List<string>() { "basic" };
             groupProbs = new List<double>() { 1 };
@@ -361,6 +369,7 @@ namespace LD42
             baseicds = new List<double>() { 0 };
             itemCooldowns = new List<double>() { 0 };
             itemYs = new List<double>() { 80 };
+            baseglobalcds = new List<double>() { 0 };
 
             XDocument xdoc = new XDocument();
             xdoc = XDocument.Load("Content\\XML\\PickupInfo.xml");
@@ -372,6 +381,7 @@ namespace LD42
                 itemProbs.Add(double.Parse(xel.Attribute("prob").Value));
                 baseicds.Add(double.Parse(xel.Attribute("cooldown").Value));
                 itemCooldowns.Add(0);
+                baseglobalcds.Add(double.Parse(xel.Attribute("globalCooldown").Value));
                 if (xel.Attribute("y") != null)
                 {
                     itemYs.Add(double.Parse(xel.Attribute("y").Value));
