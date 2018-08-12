@@ -27,7 +27,7 @@ namespace LD42
 
         public override void Move()
         {
-            mov.X -= 200;
+            mov.X -= 100;
             base.Move();
         }
 
