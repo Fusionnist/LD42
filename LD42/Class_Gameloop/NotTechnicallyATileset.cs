@@ -181,15 +181,15 @@ namespace LD42
             items = new List<string>() { "none" };
             itemProbs = new List<double>() { 1 };
 
-            //XDocument xdoc = new XDocument();
-            //xdoc = XDocument.Load("Content\\XML\\PickupInfo.xml");
-            //IEnumerable<XElement> xels = xdoc.Elements("Pickup");
+            XDocument xdoc = new XDocument();
+            xdoc = XDocument.Load("Content\\XML\\PickupInfo.xml");
+            IEnumerable<XElement> xels = xdoc.Elements("Pickup");
 
-            //foreach (var xel in xels)
-            //{
-            //    items.Add(xel.Attribute("name").ToString());
-             //   itemProbs.Add(double.Parse(xel.Attribute("prob").ToString()));
-           // }
+            foreach (var xel in xels)
+            {
+                items.Add(xel.Attribute("name").ToString());
+                itemProbs.Add(double.Parse(xel.Attribute("prob").ToString()));
+            }
         }
 
         public void Draw(SpriteBatch sb_)
