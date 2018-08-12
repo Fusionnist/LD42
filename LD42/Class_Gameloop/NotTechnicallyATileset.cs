@@ -26,18 +26,19 @@ namespace LD42
         ContentManager content;
         string nextFloorType;
         List<string> groups, items, tempGroups, tempItems;
-        List<double> groupProbs, itemProbs, tempGroupProbs, tempItemProbs, groupCooldowns, itemCooldowns, tempGlobalCountdowns, itemYs, tempYs, basegcds, baseicds, baseglobalcds;
+        List<double> groupProbs, itemProbs, tempGroupProbs, tempItemProbs, groupCooldowns, itemCooldowns, tempGlobalCountdowns, itemYs, tempYs, basegcds, baseicds, baseglobalcds, itemSpawnCeilings;
         double totalProbs, totalGroupProbs, globalCooldown;
         bool addCeiling;
         float lastPos;
         Random r;
-        int ticktock;
+        int ticktock, itemCount;
 
         public NotTechnicallyATileset(Texture2D[] dick, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
             vdims = vdims_;
             addCeiling = true;
             globalCooldown = 20;
+            itemCount = 0;
             r = new Random();
             ebuilder = ebuilder_;
             content = content_;
@@ -77,9 +78,14 @@ namespace LD42
             }
             if (itemId_ != "none")
             {
+                if (itemId_ == "renemy" || itemId_ == "fenemy")
+                {
+                    int e = 0;
+                }
                 Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef(itemId_), new Vector2(xpos_, itemY_), content, ebuilder, false);
                 ent.AddProperty(new Property("isCollectible", "isCollectible", "isCollectible"));
                 ents.Add(ent);
+                itemCount++;
             }
             EntityCollection.AddEntities(ents);
             ticktock++;
@@ -340,6 +346,8 @@ namespace LD42
             tempGroupProbs.Clear();
             tempItemProbs.Clear();
             tempItems.Clear();
+            tempYs.Clear();
+            tempGlobalCountdowns.Clear();
         }
 
         public void HandleCooldowns()
@@ -362,7 +370,7 @@ namespace LD42
         {
             for (int i = 0; i < itemCooldowns.Count; i++)
             {
-                if (itemCooldowns[i] == 0)
+                if (itemCooldowns[i] == 0 && itemSpawnCeilings[i] <= itemCount)
                 { tempItems.Add(items[i]); tempItemProbs.Add(itemProbs[i]); totalProbs += itemProbs[i]; tempYs.Add(itemYs[i]); tempGlobalCountdowns.Add(baseglobalcds[i]); }
             }
             for (int i = 0; i < groupCooldowns.Count; i++)
@@ -386,12 +394,13 @@ namespace LD42
             groupCooldowns = new List<double>() { 0 };
             basegcds = new List<double>() { 0 };
 
-            items = new List<string>() { "none" };
-            itemProbs = new List<double>() { 1 };
-            baseicds = new List<double>() { 0 };
-            itemCooldowns = new List<double>() { 0 };
-            itemYs = new List<double>() { 80 };
-            baseglobalcds = new List<double>() { 0 };
+            items = new List<string>();
+            itemProbs = new List<double>();
+            baseicds = new List<double>();
+            itemCooldowns = new List<double>();
+            itemYs = new List<double>();
+            baseglobalcds = new List<double>();
+            itemSpawnCeilings = new List<double>();
 
             XDocument xdoc = new XDocument();
             xdoc = XDocument.Load("Content\\XML\\PickupInfo.xml");
@@ -410,6 +419,12 @@ namespace LD42
                 }
                 else
                     itemYs.Add(80);
+                if (xel.Attribute("necessarySpawns") != null)
+                {
+                    itemSpawnCeilings.Add(double.Parse(xel.Attribute("necessarySpawns").Value));
+                }
+                else
+                    itemSpawnCeilings.Add(0);
             }
         }
 
