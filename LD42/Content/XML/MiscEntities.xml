@@ -6,4 +6,14 @@
     </Textures>
     <Properties></Properties>
   </Entity>
+
+  <Entity type="player" name="player">
+    <Textures name ="default">
+      <Texture name="run" id="player" sheetName="pruns"></Texture>
+      <Texture name="jump" id="player" sheetName="pjumps"></Texture>
+    </Textures>
+    <Properties></Properties>
+
+  </Entity>
+  
 </Entities>

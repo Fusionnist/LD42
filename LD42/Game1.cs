@@ -30,7 +30,7 @@ namespace LD42
         EntBuilder42 ebuilder;
         NotTechnicallyATileset ts;
         Inventory inven;
-        Player player;
+        Entity player;
 
         UISystem[] uis;
         int currentUInb;
@@ -106,7 +106,7 @@ namespace LD42
             ElementCollection.ReadDocument(XDocument.Load("Content/XML/Pickups.xml"));
             ElementCollection.ReadDocument(XDocument.Load("Content/XML/Spritesheets.xml"));
 
-            SpriteSheetCollection.LoadSheet(ElementCollection.GetSpritesheetRef("placeholderSheet"), Content);
+            SpriteSheetCollection.ReadDocument(XDocument.Load("Content/XML/Spritesheets.xml"), Content);
 
             RecipeBook.ReadDocument(XDocument.Load("Content/XML/Recipes.xml"));
             //LOAD TEXTURES
@@ -137,12 +137,7 @@ namespace LD42
 
             SetupUISystems();
             ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed"), Content.Load<Texture2D>("Placeholder/placeholder1") }, vdims, ebuilder, Content);
-            player = new Player
-                (
-                new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new HitboxCollection[] { new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, 0, 50, 20) } }, "collision") }) }, "texes"), 
-                new Vector2(68, 68), 
-                new List<Property>()
-                );
+            player = Assembler.GetEnt(ElementCollection.GetEntRef("player"), new Vector2(0, 65), Content, ebuilder);
 
             inven = new Inventory(Content);
             for (int x = 0; x < 3; x++)
@@ -222,8 +217,14 @@ namespace LD42
             if (gameState == GameState.Game)
             {
                 Vector2 input = Vector2.Zero;
-                if (ipp.JustPressed("w"))
+                if (ipp.JustPressed("w") || ipp.JustPressed("up"))
                     input.Y = -1;
+
+                if (ipp.JustPressed("s") || ipp.JustPressed("down"))
+                    input.Y = 1;
+
+                if (ipp.JustPressed("d") || ipp.JustPressed("right"))
+                    input.X = 1;
 
                 player.Input(input);
                 player.Move();
@@ -231,7 +232,7 @@ namespace LD42
                 HandleCollisions();
                 player.Update(es_);
             }
-
+            
             ts.Update(es_, player.pos.X - 64);
 
             inven.Update(es_);
@@ -395,7 +396,7 @@ namespace LD42
         void DrawGame()
         {
             scenes.SelectScene("game");
-            scenes.CurrentScene.TranslateTo(new Vector2((float)Math.Round(player.pos.X) - 64, 0), false);
+            scenes.CurrentScene.TranslateTo(new Vector2((float)Math.Round(player.pos.ToPoint().ToVector2().X, 1) - 64, 0), false);
             scenes.SetupScene(spriteBatch, GraphicsDevice);
             //DRAW HERE
             ts.Draw(spriteBatch);

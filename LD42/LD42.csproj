@@ -124,6 +124,8 @@
     <Content Include="Content\Placeholder\barint.png" />
     <Content Include="Content\Placeholder\black.png" />
     <Content Include="Content\Placeholder\placeholder1.png" />
+    <Content Include="Content\Sprite\jumpspritesheet.png" />
+    <Content Include="Content\Sprite\runningspritesheet.png" />
     <Content Include="Content\XML\Items.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -145,7 +147,6 @@
   <ItemGroup>
     <Folder Include="Content\Music\" />
     <Folder Include="Content\SFX\" />
-    <Folder Include="Content\Sprite\" />
     <Folder Include="Content\Tile\" />
     <Folder Include="Content\UI\" />
   </ItemGroup>

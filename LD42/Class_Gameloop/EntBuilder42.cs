@@ -39,6 +39,11 @@ namespace LD42
                 return new Tile(dc_, pos_, props_);
             }
 
+            if (type_ == "player")
+            {
+                return new Player(dc_, pos_, props_);
+            }
+
             return base.CreateEntity(type_, dc_, pos_, props_, name_);
         }
     }

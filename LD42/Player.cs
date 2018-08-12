@@ -14,19 +14,44 @@ using System.Collections.Generic;
 
 namespace LD42
 {
+    enum PlayerState { walk, jump, dash, slide }
     class Player : Entity
     {
         float speed;
+        PlayerState state;
 
-        public Player(DrawerCollection texes_, Vector2 pos_, List<Property> props_, string name_ = null): base(texes_, pos_, props_, name_, "player")
+        Timer dashTimer;
+
+        public Player(DrawerCollection texes_, Vector2 pos_, List<Property> props_, string name_ = null) : base(texes_, pos_, props_, name_, "player")
         {
-
+            dashTimer = new Timer(1f);
+            dashTimer.Stop();
         }
 
         public override void Input(Vector2 input_)
         {
+            state = PlayerState.jump;
+            if (touchWallD) { state = PlayerState.walk; }
+            if (input_.Y == 1 && touchWallD)
+            {
+                state = PlayerState.slide;
+            }
             if (input_.Y == -1 && touchWallD)
+            {
+                state = PlayerState.jump;
                 vel.Y = -120;
+            }
+            if(input_.X == 1 && dashTimer.Complete())
+            {
+                dashTimer.Reset();
+                state = PlayerState.dash;
+               
+            }
+            if (!dashTimer.Complete())
+            {
+                mov.X += 200 * dashTimer.timer;
+            }
+
             base.Input(input_);
         }
 
@@ -39,14 +64,22 @@ namespace LD42
 
         public override void Update(float es_)
         {
-            textures.Update(es_);
-            
+            //textures.Update(es_);
+            dashTimer.Update(es_);
+
             base.Update(es_);
         }
 
-        public void Draw(SpriteBatch sb_)
+        public override void Draw(SpriteBatch sb_, bool flipH_ = false, bool flipV_ = false, float angle_ = 0)
         {
-            currentTex.Draw(sb_, pos);
+            SetTexture("run");
+
+            if(state == PlayerState.jump)
+            {
+                SetTexture("jump");
+            }
+           
+            base.Draw(sb_, flipH_, flipV_, angle_);
         }
     }
 }
