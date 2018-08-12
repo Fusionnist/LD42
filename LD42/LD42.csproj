@@ -141,6 +141,9 @@
     <Content Include="Content\XML\Spritesheets.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\XML\PickupInfo.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\Names.txt" />
     <Content Include="temp\yesnpressed.png" />
   </ItemGroup>

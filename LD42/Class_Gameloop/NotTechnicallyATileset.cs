@@ -13,6 +13,7 @@ using MonoGame.FZT.UI;
 using MonoGame.FZT.XML;
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace LD42
 {
@@ -23,7 +24,9 @@ namespace LD42
         public Texture2D[] tileTexes;
         ContentManager content;
         string nextFloorType;
-        int voidCooldown, goldCooldown;
+        List<string> groups, items, tempGroups, tempItems;
+        List<double> groupProbs, itemProbs, tempGroupProbs, tempItemProbs, groupCooldowns, itemCooldowns;
+        double totalProbs, totalGroupProbs;
 
         public NotTechnicallyATileset(Texture2D[] tileTexes_, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
@@ -32,8 +35,7 @@ namespace LD42
             ebuilder = ebuilder_;
             content = content_;
             nextFloorType = "rand";
-            voidCooldown = 0;
-            goldCooldown = 0;
+            InitialiseGroups();
             SetupTiles();
             EntityCollection.CreateGroup(new Property("isTile", "isTile", "isTile"), "tiles");
             //EntityCollection.CreateGroup(new Property("isCollectible", "isCollectible", "isCollectible"), "pickups");
@@ -55,15 +57,11 @@ namespace LD42
                 case "void":
                     break;
             }
-            switch(itemId_)
+            if (itemId_ != "none")
             {
-                case "gold":
-                    Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef("placeholderPickup"), new Vector2(xpos_, height - 16), content, ebuilder);
-                    ent.AddProperty(new Property("isCollectible", "isCollectible", "isCollectible"));
-                    ents.Add(ent);
-                    break;
-                case "none":
-                    break;
+                Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef(itemId_), new Vector2(xpos_, height - 16), content, ebuilder);
+                ent.AddProperty(new Property("isCollectible", "isCollectible", "isCollectible"));
+                ents.Add(ent);
             }
             EntityCollection.AddEntities(ents);
         }
@@ -136,49 +134,99 @@ namespace LD42
         public void HandleNewTileSpawns(float camPos_)
         {
             string groupStuff = null, itemStuff = null;
-            bool u = false;
-            while (!u)
+            totalProbs = 0;
+            totalGroupProbs = 0;
+            if (nextFloorType == "rand")
             {
-                if (nextFloorType == "rand")
+                AddPossibilitiesToLists();
+                Random r = new Random();
+
+                double x = r.NextDouble() * totalProbs;
+                for (int i = 0; x > 0; i++)
                 {
-                    Random r = new Random();
-                    int x = r.Next(10);
-                    if (x == 0 && goldCooldown == 0)
-                    {
-                        groupStuff = "basic";
-                        itemStuff = "gold";
-                        u = true;
-                        goldCooldown = 3;
-                    }
-                    else if (x == 1 && voidCooldown == 0)
-                    {
-                        groupStuff = "void";
-                        itemStuff = "none";
-                        nextFloorType = "void2";
-                        u = true;
-                    }
-                    else if (x >= 2)
-                    {
-                        groupStuff = "basic";
-                        itemStuff = "none";
-                        u = true;
-                    }
+                    x -= tempItemProbs[i];
+                    if (x <= 0)
+                        itemStuff = tempItems[i];
                 }
-                else if (nextFloorType.StartsWith("void"))
+
+                x = r.NextDouble() * totalGroupProbs;
+                for (int i = 0; x > 0; i++)
                 {
-                    u = true;
-                    groupStuff = "void";
-                    if (int.Parse(nextFloorType.Substring(4)) < 3)
-                        nextFloorType = "void" + (int.Parse(nextFloorType.Substring(4)) + 1).ToString();
-                    else
-                    { nextFloorType = "rand"; voidCooldown = 20; }
+                    x -= tempGroupProbs[i];
+                    if (x <= 0)
+                        groupStuff = tempGroups[i];
                 }
             }
+            else if (nextFloorType.StartsWith("void"))
+            {
+                groupStuff = "void";
+                if (int.Parse(nextFloorType.Substring(4)) < 3)
+                    nextFloorType = "void" + (int.Parse(nextFloorType.Substring(4)) + 1).ToString();
+                else
+                { nextFloorType = "rand"; groupCooldowns[1] = 20; }
+            }
             AddTileGroup(groupStuff, itemStuff, vdims.X + camPos_);
-            if (voidCooldown > 0)
-                voidCooldown--;
-            if (goldCooldown > 0)
-                goldCooldown--;
+
+
+            HandleCooldowns();
+            tempGroups.Clear();
+            tempGroupProbs.Clear();
+            tempItemProbs.Clear();
+            tempItems.Clear();
+        }
+
+        public void HandleCooldowns()
+        {
+            for (int i = 0; i < itemCooldowns.Count; i++)
+            {
+                if (itemCooldowns[i] > 0)
+                    itemCooldowns[i]--;
+            }
+            for (int i = 0; i < groupCooldowns.Count; i++)
+            {
+                if (groupCooldowns[i] > 0)
+                    groupCooldowns[i]--;
+            }
+        }
+
+        public void AddPossibilitiesToLists()
+        {
+            for (int i = 0; i < itemCooldowns.Count; i++)
+            {
+                if (itemCooldowns[i] == 0)
+                { tempItems.Add(items[i]); tempItemProbs.Add(itemProbs[i]); totalProbs += itemProbs[i]; }
+            }
+            for (int i = 0; i < groupCooldowns.Count; i++)
+            {
+                if (groupCooldowns[i] == 0)
+                { tempGroups.Add(groups[i]); tempGroupProbs.Add(groupProbs[i]); totalGroupProbs += groupProbs[i]; }
+            }
+        }
+        public void InitialiseGroups()
+        {
+            tempGroups = new List<string>();
+            tempItems = new List<string>();
+            tempGroupProbs = new List<double>();
+            tempItemProbs = new List<double>();
+
+            groups = new List<string>() { "basic", "void" };
+            groupProbs = new List<double>() { .96, .04 };
+            groupCooldowns = new List<double>() { 0, 20 };
+
+            items = new List<string>() { "none" };
+            itemProbs = new List<double>() { 1 };
+            itemCooldowns = new List<double>() { 0 };
+
+            XDocument xdoc = new XDocument();
+            xdoc = XDocument.Load("Content\\XML\\PickupInfo.xml");
+            IEnumerable<XElement> xels = xdoc.Root.Elements("Pickup");
+
+            foreach (var xel in xels)
+            {
+                items.Add(xel.Attribute("name").Value);
+                itemProbs.Add(double.Parse(xel.Attribute("prob").Value));
+                itemCooldowns.Add(double.Parse(xel.Attribute("cooldown").Value));
+            }
         }
 
         public void Draw(SpriteBatch sb_)
