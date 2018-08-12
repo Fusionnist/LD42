@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using MonoGame.FZT.Assets;
 using MonoGame.FZT.Data;
+using MonoGame.FZT.Drawing;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -60,6 +61,7 @@ namespace LD42
             {
                 if (items[x].Name == "heart")
                 {
+                    ParticleSystem.CreateInstance(items[x].pos - new Vector2(16, 16), "appear", true, 0.23f);
                     items[x].exists = false;
                     items.RemoveAt(x);
                     break;
@@ -70,6 +72,19 @@ namespace LD42
         public void AddItem(Entity item_)
         {
             items.Add(item_);
+            for (int x = items.Count - 1; x >= 0; x--)
+            {
+                if (items[x] == null || items[x].exists == false)
+                {
+                    items.RemoveAt(x);
+                }
+                else if (x >= 0)
+                {
+                    items[x].pos = GetSlotPos(x + 1).ToVector2() * 32;
+                    
+                }
+            }
+            ParticleSystem.CreateInstance(item_.pos - new Vector2(16, 16), "appear", true, 0.23f);
             CheckRecipes(GetPool());           
         }
 
@@ -134,12 +149,15 @@ namespace LD42
             Vector2 pos = target.ToVector2() * 32;
 
             slots.Add(Assembler.GetEnt(ElementCollection.GetEntRef("slot"), pos, content, new EntBuilder42()));
+            
         }
 
         void RemoveSlot()
         {
             if (size > minSize)
             {
+               
+
                 slots[size - 1].exists = false;
 
                 slots.RemoveAt(size - 1);
