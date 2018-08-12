@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Pickups>
   <Pickup name="placeholderPickup" prob="0.05" cooldown="0"></Pickup>
-  <Pickup name="heart" prob="0.05" cooldown="3"></Pickup>
+  <Pickup name="heartpickup" prob="0.05" cooldown="3"></Pickup>
 </Pickups>

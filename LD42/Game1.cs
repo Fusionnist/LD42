@@ -280,7 +280,7 @@ namespace LD42
                 }
                 if (x)
                 {
-                    inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderItem"), new Vector2(0, 0), Content, ebuilder));
+                    inven.AddItem(pickup.SubEntities()[0]);
                     pickup.exists = false;
                 }
 

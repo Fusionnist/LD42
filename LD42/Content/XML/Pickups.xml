@@ -5,11 +5,13 @@
     <Texture name="pickup" id="pickup" sheetName="placeholderSheet"></Texture>
   </Textures>
   <Properties></Properties>
+  <Entity add="false" context="eat my ass" name="placeholderItem"></Entity>
 </Entity>
-  <Entity type="pickup" name="heart">
+  <Entity type="pickup" name="heartpickup">
     <Textures name ="textures">
       <Texture name="heart" id="pickup" sheetName="placeholderSheet"></Texture>
     </Textures>
     <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="heart"></Entity>
   </Entity>
 </Entities>
