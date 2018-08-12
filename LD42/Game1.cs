@@ -281,7 +281,6 @@ namespace LD42
                 {
                     inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderItem"), new Vector2(0, 0), Content, ebuilder));
                     pickup.exists = false;
-                    inven.LoseHP();
                 }
 
             }
