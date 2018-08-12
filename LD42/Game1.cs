@@ -134,6 +134,7 @@ namespace LD42
             EntityCollection.CreateGroup("slot", "slots");
             EntityCollection.CreateGroup("item", "items");
             EntityCollection.CreateGroup("pickup", "pickups");
+            EntityCollection.CreateGroup("enemy", "enemies");
 
             SetupUISystems();
             ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed"), Content.Load<Texture2D>("Placeholder/placeholder1") }, vdims, ebuilder, Content);
@@ -261,8 +262,8 @@ namespace LD42
             }
             foreach (var tile in EntityCollection.GetGroup("slots"))
             {
-                CollisionSolver.SolveEntTileCollision(player, tile, tileTranslation_: new Vector2(player.pos.X + player.mov.X- 65,0));
-                CollisionSolver.SecondPassCollision(player, tile, tileTranslation_: new Vector2(player.pos.X + player.mov.X - 65, 0));
+                CollisionSolver.SolveEntTileCollision(player, tile, tileTranslation_: new Vector2(player.pos.X + player.mov.X- 33,0));
+                CollisionSolver.SecondPassCollision(player, tile, tileTranslation_: new Vector2(player.pos.X + player.mov.X - 33, 0));
             }
             foreach (var pickup in EntityCollection.GetGroup("pickups"))
             {
@@ -421,7 +422,7 @@ namespace LD42
         void DrawGame()
         {
             scenes.SelectScene("game");
-            scenes.CurrentScene.TranslateTo(new Vector2((float)Math.Round(player.pos.ToPoint().ToVector2().X, 1) - 64, 0), false);
+            scenes.CurrentScene.TranslateTo(new Vector2((float)Math.Round(player.pos.ToPoint().ToVector2().X, 1) - 32, 0), false);
             scenes.SetupScene(spriteBatch, GraphicsDevice);
             //DRAW HERE
             ts.Draw(spriteBatch);

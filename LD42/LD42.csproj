@@ -124,8 +124,16 @@
     <Content Include="Content\Placeholder\barint.png" />
     <Content Include="Content\Placeholder\black.png" />
     <Content Include="Content\Placeholder\placeholder1.png" />
+    <Content Include="Content\Sprite\enemyspritesheet.png" />
+    <Content Include="Content\Sprite\fishidle.png" />
+    <Content Include="Content\Sprite\fishwakeup.png" />
     <Content Include="Content\Sprite\jumpspritesheet.png" />
     <Content Include="Content\Sprite\runningspritesheet.png" />
+    <Content Include="Content\Sprite\shadow.png" />
+    <Content Include="Content\Tile\tilebg.png" />
+    <Content Include="Content\Tile\tileceiling.png" />
+    <Content Include="Content\Tile\tilefloor.png" />
+    <Content Include="Content\UI\title.png" />
     <Content Include="Content\XML\Items.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -150,8 +158,6 @@
   <ItemGroup>
     <Folder Include="Content\Music\" />
     <Folder Include="Content\SFX\" />
-    <Folder Include="Content\Tile\" />
-    <Folder Include="Content\UI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
