@@ -159,21 +159,21 @@ namespace LD42
                 new UISystem(new List<Button>()
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/actualtitle"))),
-                    new Button("startGame", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"))),
-                    new Button("quit", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"))),
+                    new Button("startGame", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"))),
+                    new Button("quit", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"))),
                 }),
                 new UISystem(new List<Button>()),
                 new UISystem(new List<Button>()
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/pause"))),
-                    new Button("returnToMenu", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"))),
-                    new Button("retry", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")))
+                    new Button("returnToMenu", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"))),
+                    new Button("retry", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint")))
                 }),
                 new UISystem(new List<Button>()
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/dead"))),
-                    new Button("returnToMenu", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"))),
-                    new Button("retry", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"))),
+                    new Button("returnToMenu", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"))),
+                    new Button("retry", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"))),
                 }),
             };
 

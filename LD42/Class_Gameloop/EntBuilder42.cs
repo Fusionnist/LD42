@@ -54,6 +54,11 @@ namespace LD42
                 return new FishEnemy(dc_, pos_, props_, name_);
             }
 
+            if (type_ == "flyenemy")
+            {
+                return new FlyEnemy(dc_, pos_, props_, name_);
+            }
+
             return base.CreateEntity(type_, dc_, pos_, props_, name_);
         }
     }
