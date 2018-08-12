@@ -135,6 +135,7 @@ namespace LD42
             EntityCollection.CreateGroup("item", "items");
             EntityCollection.CreateGroup("pickup", "pickups");
             EntityCollection.CreateGroup("enemy", "enemies");
+            EntityCollection.CreateGroup("player", "players");
 
             SetupUISystems();
             ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed"), Content.Load<Texture2D>("Placeholder/placeholder1") }, vdims, ebuilder, Content);
@@ -231,10 +232,10 @@ namespace LD42
             if (gameState == GameState.Game)
             {
                 Vector2 input = Vector2.Zero;
-                if (ipp.JustPressed("w") || ipp.JustPressed("up"))
+                if (ipp.Pressed("w") || ipp.Pressed("up"))
                     input.Y = -1;
 
-                if (ipp.JustPressed("s") || ipp.JustPressed("down"))
+                if (ipp.Pressed("s") || ipp.Pressed("down"))
                     input.Y = 1;
 
                 if (ipp.JustPressed("d") || ipp.JustPressed("right"))
@@ -280,6 +281,22 @@ namespace LD42
             {
                 CollisionSolver.SolveEntTileCollision(player, tile, tileTranslation_: new Vector2(player.pos.X + player.mov.X- 33,0));
                 CollisionSolver.SecondPassCollision(player, tile, tileTranslation_: new Vector2(player.pos.X + player.mov.X - 33, 0));
+            }
+            foreach(Entity en in EntityCollection.GetGroup("enemies"))
+            {
+                if(player.PredictIntersect(en) )
+                {
+                    if(en.pos.Y - player.pos.Y > 16)
+                    {
+                        player.React("headJump");
+                        en.React("headJump");
+                    }
+                    else if(!player.invin)
+                    {
+                        player.ToggleInvin();
+                        inven.LoseHP();
+                    }                
+                }
             }
             foreach (var pickup in EntityCollection.GetGroup("pickups"))
             {

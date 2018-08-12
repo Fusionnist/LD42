@@ -117,7 +117,7 @@
     </Texture>
   </Spritesheet>
   <Spritesheet name="fishappears" source="Sprite/fishwakeup">
-    <Texture name="appear" id="fish">
+    <Texture name="appear" id="fish" loop="false">
       <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
       <Hitboxes>
         <Collection type="collision">

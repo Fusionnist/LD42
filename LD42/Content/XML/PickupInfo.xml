@@ -3,4 +3,5 @@
   <Pickup name="placeholderPickup" prob="0.05" cooldown="0" globalCooldown="5"></Pickup>
   <Pickup name="heartpickup" prob="0.05" cooldown="3" globalCooldown="5"></Pickup>
   <Pickup name="renemy" prob="0.05" cooldown="3" globalCooldown="5"></Pickup>
+  <Pickup name="fenemy" prob="0.05" cooldown="3" globalCooldown="5"></Pickup>
 </Pickups>

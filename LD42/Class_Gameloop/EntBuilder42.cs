@@ -49,6 +49,11 @@ namespace LD42
                 return new RunEnemy(dc_, pos_, props_, name_);
             }
 
+            if (type_ == "fenemy")
+            {
+                return new FishEnemy(dc_, pos_, props_, name_);
+            }
+
             return base.CreateEntity(type_, dc_, pos_, props_, name_);
         }
     }
