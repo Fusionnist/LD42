@@ -257,10 +257,10 @@ namespace LD42
             tempItemProbs = new List<double>();
             tempYs = new List<double>();
 
-            groups = new List<string>() { "basic", "void" };
-            groupProbs = new List<double>() { .9, .1 };
-            groupCooldowns = new List<double>() { 0, 0 };
-            basegcds = new List<double>() { 0, 20 };
+            groups = new List<string>() { "basic" };
+            groupProbs = new List<double>() { 1 };
+            groupCooldowns = new List<double>() { 0 };
+            basegcds = new List<double>() { 0 };
 
             items = new List<string>() { "none" };
             itemProbs = new List<double>() { 1 };
