@@ -162,7 +162,11 @@ namespace LD42
                 new UISystem(new List<Button>()
                 {
                     new Button("returnToMenu", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new Point(vdims.X / 10, vdims.Y / 20))))
-                })
+                }),
+                new UISystem(new List<Button>()
+                {
+                    new Button("returnToMenu", new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new TextureDrawer(Content.Load<Texture2D>("yesnpressed"), new TextureFrame(new Rectangle(vdims.X / 5, vdims.Y / 5, vdims.X / 2, vdims.Y / 4), new Point(vdims.X / 10, vdims.Y / 20))))
+                }),
             };
 
         }
@@ -182,7 +186,7 @@ namespace LD42
             if (gameState == GameState.Game || gameState == GameState.TransitionG)
                 UpdateGame(es);
 
-            if (gameState == GameState.TransitionG || gameState == GameState.TransitionM || gameState == GameState.TransitionP)
+            if (gameState == GameState.TransitionG || gameState == GameState.TransitionM || gameState == GameState.TransitionP || gameState == GameState.TransitionD)
                 ChangeAlpha(es);
 
             //END
@@ -197,6 +201,11 @@ namespace LD42
             {
                 gameState = GameState.TransitionM;
             }
+            else if (inven.PlayerDead() && gameState == GameState.Game)
+            {
+                gameState = GameState.Dead;
+                currentUInb = 3;
+            }
             else if (gameState == GameState.Game && ipp.JustPressed("p"))
             {
                 gameState = GameState.Pause;
@@ -210,6 +219,10 @@ namespace LD42
             else if (gameState == GameState.Pause && uis[currentUInb].IssuedCommand("returnToMenu"))
             {
                 gameState = GameState.TransitionP;
+            }
+            else if (gameState == GameState.Dead && uis[currentUInb].IssuedCommand("returnToMenu"))
+            {
+                gameState = GameState.TransitionD;
             }
         }
         protected void UpdateUIStuff()
@@ -268,6 +281,7 @@ namespace LD42
                 {
                     inven.AddItem(Assembler.GetEnt(ElementCollection.GetEntRef("placeholderItem"), new Vector2(0, 0), Content, ebuilder));
                     pickup.exists = false;
+                    inven.LoseHP();
                 }
 
             }
@@ -282,9 +296,9 @@ namespace LD42
                     blackness = 1;
                     fading = false;
                     if (gameState == GameState.TransitionM)
-                        gameState = GameState.TransitionG;
+                    { gameState = GameState.TransitionG; currentUInb = 1; }
                     else
-                        gameState = GameState.TransitionM;
+                    { gameState = GameState.TransitionM; currentUInb = 0; }
                 }
             }
             else
@@ -295,9 +309,9 @@ namespace LD42
                     blackness = 0;
                     fading = true;
                     if (gameState == GameState.TransitionG)
-                        gameState = GameState.Game;
+                    { gameState = GameState.Game; currentUInb = 1; }
                     else if (gameState == GameState.TransitionM)
-                        gameState = GameState.Menu;
+                    { gameState = GameState.Menu; currentUInb = 0; SetupGame(); }
                 }
             }
         }
@@ -329,6 +343,16 @@ namespace LD42
                     DrawGame();
                     DrawInventory();
                     break;
+                case GameState.TransitionD:
+                    DrawInventory();
+                    DrawGame();
+                    DrawUI();
+                    break;
+                case GameState.Dead:
+                    DrawInventory();
+                    DrawGame();
+                    DrawUI();
+                    break;
             }
 
             //DRAW TO MAIN
@@ -359,12 +383,20 @@ namespace LD42
                     scenes.DrawScene(spriteBatch, "game");
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
+                case GameState.TransitionD:
+                    scenes.DrawScene(spriteBatch, "game");
+                    scenes.DrawScene(spriteBatch, "UI");
+                    break;
+                case GameState.Dead:
+                    scenes.DrawScene(spriteBatch, "game");
+                    scenes.DrawScene(spriteBatch, "UI");
+                    break;
             }
             spriteBatch.End();
 
             spriteBatch.Begin();
-            if (gameState == GameState.TransitionG || gameState == GameState.TransitionM || gameState == GameState.TransitionP)
-            spriteBatch.Draw(Content.Load<Texture2D>("Placeholder/black"), new Rectangle(0, 0, wdims.X, wdims.Y), new Color(Color.Black, blackness));
+            if (gameState == GameState.TransitionG || gameState == GameState.TransitionM || gameState == GameState.TransitionP || gameState == GameState.TransitionD)
+                spriteBatch.Draw(Content.Load<Texture2D>("Placeholder/black"), new Rectangle(0, 0, wdims.X, wdims.Y), new Color(Color.Black, blackness));
             spriteBatch.End();
 
             //DRAW TO SCREEN
@@ -374,12 +406,6 @@ namespace LD42
             scenes.DrawScene(spriteBatch, "main");
 
             spriteBatch.End();
-
-            spriteBatch.Begin();
-            if (gameState == GameState.TransitionG || gameState == GameState.TransitionM || gameState == GameState.TransitionP)
-            { }
-            spriteBatch.End();
-
 
             base.Draw(gameTime);
         }
