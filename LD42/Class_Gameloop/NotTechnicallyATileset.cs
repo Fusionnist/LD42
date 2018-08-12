@@ -28,6 +28,7 @@ namespace LD42
         List<string> groups, items, tempGroups, tempItems;
         List<double> groupProbs, itemProbs, tempGroupProbs, tempItemProbs, groupCooldowns, itemCooldowns, itemYs, tempYs, basegcds, baseicds;
         double totalProbs, totalGroupProbs;
+        bool addCeiling;
 
         public NotTechnicallyATileset(Texture2D[] dick, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
@@ -47,7 +48,9 @@ namespace LD42
         {
             float height = 96;
             List<Entity> ents = new List<Entity>();
-            ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(0), new Vector2(xpos_, 0), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
+            if (addCeiling)
+                ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(6), new Vector2(xpos_, 0), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
+            addCeiling = !addCeiling;
             switch (groupId_)
             {
                 case "basic":
@@ -67,7 +70,7 @@ namespace LD42
             }
             if (itemId_ != "none")
             {
-                Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef(itemId_), new Vector2(xpos_, itemY_), content, ebuilder);
+                Entity ent = Assembler.GetEnt(ElementCollection.GetEntRef(itemId_), new Vector2(xpos_, itemY_), content, ebuilder, false);
                 ent.AddProperty(new Property("isCollectible", "isCollectible", "isCollectible"));
                 ents.Add(ent);
             }
@@ -107,7 +110,19 @@ namespace LD42
                 case 5:
                     dc = new DrawerCollection(new List<TextureDrawer>() { new TextureDrawer(bgtex, new TextureFrame(new Rectangle(384, 0, 96, 96), new Point(48, 48))) }, "bg");
                     break;
-
+                case 6:
+                    dc = new DrawerCollection(new List<TextureDrawer>()
+                            {
+                                new TextureDrawer
+                                (
+                                    tileTexes[1],
+                                    new HitboxCollection[]
+                                    {
+                                        new HitboxCollection(new FRectangle[][] { new FRectangle[] { new FRectangle(0, -4, 32, 20) } }, "collision")
+                                    }
+                                )
+                            }, "tileDrawer");
+                    break;
             }
             return dc;
         }
@@ -299,7 +314,7 @@ namespace LD42
 
         public void SetupTexes()
         {
-            tileTexes = new Texture2D[] { content.Load<Texture2D>("yesnpressed") };
+            tileTexes = new Texture2D[] { content.Load<Texture2D>("yesnpressed"), content.Load<Texture2D>("Tile/tileceiling") };
             bgtex = content.Load<Texture2D>("Tile/tilebg");
         }
 
