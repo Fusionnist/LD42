@@ -316,10 +316,6 @@ namespace LD42
                         }
                     }
                 }
-                else
-                {
-                    int e = 5;
-                }
 
                     double z = r.NextDouble() * totalGroupProbs;
                     for (int i = 0; z > 0; i++)
