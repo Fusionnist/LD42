@@ -17,15 +17,17 @@ namespace LD42
     enum PlayerState { walk, jump, dash, slide }
     class Player : ShadowEnt
     {
-        float speed;
+        float speed; bool queueJump;
         PlayerState state;
 
         Timer dashTimer;
 
         public Player(DrawerCollection texes_, Vector2 pos_, List<Property> props_, string name_ = null) : base(texes_, pos_, props_, name_, "player")
         {
+            type = "player";
             dashTimer = new Timer(1f);
             dashTimer.Stop();
+            invinTimer = new Timer(1f);
         }
 
         public override void Input(Vector2 input_)
@@ -39,7 +41,12 @@ namespace LD42
             if (input_.Y == -1 && touchWallD)
             {
                 state = PlayerState.jump;
-                vel.Y = -120;
+                vel.Y = -300;
+            }
+            if (queueJump)
+            {
+                queueJump = false;
+                vel.Y -= 200;
             }
             if (input_.X == 1 && dashTimer.Complete())
             {
@@ -58,8 +65,11 @@ namespace LD42
 
         public override void Move()
         {
-            mov.X += 32;
-            vel.Y += 2;
+            mov.X += 100;
+            
+            {
+                vel.Y += 15;
+            }
             base.Move();
         }
 
@@ -84,8 +94,20 @@ namespace LD42
             {
                 SetTexture("jump");
             }
-
+            if (invin)
+            {
+                SetTexture("shadow");
+            }
             base.Draw(sb_, flipH_, flipV_, angle_);
+        }
+
+        public override void React(string id_)
+        {
+            if(id_ == "headJump")
+            {
+                queueJump = true;
+            }
+            base.React(id_);
         }
     }
 }

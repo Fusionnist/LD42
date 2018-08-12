@@ -21,7 +21,20 @@ namespace LD42
 
         public override void Draw(SpriteBatch sb_, bool flipH_ = false, bool flipV_ = false, float angle_ = 0)
         {
+            if (isDestroyed)
+            {
+                SetTexture("dead");
+            }
             base.Draw(sb_, flipH_, flipV_, angle_);
+        }
+
+        public override void React(string id_)
+        {
+            if(id_ == "headJump")
+            {
+                isDestroyed = true;
+            }
+            base.React(id_);
         }
     }
 }
