@@ -1,7 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 using MonoGame.FZT;
 using MonoGame.FZT.Assets;
@@ -112,6 +113,15 @@ namespace LD42
             ElementCollection.ReadDocument(XDocument.Load("Content/XML/Spritesheets.xml"));
 
             SpriteSheetCollection.ReadDocument(XDocument.Load("Content/XML/Spritesheets.xml"), Content);
+
+            SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit1"), "hit1");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit2"), "hit2");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit3"), "hit3");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit4"), "hit4");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit5"), "hit5");
+
+            SoundManager.AddSong(Content.Load<Song>("Music/dungeonrun"), "gamesong");
+            SoundManager.AddSong(Content.Load<Song>("Music/menusong"), "menusong");
 
             RecipeBook.ReadDocument(XDocument.Load("Content/XML/Recipes.xml"));
             //LOAD TEXTURES
@@ -319,17 +329,19 @@ namespace LD42
             }
             foreach(Entity en in EntityCollection.GetGroup("enemies"))
             {
-                if(player.PredictIntersect(en) )
+                if(!en.isDestroyed && player.PredictIntersect(en) )
                 {
                     if(en.pos.Y - player.pos.Y > 16)
                     {
                         player.React("headJump");
                         en.React("headJump");
+                        SoundManager.PlayEffect("hit2");
                     }
                     else if(!player.invin)
                     {
                         player.ToggleInvin();
                         inven.LoseHP();
+                        SoundManager.PlayEffect("hit4");
                     }                
                 }
             }

@@ -193,17 +193,47 @@
 /processorParam:TextureFormat=Color
 /build:UI/invenappear.png
 
-#begin Placeholder/title.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Placeholder/title.png
+#begin SFX/hit1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/hit1.wav
+
+#begin SFX/hit2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/hit2.wav
+
+#begin SFX/hit3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/hit3.wav
+
+#begin SFX/hit4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/hit4.wav
+
+#begin SFX/hit5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/hit5.wav
+
+#begin Music/dungeonrun.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/dungeonrun.mp3
+
+#begin Music/menusong.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Music/menusong.mp3
 
 #begin Placeholder/actualtitle.png
 /importer:TextureImporter
@@ -240,4 +270,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Placeholder/pause.png
+
+#begin Placeholder/title.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Placeholder/title.png
 

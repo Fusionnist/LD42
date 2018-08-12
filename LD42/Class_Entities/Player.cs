@@ -42,17 +42,18 @@ namespace LD42
             {
                 state = PlayerState.jump;
                 vel.Y = -280;
+                SoundManager.PlayEffect("hit1");
             }
             if (queueJump)
             {
                 queueJump = false;
-                vel.Y -= 200;
+                vel.Y = -200;
             }
             if (input_.X == 1 && dashTimer.Complete())
             {
                 dashTimer.Reset();
-               
 
+                SoundManager.PlayEffect("hit3");
             }
             if (!dashTimer.Complete())
             {

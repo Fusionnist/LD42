@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MonoGame.FZT.Assets;
 using MonoGame.FZT.Data;
 using MonoGame.FZT.Drawing;
+using MonoGame.FZT.Sound;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -85,7 +86,8 @@ namespace LD42
                 }
             }
             ParticleSystem.CreateInstance(item_.pos - new Vector2(16, 16), "appear", true, 0.23f);
-            CheckRecipes(GetPool());           
+            CheckRecipes(GetPool());
+            SoundManager.PlayEffect("hit5");
         }
 
         List<string> GetPool()
