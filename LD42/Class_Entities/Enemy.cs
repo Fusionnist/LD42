@@ -36,5 +36,11 @@ namespace LD42
             }
             base.React(id_);
         }
+
+        public override void Move()
+        {
+            vel.Y += 1;
+            base.Move();
+        }
     }
 }
