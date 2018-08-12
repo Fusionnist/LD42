@@ -37,7 +37,7 @@ namespace LD42
         {
             vdims = vdims_;
             addCeiling = true;
-            globalCooldown = 0;
+            globalCooldown = 20;
             r = new Random();
             ebuilder = ebuilder_;
             content = content_;
