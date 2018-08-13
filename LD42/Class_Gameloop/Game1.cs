@@ -206,26 +206,26 @@ namespace LD42
         {
             uis = new UISystem[]
             {
-                new UISystem(new List<Button>()
+                new UISystem(new List<Button>()//menu
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/actualtitle"))),
                     new Button("startGame", new Rectangle(50, 140, 60, 20), SpriteSheetCollection.GetTex("play","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
                     new Button("quit", new Rectangle(130, 140, 60, 20),  SpriteSheetCollection.GetTex("exitbutton","miscsheet1","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
                 }),
-                new UISystem(new List<Button>()),
-                new UISystem(new List<Button>()
+                new UISystem(new List<Button>()),//game
+                new UISystem(new List<Button>()//pause
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/pause"))),
                     new Button("returnToMenu", new Rectangle(120, 100, 60, 20),  SpriteSheetCollection.GetTex("menu","menuresume","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
                     new Button("retry", new Rectangle(40, 100, 60, 20),  SpriteSheetCollection.GetTex("retry","retry","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"))
                 }),
-                new UISystem(new List<Button>()
+                new UISystem(new List<Button>()//death
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/dead"))),
                     new Button("returnToMenu", new Rectangle(120, 100, 60, 20), SpriteSheetCollection.GetTex("menu","menuresume","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
                     new Button("retry", new Rectangle(40, 100, 60, 20), SpriteSheetCollection.GetTex("retry","retry","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
                 }),
-                new UISystem(new List<Button>()
+                new UISystem(new List<Button>()//tutorial
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("UI/Image1"))),
                     new Button("startGame", new Rectangle(168, 137, 44, 15), SpriteSheetCollection.GetTex("play","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
