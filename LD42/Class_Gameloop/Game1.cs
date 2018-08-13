@@ -522,7 +522,6 @@ namespace LD42
                 case GameState.Game:
                     scenes.DrawScene(spriteBatch, "game");
                     scenes.DrawScene(spriteBatch, "inven");
-                    scenes.DrawScene(spriteBatch, "UI");
                     break;
                 case GameState.Pause:
                     scenes.DrawScene(spriteBatch, "game");
@@ -535,7 +534,6 @@ namespace LD42
                 case GameState.TransitionG:
                     scenes.DrawScene(spriteBatch, "game");
                     scenes.DrawScene(spriteBatch, "inven");
-                    scenes.DrawScene(spriteBatch, "UI");
                     break;
                 case GameState.TransitionP:
                     scenes.DrawScene(spriteBatch, "game");
