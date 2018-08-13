@@ -21,6 +21,7 @@ namespace LD42
 
         public override void Draw(SpriteBatch sb_, bool flipH_ = false, bool flipV_ = false, float angle_ = 0)
         {
+            if(!isDestroyed)
             textures.GetTex("shadow").Draw(sb_, new Vector2((int)pos.X, 62));
             base.Draw(sb_, flipH_, flipV_, angle_);
         }

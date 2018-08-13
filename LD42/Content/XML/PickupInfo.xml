@@ -2,7 +2,7 @@
 <Pickups>
   //pickups
   <Pickup name="placeholderPickup" prob="0.05" cooldown="0" globalCooldown="20"></Pickup>
-  <Pickup name="heartpickup" prob="0.05" cooldown="3" globalCooldown="20" necessarySpawns="10"></Pickup>
+  <Pickup name="heartpickup" prob="0.5" cooldown="3" globalCooldown="3" necessarySpawns="0"></Pickup>
 
   <Pickup name="coinpickup" prob="0.05" cooldown="3" globalCooldown="20" necessarySpawns="10"></Pickup>
   <Pickup name="gempickup" prob="0.05" cooldown="3" globalCooldown="20" necessarySpawns="10"></Pickup>
