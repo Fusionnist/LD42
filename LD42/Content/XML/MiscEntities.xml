@@ -34,6 +34,8 @@
       <Texture name="idle" id="fish" sheetName="fishidles"></Texture>
       <Texture name="appear" id="fish" sheetName="fishappears"></Texture>
       <Texture name="shadow" id="shadow" sheetName="shadows"></Texture>
+      <Texture name="hit" id="fish" sheetName="miscsheet2"></Texture>
+      <Texture name="dead" id="fish" sheetName="miscsheet2"></Texture>
     </Textures>
     <Properties></Properties>
 
@@ -41,8 +43,7 @@
 
   <Entity type="flyenemy" name="flyenemy">
     <Textures name ="default">
-      <Texture name="idle" id="fish" sheetName="fishidles"></Texture>
-      <Texture name="appear" id="fish" sheetName="fishappears"></Texture>
+      <Texture name="idle" id="fly" sheetName="miscsheet3"></Texture>
       <Texture name="shadow" id="shadow" sheetName="shadows"></Texture>
     </Textures>
     <Properties></Properties>

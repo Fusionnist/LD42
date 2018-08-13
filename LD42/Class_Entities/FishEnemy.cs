@@ -15,6 +15,7 @@ namespace LD42
     public class FishEnemy : Enemy
     {
         bool awake;
+        bool ded;
         public FishEnemy(DrawerCollection texes_, Vector2 pos_, List<Property> props_, string name_, string type_ = "enemy") : base(texes_, pos_, props_, name_, type_)
         {
             type = "enemy";
@@ -35,6 +36,16 @@ namespace LD42
             if (textures.GetTex("appear").Ended() && awake)
             {
                 SetTexture("idle");
+            }
+            if (isDestroyed && !ded)
+            {
+                ded = true;
+                SetTexture("hit");
+                currentTex.Reset();
+            }
+            if (isDestroyed && textures.GetTex("hit").Ended())
+            {
+                SetTexture("dead");
             }
             base.Draw(sb_, flipH_, flipV_, angle_);
         }
