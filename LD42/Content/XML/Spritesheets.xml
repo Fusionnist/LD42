@@ -166,7 +166,6 @@
         </Collection>
       </Hitboxes>
     </Texture>
-
     <Texture name="dead" id="player">
       <Frameset delay="0.1" x="32" y="96" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
     </Texture>
@@ -229,5 +228,59 @@
     <Texture name="stars" id="particle">
       <Frameset delay="0.1" x="32" y="368" w="16" h="16" amt="4" cx="0" cy="0"></Frameset>
     </Texture>
+  </Spritesheet>
+  //losta stuff 2
+  <Spritesheet name="miscsheet2" source="Sprite/spritesmisc2">
+    //pickups
+    <Texture name="heartp" id="pickup">
+      <Frameset delay="0.2" x="32" y="32" w="16" h="16" amt="4" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    <Texture name="plantp" id="pickup">
+      <Frameset delay="0.2" x="32" y="112" w="16" h="16" amt="4" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    <Texture name="maskp" id="pickup">
+      <Frameset delay="1" x="32" y="144" w="16" h="16" amt="2" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    //fish ded
+    <Texture name="hit" id="fish">
+      <Frameset delay="0.1" x="32" y="64" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frameset x="8" y="0" w="16" h="32" amt="4"></Frameset>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    <Texture name="dead" id="fish">
+      <Frameset delay="0.1" x="160" y="64" w="32" h="32" amt="2" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frameset x="8" y="0" w="16" h="32" amt="4"></Frameset>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+  </Spritesheet>
+  //losta stuff 3: the return of the jedi
+  <Spritesheet name="miscsheet3" source="Sprite/spritemisc3">
   </Spritesheet>
 </Spritesheets>

@@ -148,6 +148,7 @@
     <Content Include="Content\Tile\tilebg.png" />
     <Content Include="Content\Tile\tileceiling.png" />
     <Content Include="Content\Tile\tilefloor.png" />
+    <Content Include="Content\UI\Image1.png" />
     <Content Include="Content\UI\invenappear.png" />
     <Content Include="Content\UI\playbutton.png" />
     <Content Include="Content\UI\title.png" />
