@@ -252,7 +252,7 @@ namespace LD42
             {
                 gameState = GameState.TransitionP;
                 goingToMenu = false;
-                easeIn.Reset();
+                ParticleSystem.Flush();
             }
             else if (gameState == GameState.Dead && uis[currentUInb].IssuedCommand("returnToMenu"))
             {
@@ -264,7 +264,7 @@ namespace LD42
             {
                 gameState = GameState.TransitionD;
                 goingToMenu = false;
-                easeIn.Reset();
+                ParticleSystem.Flush();
             }
         }
         protected void UpdateUIStuff()
@@ -386,7 +386,7 @@ namespace LD42
                     else if (goingToMenu)
                     { gameState = GameState.TransitionM; currentUInb = 0; }
                     else
-                    { gameState = GameState.TransitionG; currentUInb = 1; SetupGame();  }
+                    { gameState = GameState.TransitionG; currentUInb = 1; SetupGame(); easeIn.Reset(); }
                 }
             }
             else
