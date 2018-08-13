@@ -80,9 +80,7 @@ namespace LD42
                     items[x].exists = false;
                     items.RemoveAt(x);
                     break;
-                }
-                   
-                
+                }    
             }
         }
 
@@ -103,7 +101,12 @@ namespace LD42
             }
             ParticleSystem.CreateInstance(item_.pos - new Vector2(16, 16), "appear", true, 0.23f);
             CheckRecipes(GetPool());
+            if(size != 32)
             SoundManager.PlayEffect("hit5");
+            else
+            {
+                SoundManager.PlayEffect("hit6");
+            }
         }
 
         List<string> GetPool()
