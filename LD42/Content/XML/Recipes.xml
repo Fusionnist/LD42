@@ -4,7 +4,57 @@
     <Ingredient>coin</Ingredient>
     <Ingredient>coin</Ingredient>
     <Ingredient>coin</Ingredient>
+    <Ingredient>coin</Ingredient>
+    <Ingredient>coin</Ingredient>
     <Result>coinStack</Result>
-    <ResultWorth>1000</ResultWorth>
+    <ResultWorth>5</ResultWorth>
+  </Recipe>
+  <Recipe>
+    <Ingredient>diamond</Ingredient>
+    <Ingredient>diamond</Ingredient>
+    <Ingredient>diamond</Ingredient>
+    <Result>bag</Result>
+    <ResultWorth>15</ResultWorth>
+  </Recipe>
+  <Recipe>
+    <Ingredient>coinStack</Ingredient>
+    <Ingredient>coinStack</Ingredient>
+    <Ingredient>coinStack</Ingredient>
+    <Result>bag</Result>
+    <ResultWorth>15</ResultWorth>
+  </Recipe>
+  <Recipe>
+    <Ingredient>bag</Ingredient>
+    <Ingredient>bag</Ingredient>
+    <Ingredient>bag</Ingredient>
+    <Result>chest</Result>
+    <ResultWorth>50</ResultWorth>
+  </Recipe>
+  <Recipe>
+    <Ingredient>chest</Ingredient>
+    <Ingredient>chest</Ingredient>
+    <Ingredient>chest</Ingredient>
+    <Result>crown</Result>
+    <ResultWorth>200</ResultWorth>
+  </Recipe>
+  <Recipe>
+    <Ingredient>plant</Ingredient>
+    <Ingredient>coinStack</Ingredient>
+    <Result>goldenPlant</Result>
+    <ResultWorth>50</ResultWorth>
+  </Recipe>
+  <Recipe>
+    <Ingredient>goldenPlant</Ingredient>
+    <Ingredient>sword</Ingredient>
+    <Ingredient>sword</Ingredient>
+    <Ingredient>sword</Ingredient>
+    <Result>swordPlant</Result>
+    <ResultWorth>100</ResultWorth>
+  </Recipe>
+  <Recipe>
+    <Ingredient>swordPlant</Ingredient>
+    <Ingredient>crown</Ingredient>
+    <Result>kingOfPlants</Result>
+    <ResultWorth>500</ResultWorth>
   </Recipe>
 </Recipes>
