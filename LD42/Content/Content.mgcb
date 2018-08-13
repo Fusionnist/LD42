@@ -331,6 +331,12 @@
 /processorParam:TextureFormat=Color
 /build:UI/playbutton.png
 
+#begin SFX/hit6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SFX/hit6.wav
+
 #begin UI/Image1.png
 /importer:TextureImporter
 /processor:TextureProcessor

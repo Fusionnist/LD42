@@ -136,6 +136,7 @@
     <Content Include="Content\SFX\hit3.wav" />
     <Content Include="Content\SFX\hit4.wav" />
     <Content Include="Content\SFX\hit5.wav" />
+    <Content Include="Content\SFX\hit6.wav" />
     <Content Include="Content\Sprite\enemyspritesheet.png" />
     <Content Include="Content\Sprite\fishidle.png" />
     <Content Include="Content\Sprite\fishwakeup.png" />

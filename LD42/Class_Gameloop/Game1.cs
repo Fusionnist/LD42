@@ -128,6 +128,7 @@ namespace LD42
             SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit3"), "hit3");
             SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit4"), "hit4");
             SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit5"), "hit5");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit6"), "hit6");
 
             SoundManager.AddSong(Content.Load<Song>("Music/dungeonrun"), "gamesong");
             SoundManager.AddSong(Content.Load<Song>("Music/menusong"), "menusong");
