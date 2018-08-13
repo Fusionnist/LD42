@@ -74,11 +74,14 @@ namespace LD42
         {
             for (int x = items.Count - 1; x >= 0; x--)
             {
-
+                if (items[x].exists)
+                {
                     ParticleSystem.CreateInstance(items[x].pos - new Vector2(16, 16), "appear", true, 0.23f);
                     items[x].exists = false;
                     items.RemoveAt(x);
                     break;
+                }
+                   
                 
             }
         }

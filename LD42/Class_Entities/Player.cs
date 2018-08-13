@@ -25,7 +25,7 @@ namespace LD42
         public Player(DrawerCollection texes_, Vector2 pos_, List<Property> props_, string name_ = null) : base(texes_, pos_, props_, name_, "player")
         {
             type = "player";
-            dashTimer = new Timer(1f);
+            dashTimer = new Timer(0.6f);
             dashTimer.Stop();
             invinTimer = new Timer(1f);
         }
@@ -57,7 +57,7 @@ namespace LD42
             }
             if (!dashTimer.Complete())
             {
-                mov.X += 200 * dashTimer.timer;
+                mov.X += 170 * dashTimer.timer;
                 state = PlayerState.dash;
             }
 
