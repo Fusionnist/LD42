@@ -174,7 +174,7 @@
     </Properties>
   </Entity>
   //rbow chest
-  <Entity type="item" name="gem1">
+  <Entity type="item" name="rainbowchest">
     <Textures name ="textures">
       <Texture name="rainbowchest" id="item" sheetName="miscsheet5"></Texture>
     </Textures>

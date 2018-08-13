@@ -328,6 +328,7 @@ namespace LD42
             if(gameState == GameState.Dead && dist.Complete())
             {
                 inven.LoseItem();
+                ParticleSystem.CreateInstance(new Vector2(16,48), "appear", true, 0.23f);
                 dist.Reset();
             }
             easeIn.Update(es_);

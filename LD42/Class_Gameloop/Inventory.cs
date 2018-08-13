@@ -238,6 +238,7 @@ namespace LD42
                         {
                             items[x].exists = false;
                             items.RemoveAt(x);
+                            break;
                         }
                     }
                 }
