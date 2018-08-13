@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Recipes>
   <Recipe>
-    <Ingredient>placeholderItem</Ingredient>
-    <Ingredient>placeholderItem</Ingredient>
-    <Ingredient>placeholderItem</Ingredient>
-    <Result>placeholderItem</Result>
+    <Ingredient>coin</Ingredient>
+    <Ingredient>coin</Ingredient>
+    <Ingredient>coin</Ingredient>
+    <Result>coinStack</Result>
     <ResultWorth>1000</ResultWorth>
   </Recipe>
 </Recipes>

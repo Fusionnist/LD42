@@ -56,7 +56,7 @@ namespace LD42
         public void AddTileGroup(string groupId_, string itemId_, float xpos_, float itemY_)
         {
             float height = 96;
-            if (ticktock == 5)
+            if (ticktock == 20)
                 ticktock = 0;
             List<Entity> ents = new List<Entity>();
             if (addCeiling)
@@ -224,10 +224,15 @@ namespace LD42
 
         public void SetupTiles()
         {
-            for (int i = 0; i < 30; i++)
+            List<Entity> ents = new List<Entity>();
+            ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(12), new Vector2(0, 96), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
+            ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(12), new Vector2(160, 96), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
+            for (int i = -10; i <= 20; i++)
             {
-                AddTileGroup("basic", "none", i * vdims.X / 14, 80);
+                ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(6), new Vector2(32 * i, 0), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
             }
+            for (int i = -2; i <= 4; i++)
+                ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(12), new Vector2(160 * i, 96), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
             for (int i = 0; i < 3; i++)
             {
                 Random r = new Random();
@@ -235,6 +240,7 @@ namespace LD42
                 Entity ent = ebuilder.CreateEntity("bg", GetDrawerCollection(x), new Vector2(i * 96 + 48, 64), new List<Property>() { new Property("isBG", "isBG", "isBG") }, "bg");
                 EntityCollection.AddEntity(ent);
             }
+            EntityCollection.AddEntities(ents);
         }
 
         public void Update(float es_, float camPos_)
