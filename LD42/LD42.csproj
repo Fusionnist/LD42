@@ -152,6 +152,7 @@
     <Content Include="Content\Tile\tilefloor.png" />
     <Content Include="Content\UI\Image1.png" />
     <Content Include="Content\UI\invenappear.png" />
+    <Content Include="Content\UI\menuresume.png" />
     <Content Include="Content\UI\playbutton.png" />
     <Content Include="Content\UI\title.png" />
     <Content Include="Content\XML\Items.xml">
