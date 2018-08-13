@@ -2,7 +2,7 @@
 <Entities>
   <Entity type="slot" name="slot">
     <Textures name ="default">
-      <Texture name="itemframe" id="itemframe" sheetName="placeholderSheet"></Texture>
+      <Texture name="itemframe" id="frame" sheetName="miscsheet3"></Texture>
     </Textures>
     <Properties></Properties>
   </Entity>

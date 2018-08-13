@@ -100,7 +100,7 @@
       <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="8" cx="0" cy="0"></Frameset>
       <Hitboxes>
         <Collection type="collision">
-          <Frameset x="8" y="0" w="16" h="32" amt="8"></Frameset>
+          <Frameset x="8" y="8" w="16" h="24" amt="8"></Frameset>
         </Collection>
       </Hitboxes>
     </Texture>
@@ -111,7 +111,7 @@
       <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="3" cx="0" cy="0"></Frameset>
       <Hitboxes>
         <Collection type="collision">
-          <Frameset x="8" y="0" w="16" h="32" amt="3"></Frameset>
+          <Frameset x="8" y="8" w="16" h="24" amt="3"></Frameset>
         </Collection>
       </Hitboxes>
     </Texture>
@@ -318,6 +318,16 @@
     </Texture>
     <Texture name="swordpot" id="item">
       <Frameset delay="0.1" x="128" y="128" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="itemframe" id="frame">
+      <Frameset delay="0.1" x="160" y="128" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="32" h="32"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
     </Texture>
     <Texture name="coin" id="item">
       <Frameset delay="0.1" x="32" y="160" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>

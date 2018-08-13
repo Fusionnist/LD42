@@ -70,6 +70,19 @@ namespace LD42
             }
         }
 
+        public void LoseItem()
+        {
+            for (int x = items.Count - 1; x >= 0; x--)
+            {
+
+                    ParticleSystem.CreateInstance(items[x].pos - new Vector2(16, 16), "appear", true, 0.23f);
+                    items[x].exists = false;
+                    items.RemoveAt(x);
+                    break;
+                
+            }
+        }
+
         public void AddItem(Entity item_)
         {
             items.Add(item_);

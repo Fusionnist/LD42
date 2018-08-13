@@ -286,6 +286,7 @@ namespace LD42
         }
         protected void UpdateGame(float es_)
         {
+            if(gameState == GameState.Dead) { inven.LoseItem(); }
             easeIn.Update(es_);
             if (easeIn.Complete()) { easeIn.Stop(); }
             if (gameState != GameState.TransitionG)
@@ -326,11 +327,16 @@ namespace LD42
         }
         protected void HandleCollisions()
         {
-            
+            player.touchWallD = false;
+            if (player.pos.Y + player.mov.Y + 32 > 92)
+            {
+                player.vel.Y = 0;
+                player.mov.Y -= (player.pos.Y + player.mov.Y + 32 - 92);
+                player.touchWallD = true;
+            }
 
             foreach (var tile in EntityCollection.GetGroup("tiles"))
             {
-                CollisionSolver.SolveEntTileCollision(player, tile);
                 foreach (Entity enemy in EntityCollection.GetGroup("enemies"))
                 {
                     CollisionSolver.SolveEntTileCollision(enemy, tile);
@@ -339,7 +345,6 @@ namespace LD42
            
             foreach (var tile in EntityCollection.GetGroup("tiles"))
             {
-                CollisionSolver.SecondPassCollision(player, tile);
                 foreach (Entity enemy in EntityCollection.GetGroup("enemies"))
                 {
                     CollisionSolver.SecondPassCollision(enemy, tile);
@@ -350,7 +355,7 @@ namespace LD42
             {
                 if (tile.PredictIntersect(player, new Vector2(player.pos.X + player.mov.X - 33, 0)))
                 {
-                    if(player.vel.Y < 0) { player.vel.Y = 0; player.pos.Y = 64; }
+                    if(player.vel.Y < 0) { player.vel.Y = 0; }
                 }
 
             }
@@ -358,9 +363,9 @@ namespace LD42
 
             foreach (Entity en in EntityCollection.GetGroup("enemies"))
             {
-                if(!en.isDestroyed && player.PredictIntersect(en) )
+                if(!en.isDestroyed && player.PredictIntersect(en))
                 {
-                    if(en.pos.Y - player.pos.Y > 16)
+                    if(en.pos.Y - player.pos.Y > 16 && player.vel.Y > 0)
                     {
                         player.React("headJump");
                         en.React("headJump");
