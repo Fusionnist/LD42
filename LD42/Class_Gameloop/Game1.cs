@@ -203,7 +203,7 @@ namespace LD42
             //self-explanatory
             UpdateUIStuff();
 
-            if (gameState == GameState.Game || gameState == GameState.TransitionG)
+            if (gameState == GameState.Game || gameState == GameState.TransitionG || gameState == GameState.Dead || gameState == GameState.TransitionD)
                 UpdateGame(es);
 
             if (gameState == GameState.TransitionG || gameState == GameState.TransitionM || gameState == GameState.TransitionP || gameState == GameState.TransitionD)
@@ -252,7 +252,7 @@ namespace LD42
             {
                 gameState = GameState.TransitionP;
                 goingToMenu = false;
-                easeIn.Reset();
+                ParticleSystem.Flush();
             }
             else if (gameState == GameState.Dead && uis[currentUInb].IssuedCommand("returnToMenu"))
             {
@@ -264,7 +264,7 @@ namespace LD42
             {
                 gameState = GameState.TransitionD;
                 goingToMenu = false;
-                easeIn.Reset();
+                ParticleSystem.Flush();
             }
         }
         protected void UpdateUIStuff()
@@ -276,17 +276,20 @@ namespace LD42
         {
             easeIn.Update(es_);
             if (easeIn.Complete()) { easeIn.Stop(); }
-            if (gameState == GameState.Game)
+            if (gameState != GameState.TransitionG)
             {
                 Vector2 input = Vector2.Zero;
-                if (ipp.Pressed("w") || ipp.Pressed("up"))
-                    input.Y = -1;
+                if (gameState == GameState.Game)
+                {
+                    if (ipp.Pressed("w") || ipp.Pressed("up"))
+                        input.Y = -1;
 
-                if (ipp.Pressed("s") || ipp.Pressed("down"))
-                    input.Y = 1;
+                    if (ipp.Pressed("s") || ipp.Pressed("down"))
+                        input.Y = 1;
 
-                if (ipp.JustPressed("d") || ipp.JustPressed("right"))
-                    input.X = 1;
+                    if (ipp.JustPressed("d") || ipp.JustPressed("right"))
+                        input.X = 1;
+                }
 
                 player.Input(input);
                 player.Move();
@@ -386,7 +389,7 @@ namespace LD42
                     else if (goingToMenu)
                     { gameState = GameState.TransitionM; currentUInb = 0; }
                     else
-                    { gameState = GameState.TransitionG; currentUInb = 1; SetupGame();  }
+                    { gameState = GameState.TransitionG; currentUInb = 1; SetupGame(); easeIn.Reset(); }
                 }
             }
             else
