@@ -250,7 +250,7 @@ namespace LD42
             if (gameState == GameState.Game || gameState == GameState.TransitionG || gameState == GameState.Dead || gameState == GameState.TransitionD)
                 UpdateGame(es);
 
-            if (gameState == GameState.TransitionG || gameState == GameState.TransitionM || gameState == GameState.TransitionP || gameState == GameState.TransitionD)
+            if (gameState == GameState.TransitionG || gameState == GameState.TransitionM || gameState == GameState.TransitionP || gameState == GameState.TransitionD|| gameState == GameState.TransitionT)
                 ChangeAlpha(es);
 
             //END
@@ -263,13 +263,11 @@ namespace LD42
         {
             if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("startGame"))
             {
-                gameState = GameState.Tutorial;
-                currentUInb = 4;
-                SoundManager.PlaySong("gamesong");
+                gameState = GameState.TransitionM;
             }
             if (gameState == GameState.Tutorial && uis[currentUInb].IssuedCommand("startGame"))
             {
-                gameState = GameState.TransitionM;
+                gameState = GameState.TransitionT;
                 easeIn.Reset();
             }
             else if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("quit"))
@@ -458,7 +456,9 @@ namespace LD42
                     blackness = 1;
                     fading = false;
                     if (gameState == GameState.TransitionM)
-                    { gameState = GameState.TransitionG; currentUInb = 1; }
+                    { gameState = GameState.TransitionT; currentUInb = 4; SoundManager.PlaySong("gamesong"); }
+                    else if (gameState == GameState.TransitionT)
+                    { gameState = GameState.TransitionG; currentUInb = 1;}
                     else if (goingToMenu)
                     { gameState = GameState.TransitionM; currentUInb = 0; }
                     else
@@ -476,6 +476,8 @@ namespace LD42
                     { gameState = GameState.Game; currentUInb = 1; }
                     else if (gameState == GameState.TransitionM)
                     { gameState = GameState.Menu; currentUInb = 0; SetupGame(); }
+                    else if (gameState == GameState.TransitionT)
+                    { gameState = GameState.Tutorial; }
                 }
             }
         }
@@ -488,6 +490,9 @@ namespace LD42
                     DrawUI();
                     break;
                 case GameState.Tutorial:
+                    DrawUI();
+                    break;
+                case GameState.TransitionT:
                     DrawUI();
                     break;
                 case GameState.Game:
@@ -534,6 +539,9 @@ namespace LD42
                 case GameState.Tutorial:
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
+                case GameState.TransitionT:
+                    scenes.DrawScene(spriteBatch, "UI");
+                    break;
                 case GameState.Game:
                     scenes.DrawScene(spriteBatch, "game");
                     scenes.DrawScene(spriteBatch, "inven");
@@ -569,7 +577,7 @@ namespace LD42
             spriteBatch.End();
 
             spriteBatch.Begin();
-            if (gameState == GameState.TransitionG || gameState == GameState.TransitionM || gameState == GameState.TransitionP || gameState == GameState.TransitionD)
+            if (gameState == GameState.TransitionG || gameState == GameState.TransitionM || gameState == GameState.TransitionP || gameState == GameState.TransitionD|| gameState == GameState.TransitionT)
                 spriteBatch.Draw(Content.Load<Texture2D>("Placeholder/black"), new Rectangle(0, 0, wdims.X, wdims.Y), new Color(Color.Black, blackness));
             spriteBatch.End();
 
