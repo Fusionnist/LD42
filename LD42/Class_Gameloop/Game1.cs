@@ -33,7 +33,7 @@ namespace LD42
         NotTechnicallyATileset ts;
         Inventory inven;
         Entity player;
-
+        Timer dist;
         UISystem[] uis;
         int currentUInb;
 
@@ -60,6 +60,8 @@ namespace LD42
 
         protected override void Initialize()
         {
+            dist = new Timer(0.2f);
+
             easeOut = new Timer(5f);
             easeIn = new Timer(2f);
 
@@ -95,6 +97,13 @@ namespace LD42
                new Rectangle(0, 0, vdims.X, vdims.Y),
                "game"
                ));
+
+            scenes.scenes.Add(new Scene(
+              new RenderTarget2D(GraphicsDevice, vdims.X, vdims.Y),
+              new Rectangle(0, 0, vdims.X, vdims.Y),
+              new Rectangle(0, 0, vdims.X, vdims.Y),
+              "inven"
+              ));
 
             cursorManager = new CursorManager();
             KeyManager[] keyManagers = new KeyManager[] { };
@@ -286,7 +295,12 @@ namespace LD42
         }
         protected void UpdateGame(float es_)
         {
-            if(gameState == GameState.Dead) { inven.LoseItem(); }
+            dist.Update(es_);
+            if(gameState == GameState.Dead && dist.Complete())
+            {
+                inven.LoseItem();
+                dist.Reset();
+            }
             easeIn.Update(es_);
             if (easeIn.Complete()) { easeIn.Stop(); }
             if (gameState != GameState.TransitionG)
@@ -490,10 +504,12 @@ namespace LD42
                     break;
                 case GameState.Game:
                     scenes.DrawScene(spriteBatch, "game");
+                    scenes.DrawScene(spriteBatch, "inven");
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
                 case GameState.Pause:
                     scenes.DrawScene(spriteBatch, "game");
+                    scenes.DrawScene(spriteBatch, "inven");
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
                 case GameState.TransitionM:
@@ -501,18 +517,22 @@ namespace LD42
                     break;
                 case GameState.TransitionG:
                     scenes.DrawScene(spriteBatch, "game");
+                    scenes.DrawScene(spriteBatch, "inven");
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
                 case GameState.TransitionP:
                     scenes.DrawScene(spriteBatch, "game");
+                    scenes.DrawScene(spriteBatch, "inven");
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
                 case GameState.TransitionD:
                     scenes.DrawScene(spriteBatch, "game");
+                    scenes.DrawScene(spriteBatch, "inven");
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
                 case GameState.Dead:
                     scenes.DrawScene(spriteBatch, "game");
+                    scenes.DrawScene(spriteBatch, "inven");
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
             }
@@ -556,7 +576,7 @@ namespace LD42
         }
         void DrawInventory()
         {
-            scenes.SelectScene("UI");
+            scenes.SelectScene("inven");
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             GraphicsDevice.Clear(Color.TransparentBlack);
