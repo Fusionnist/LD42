@@ -263,8 +263,8 @@
       </Hitboxes>
     </Texture>
     //fish ded
-    <Texture name="hit" id="fish">
-      <Frameset delay="0.1" x="32" y="64" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
+    <Texture name="hit" id="fish" loop="false">
+      <Frameset delay="0.3" x="32" y="64" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
       <Hitboxes>
         <Collection type="collision">
           <Frameset x="8" y="0" w="16" h="32" amt="4"></Frameset>
@@ -272,7 +272,7 @@
       </Hitboxes>
     </Texture>
     <Texture name="dead" id="fish">
-      <Frameset delay="0.1" x="160" y="64" w="32" h="32" amt="2" cx="0" cy="0"></Frameset>
+      <Frameset delay="0.05" x="160" y="64" w="32" h="32" amt="2" cx="0" cy="0"></Frameset>
       <Hitboxes>
         <Collection type="collision">
           <Frameset x="8" y="0" w="16" h="32" amt="4"></Frameset>
@@ -282,5 +282,54 @@
   </Spritesheet>
   //losta stuff 3: the return of the jedi
   <Spritesheet name="miscsheet3" source="Sprite/spritemisc3">
+    //flying enemy
+    <Texture name="idle" id="fly">
+      <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frameset x="8" y="0" w="16" h="32" amt="4"></Frameset>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    //items
+    <Texture name="pile" id="item">
+      <Frameset delay="0.1" x="32" y="96" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="mask" id="item">
+      <Frameset delay="0.1" x="64" y="96" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="crown" id="item">
+      <Frameset delay="0.1" x="96" y="96" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="heart" id="item">
+      <Frameset delay="0.1" x="128" y="96" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="crownpot" id="item">
+      <Frameset delay="0.1" x="160" y="96" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="sword" id="item">
+      <Frameset delay="0.1" x="32" y="128" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="pot" id="item">
+      <Frameset delay="0.1" x="64" y="128" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="goldpot" id="item">
+      <Frameset delay="0.1" x="96" y="128" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="swordpot" id="item">
+      <Frameset delay="0.1" x="128" y="128" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="coin" id="item">
+      <Frameset delay="0.1" x="32" y="160" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="gem" id="item">
+      <Frameset delay="0.1" x="64" y="160" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="bag" id="item">
+      <Frameset delay="0.1" x="96" y="160" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="chest" id="item">
+      <Frameset delay="0.1" x="128" y="160" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
   </Spritesheet>
 </Spritesheets>
