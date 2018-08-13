@@ -10,6 +10,7 @@
   <Entity type="player" name="player">
     <Textures name ="default">
       <Texture name="run" id="player" sheetName="pruns"></Texture>
+      <Texture name="slide" id="player" sheetName="miscsheet5"></Texture>
       <Texture name="jump" id="player" sheetName="pjumps"></Texture>
       <Texture name="dead" id="player" sheetName="miscsheet1"></Texture>
       <Texture name="hit" id="player" sheetName="miscsheet1"></Texture>

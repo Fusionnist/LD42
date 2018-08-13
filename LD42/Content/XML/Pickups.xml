@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Entities>
   //placeholder
-<Entity type="pickup" name="placeholderPickup">
+  <Entity type="pickup" name="placeholderPickup">
   <Textures name ="textures">
     <Texture name="pickup" id="pickup" sheetName="placeholderSheet"></Texture>
   </Textures>
@@ -11,7 +11,7 @@
   //heart
   <Entity type="pickup" name="heartpickup">
     <Textures name ="textures">
-      <Texture name="heart" id="pickup" sheetName="placeholderSheet"></Texture>
+      <Texture name="heartp" id="pickup" sheetName="miscsheet2"></Texture>
     </Textures>
     <Properties></Properties>
     <Entity add="false" context="eat my ass" name="heart"></Entity>
@@ -69,5 +69,42 @@
     </Textures>
     <Properties></Properties>
     <Entity add="false" context="eat my ass" name="plant"></Entity>
+  </Entity>
+  //rustcoin
+  <Entity type="pickup" name="rustcoinpickup">
+    <Textures name ="textures">
+      <Texture name="rustcoinp" id="pickup" sheetName="miscsheet4"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="rustcoin"></Entity>
+  </Entity>
+  //4 gems
+  <Entity type="pickup" name="gem1pickup">
+    <Textures name ="textures">
+      <Texture name="gemp1" id="pickup" sheetName="miscsheet4"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="gem1"></Entity>
+  </Entity>
+  <Entity type="pickup" name="gem2pickup">
+    <Textures name ="textures">
+      <Texture name="gemp2" id="pickup" sheetName="miscsheet4"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="gem2"></Entity>
+  </Entity>
+  <Entity type="pickup" name="gem3pickup">
+    <Textures name ="textures">
+      <Texture name="gemp3" id="pickup" sheetName="miscsheet4"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="gem3"></Entity>
+  </Entity>
+  <Entity type="pickup" name="gem4pickup">
+    <Textures name ="textures">
+      <Texture name="gemp4" id="pickup" sheetName="miscsheet4"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="gem4"></Entity>
   </Entity>
 </Entities>

@@ -138,6 +138,7 @@
     <Content Include="Content\SFX\hit4.wav" />
     <Content Include="Content\SFX\hit5.wav" />
     <Content Include="Content\SFX\hit6.wav" />
+    <Content Include="Content\SFX\hit7.wav" />
     <Content Include="Content\Sprite\enemyspritesheet.png" />
     <Content Include="Content\Sprite\fishidle.png" />
     <Content Include="Content\Sprite\fishwakeup.png" />
@@ -145,6 +146,8 @@
     <Content Include="Content\Sprite\runningspritesheet.png" />
     <Content Include="Content\Sprite\shadow.png" />
     <Content Include="Content\Sprite\spritemisc3.png" />
+    <Content Include="Content\Sprite\spritemisc4.png" />
+    <Content Include="Content\Sprite\spritemiscgotcha.png" />
     <Content Include="Content\Sprite\spritesmisc.png" />
     <Content Include="Content\Sprite\spritesmisc2.png" />
     <Content Include="Content\Tile\tilebg.png" />

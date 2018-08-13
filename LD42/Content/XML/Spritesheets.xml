@@ -376,4 +376,93 @@
       <Frameset delay="0.1" x="0" y="0" w="80" h="16" amt="1" cx="0" cy="0"></Frameset>
     </Texture>
   </Spritesheet>
+  //losta stuff 4: the jedi are all dead
+  <Spritesheet name="miscsheet4" source="Sprite/spritemisc4">
+    //items
+    <Texture name="rustcoin" id="item">
+      <Frameset delay="0.1" x="16" y="16" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="rustpile" id="item">
+      <Frameset delay="0.1" x="48" y="48" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="gem1" id="item">
+      <Frameset delay="0.1" x="48" y="16" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="gem2" id="item">
+      <Frameset delay="0.1" x="80" y="16" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="gem3" id="item">
+      <Frameset delay="0.1" x="112" y="16" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="gem4" id="item">
+      <Frameset delay="0.1" x="144" y="16" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="allgems" id="item">
+      <Frameset delay="0.1" x="16" y="48" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    //pickups
+    <Texture name="rustcoinp" id="pickup">
+      <Frameset delay="0.2" x="16" y="96" w="16" h="16" amt="4" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    <Texture name="gemp1" id="pickup">
+      <Frameset delay="0.2" x="16" y="128" w="16" h="16" amt="3" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    <Texture name="gemp2" id="pickup">
+      <Frameset delay="0.2" x="16" y="112" w="16" h="16" amt="3" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    <Texture name="gemp3" id="pickup">
+      <Frameset delay="0.2" x="16" y="144" w="16" h="16" amt="3" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    <Texture name="gemp4" id="pickup">
+      <Frameset delay="0.2" x="16" y="160" w="16" h="16" amt="3" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+  </Spritesheet>
+  <Spritesheet name="miscsheet5" source="Sprite/spritemiscgotcha">
+    <Texture name="rainbowchest" id="item">
+      <Frameset delay="0.1" x="32" y="96" w="32" h="32" amt="1" cx="0" cy="0"></Frameset>
+    </Texture>
+    <Texture name="slide" id="player">
+      <Frameset delay="0.2" x="32" y="32" w="32" h="32" amt="2" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frameset x="8" y="8" w="16" h="24" amt="2"></Frameset>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+  </Spritesheet>
 </Spritesheets>

@@ -31,10 +31,10 @@ namespace LD42
         public override void Move()
         {
             if (up)
-                vel.Y -= 1/2;
+                vel.Y -= 5;
             else
-                vel.Y += 1/2;
-            if (vel.Y >= 10 || vel.Y <= -10)
+                vel.Y += 5;
+            if (vel.Y >= 50 || vel.Y <= -50)
                 up = !up;
             base.Move();
             vel.Y -= 4;

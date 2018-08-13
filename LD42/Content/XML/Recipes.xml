@@ -10,6 +10,18 @@
     <ResultWorth>5</ResultWorth>
   </Recipe>
   <Recipe>
+    <Ingredient>rustcoin</Ingredient>
+    <Ingredient>rustcoin</Ingredient>
+    <Ingredient>rustcoin</Ingredient>
+    <Ingredient>rustcoin</Ingredient>
+    <Ingredient>rustcoin</Ingredient>
+    <Ingredient>rustcoin</Ingredient>
+    <Ingredient>rustcoin</Ingredient>
+    <Ingredient>rustcoin</Ingredient>
+    <Result>rustcoinStack</Result>
+    <ResultWorth>5</ResultWorth>
+  </Recipe>
+  <Recipe>
     <Ingredient>diamond</Ingredient>
     <Ingredient>diamond</Ingredient>
     <Ingredient>diamond</Ingredient>
@@ -17,9 +29,38 @@
     <ResultWorth>15</ResultWorth>
   </Recipe>
   <Recipe>
+    <Ingredient>gem1</Ingredient>
+    <Ingredient>gem2</Ingredient>
+    <Ingredient>gem3</Ingredient>
+    <Ingredient>gem4</Ingredient>
+    <Result>allgems</Result>
+    <ResultWorth>10</ResultWorth>
+  </Recipe>
+  <Recipe>
     <Ingredient>coinStack</Ingredient>
     <Ingredient>coinStack</Ingredient>
     <Ingredient>coinStack</Ingredient>
+    <Result>bag</Result>
+    <ResultWorth>15</ResultWorth>
+  </Recipe>
+  <Recipe>
+    <Ingredient>rustcoinStack</Ingredient>
+    <Ingredient>coinStack</Ingredient>
+    <Ingredient>coinStack</Ingredient>
+    <Result>bag</Result>
+    <ResultWorth>15</ResultWorth>
+  </Recipe>
+  <Recipe>
+    <Ingredient>rustcoinStack</Ingredient>
+    <Ingredient>rustcoinStack</Ingredient>
+    <Ingredient>coinStack</Ingredient>
+    <Result>bag</Result>
+    <ResultWorth>15</ResultWorth>
+  </Recipe>
+  <Recipe>
+    <Ingredient>rustcoinStack</Ingredient>
+    <Ingredient>rustcoinStack</Ingredient>
+    <Ingredient>rustcoinStack</Ingredient>
     <Result>bag</Result>
     <ResultWorth>15</ResultWorth>
   </Recipe>
@@ -36,6 +77,13 @@
     <Ingredient>chest</Ingredient>
     <Result>crown</Result>
     <ResultWorth>200</ResultWorth>
+  </Recipe>
+  <Recipe>
+    <Ingredient>chest</Ingredient>
+    <Ingredient>allgems</Ingredient>
+    <Ingredient>allgems</Ingredient>
+    <Result>rainbowchest</Result>
+    <ResultWorth>1000</ResultWorth>
   </Recipe>
   <Recipe>
     <Ingredient>plant</Ingredient>

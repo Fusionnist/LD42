@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Pickups>
   //pickups
-  <Pickup name="heartpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
-  <Pickup name="coinpickup" prob="0.03" cooldown="0" globalCooldown="10" necessarySpawns="0"></Pickup>
-  <Pickup name="gempickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
-  <Pickup name="pilepickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
-  <Pickup name="bagpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
-  <Pickup name="swordpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
-  <Pickup name="maskpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
-  <Pickup name="plantpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
-  //enemies
-  <Pickup name="renemy" prob="0.01" cooldown="0" globalCooldown="10" y="56"></Pickup>
-  <Pickup name="fenemy" prob="0.01" cooldown="0" globalCooldown="10" y="56"></Pickup>
-  <Pickup name="flyenemy" prob="0.01" cooldown="0" globalCooldown="10" y="16"></Pickup>
+  
+  //common
+  <Pickup name="coinpickup" prob="0.2" cooldown="0" globalCooldown="3" necessarySpawns="0"></Pickup>
+  <Pickup name="rustcoinpickup" prob="0.2" cooldown="0" globalCooldown="3" necessarySpawns="0"></Pickup>
+  //enemy
+  <Pickup name="renemy" prob="0.1" cooldown="0" globalCooldown="20" y="56"></Pickup>
+  <Pickup name="fenemy" prob="0.1" cooldown="0" globalCooldown="20" y="56"></Pickup>
+  <Pickup name="flyenemy" prob="0.1" cooldown="0" globalCooldown="20" y="24"></Pickup>
+  //uncommon
+  <Pickup name="gempickup" prob="0.05" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
+  <Pickup name="pilepickup" prob="0.05" cooldown="0" globalCooldown="10" necessarySpawns="50"></Pickup>
+  <Pickup name="swordpickup" prob="0.05" cooldown="0" globalCooldown="10" necessarySpawns="30"></Pickup>
+  <Pickup name="maskpickup" prob="0.05" cooldown="0" globalCooldown="10" necessarySpawns="40"></Pickup>
+
+  //rare
+  <Pickup name="heartpickup" prob="0.01" cooldown="0.1" globalCooldown="20" necessarySpawns="0"></Pickup>
+  <Pickup name="bagpickup" prob="0.01" cooldown="0.1" globalCooldown="10" necessarySpawns="30"></Pickup>
+  <Pickup name="plantpickup" prob="0.01" cooldown="0.1" globalCooldown="10" necessarySpawns="80"></Pickup>
+  <Pickup name="gem1pickup" prob="0.015" cooldown="0.1" globalCooldown="10" necessarySpawns="100"></Pickup>
+  <Pickup name="gem2pickup" prob="0.015" cooldown="0.1" globalCooldown="10" necessarySpawns="100"></Pickup>
+  <Pickup name="gem3pickup" prob="0.015" cooldown="0.1" globalCooldown="10" necessarySpawns="100"></Pickup>
+  <Pickup name="gem4pickup" prob="0.015" cooldown="0.1" globalCooldown="10" necessarySpawns="100"></Pickup>
+
   //none
-  <Pickup name="none" prob="0.94" cooldown="0" globalCooldown="0"></Pickup>
+  <Pickup name="none" prob="0.3" cooldown="0" globalCooldown="0"></Pickup>
 </Pickups>

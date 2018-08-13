@@ -42,6 +42,10 @@ namespace LD42
 
         public bool PlayerDead()
         {
+            if(size == 32)
+            {
+                SoundManager.PlayEffect("hit6");
+            }
             return (GetHP() == 0 || size == 32);
         }
 
@@ -101,12 +105,10 @@ namespace LD42
             }
             ParticleSystem.CreateInstance(item_.pos - new Vector2(16, 16), "appear", true, 0.23f);
             CheckRecipes(GetPool());
-            if(size != 32)
-            SoundManager.PlayEffect("hit5");
+            if (item_.Name != "mask")
+                SoundManager.PlayEffect("hit5");
             else
-            {
-                SoundManager.PlayEffect("hit6");
-            }
+                SoundManager.PlayEffect("hit2");
         }
 
         List<string> GetPool()

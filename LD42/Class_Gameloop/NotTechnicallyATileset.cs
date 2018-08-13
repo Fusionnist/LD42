@@ -284,14 +284,14 @@ namespace LD42
             x = false;
             foreach (var bg in EntityCollection.GetGroup("backgrounds"))
             {
-                if (bg.pos.X < camPos_ - 48)
+                if (bg.pos.X < camPos_ - 96)
                     bg.exists = false;
                 if (bg.pos.X >= camPos_ + vdims.X)
                     x = true;
             }
             if (!x)
             {
-                HandleNewBgSpawns(camPos_ + vdims.X + 48);
+                HandleNewBgSpawns(camPos_ + vdims.X + 96);
             }
         }
 
@@ -452,7 +452,7 @@ namespace LD42
             Random r = new Random();
             int x;
             do {
-                x = r.Next(1, 5);
+                x = r.Next(1, 6);
             } while (x == prevBg);
             prevBg = x;
             Entity ent = ebuilder.CreateEntity("bg", GetDrawerCollection(x), new Vector2((float)(Math.Floor(camPos_ / 16) * 16), 64), new List<Property>() { new Property("isBG", "isBG", "isBG") }, "bg");

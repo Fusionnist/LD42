@@ -26,6 +26,24 @@
       <Property name="worth" value="1" type="int"></Property>
     </Properties>
   </Entity>
+  //rust coin
+  <Entity type="item" name="rustcoin">
+  <Textures name ="textures">
+    <Texture name="rustcoin" id="item" sheetName="miscsheet4"></Texture>
+  </Textures>
+  <Properties>
+    <Property name="worth" value="0" type="int"></Property>
+  </Properties>
+</Entity>
+  <Entity type="item" name="rustcoinStack">
+    <Textures name ="textures">
+      <Texture name="rustpile" id="item" sheetName="miscsheet4"></Texture>
+    </Textures>
+    <Properties>
+      <Property name="worth" value="5" type="int"></Property>
+    </Properties>
+  </Entity>
+  
   <Entity type="item" name="coinStack">
     <Textures name ="textures">
       <Texture name="pile" id="item" sheetName="miscsheet3"></Texture>
@@ -112,6 +130,56 @@
     </Textures>
     <Properties>
       <Property name="worth" value="10" type="int"></Property>
+    </Properties>
+  </Entity>
+  //the 4 gems
+  <Entity type="item" name="gem1">
+    <Textures name ="textures">
+      <Texture name="gem1" id="item" sheetName="miscsheet4"></Texture>
+    </Textures>
+    <Properties>
+      <Property name="worth" value="10" type="int"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="item" name="gem2">
+    <Textures name ="textures">
+      <Texture name="gem2" id="item" sheetName="miscsheet4"></Texture>
+    </Textures>
+    <Properties>
+      <Property name="worth" value="10" type="int"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="item" name="gem3">
+    <Textures name ="textures">
+      <Texture name="gem3" id="item" sheetName="miscsheet4"></Texture>
+    </Textures>
+    <Properties>
+      <Property name="worth" value="10" type="int"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="item" name="gem4">
+    <Textures name ="textures">
+      <Texture name="gem4" id="item" sheetName="miscsheet4"></Texture>
+    </Textures>
+    <Properties>
+      <Property name="worth" value="10" type="int"></Property>
+    </Properties>
+  </Entity>
+  <Entity type="item" name="allgems">
+    <Textures name ="textures">
+      <Texture name="allgems" id="item" sheetName="miscsheet4"></Texture>
+    </Textures>
+    <Properties>
+      <Property name="worth" value="100" type="int"></Property>
+    </Properties>
+  </Entity>
+  //rbow chest
+  <Entity type="item" name="gem1">
+    <Textures name ="textures">
+      <Texture name="rainbowchest" id="item" sheetName="miscsheet5"></Texture>
+    </Textures>
+    <Properties>
+      <Property name="worth" value="1000" type="int"></Property>
     </Properties>
   </Entity>
 </Entities>

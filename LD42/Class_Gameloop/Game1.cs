@@ -156,6 +156,7 @@ namespace LD42
             SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit4"), "hit4");
             SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit5"), "hit5");
             SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit6"), "hit6");
+            SoundManager.AddEffect(Content.Load<SoundEffect>("SFX/hit7"), "hit7");
 
             SoundManager.AddSong(Content.Load<Song>("Music/dungeonrun"), "gamesong");
             SoundManager.AddSong(Content.Load<Song>("Music/menusong"), "menusong");
@@ -209,8 +210,8 @@ namespace LD42
                 new UISystem(new List<Button>()//menu
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/actualtitle"))),
-                    new Button("startGame", new Rectangle(50, 140, 60, 20), SpriteSheetCollection.GetTex("play","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
-                    new Button("quit", new Rectangle(130, 140, 60, 20),  SpriteSheetCollection.GetTex("exitbutton","miscsheet1","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
+                    new Button("startGame", new Rectangle(12, 118, 60, 20), SpriteSheetCollection.GetTex("play","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
+                    new Button("quit", new Rectangle(14, 136, 60, 20),  SpriteSheetCollection.GetTex("exitbutton","miscsheet1","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
                 }),
                 new UISystem(new List<Button>()),//game
                 new UISystem(new List<Button>()//pause
@@ -339,10 +340,10 @@ namespace LD42
                 if (gameState == GameState.Game)
                 {
                     if (ipp.Pressed("w") || ipp.Pressed("up"))
-                        input.Y = -1;
+                        input.Y -= 1;
 
                     if (ipp.Pressed("s") || ipp.Pressed("down"))
-                        input.Y = 1;
+                        input.Y += 1;
 
                     if (ipp.JustPressed("d") || ipp.JustPressed("right"))
                         input.X = 1;
@@ -413,8 +414,8 @@ namespace LD42
                     {
                         player.React("headJump");
                         en.React("headJump");
-                        ParticleSystem.CreateInstance(en.pos + new Vector2(8, -16), "stars");
-                        SoundManager.PlayEffect("hit2");
+                        ParticleSystem.CreateInstance(en.pos + new Vector2(8, -16), "stars", true);
+                        SoundManager.PlayEffect("hit3");
                     }
                     else if(!player.invin)
                     {
@@ -424,6 +425,7 @@ namespace LD42
                     }                
                 }
             }
+            if(!player.Answer("sliding"))
             foreach (var pickup in EntityCollection.GetGroup("pickups"))
             {
                 bool x = false;
@@ -590,8 +592,8 @@ namespace LD42
 
             if (gameState == GameState.Dead)
             {
-                fdrawer.DrawText("realfont", score.ToString(), new Rectangle(144, 53, 224, 160), spriteBatch);
-                scoretex.Draw(spriteBatch, new Vector2(64, 53));
+                fdrawer.DrawText("realfont", score.ToString(), new Rectangle(124, 60, 224, 160), spriteBatch);
+                scoretex.Draw(spriteBatch, new Vector2(44, 60));
             }
 
             spriteBatch.End();

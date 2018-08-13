@@ -34,7 +34,7 @@ namespace LD42
         {
             state = PlayerState.jump;
             if (touchWallD) { state = PlayerState.walk; }
-            if (input_.Y == 1 && touchWallD)
+            if (input_.Y == 1 && touchWallD && !invin)
             {
                 state = PlayerState.slide;
             }
@@ -53,7 +53,7 @@ namespace LD42
             {
                 dashTimer.Reset();
 
-                SoundManager.PlayEffect("hit3");
+                SoundManager.PlayEffect("hit7");
             }
             if (!dashTimer.Complete())
             {
@@ -95,6 +95,10 @@ namespace LD42
             {
                 SetTexture("jump");
             }
+            if (state == PlayerState.slide)
+            {
+                SetTexture("slide");
+            }
             if (invin)
             {
                 SetTexture("hit");
@@ -113,6 +117,15 @@ namespace LD42
                 queueJump = true;
             }
             base.React(id_);
+        }
+
+        public override bool Answer(string question_)
+        {
+            if(question_ == "sliding")
+            {
+                return state == PlayerState.slide;
+            }
+            return base.Answer(question_);
         }
     }
 }
