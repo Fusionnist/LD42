@@ -39,7 +39,7 @@ namespace LD42
 
         public override void Move()
         {
-            vel.Y += 1;
+            vel.Y += 4;
             base.Move();
         }
     }

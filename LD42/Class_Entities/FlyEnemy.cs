@@ -37,7 +37,7 @@ namespace LD42
             if (vel.Y >= 10 || vel.Y <= -10)
                 up = !up;
             base.Move();
-            vel.Y -= 1;
+            vel.Y -= 4;
         }
 
         public override void Update(float elapsedTime_)

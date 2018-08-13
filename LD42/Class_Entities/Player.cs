@@ -97,7 +97,11 @@ namespace LD42
             }
             if (invin)
             {
-                SetTexture("shadow");
+                SetTexture("hit");
+            }
+            if (isDestroyed)
+            {
+                SetTexture("dead");
             }
             base.Draw(sb_, flipH_, flipV_, angle_);
         }

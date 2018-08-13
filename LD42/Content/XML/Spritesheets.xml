@@ -3,23 +3,23 @@
   <Spritesheet name="placeholderSheet" source="Placeholder/placeholder1">
     //ITEM FRAME
     <Texture name="itemframe" id="itemframe">
-     <Frame displayTime="0.1">
-       <SourceRect x="0" y="0" w="32" h="32"></SourceRect>
-       <Center x="0" y="0"></Center>
-     </Frame>
-     <Hitboxes>
-       <Collection type="collision">
-         <Frame>
+      <Frame displayTime="0.1">
+        <SourceRect x="0" y="0" w="32" h="32"></SourceRect>
+        <Center x="0" y="0"></Center>
+      </Frame>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
             <Hitbox x="0" y="0" w="32" h="32"></Hitbox>
           </Frame>
         </Collection>
-     </Hitboxes>
+      </Hitboxes>
     </Texture>
-   //ITEM
-   <Texture name="item" id="item">
-     <Frame displayTime="0.1">
+    //ITEM
+    <Texture name="item" id="item">
+      <Frame displayTime="0.1">
         <SourceRect x="32" y="0" w="32" h="32"></SourceRect>
-       <Center x="0" y="0"></Center>
+        <Center x="0" y="0"></Center>
       </Frame>
     </Texture>
     <Texture name="heart" id="item">
@@ -28,19 +28,19 @@
         <Center x="0" y="0"></Center>
       </Frame>
     </Texture>
-   //PICKUP
-   <Texture name="pickup" id="pickup">
+    //PICKUP
+    <Texture name="pickup" id="pickup">
       <Frame displayTime="0.1">
-       <SourceRect x="0" y="32" w="16" h="16"></SourceRect>
-       <Center x="0" y="0"></Center>
-     </Frame>
-     <Hitboxes>
-       <Collection type="collision">
-         <Frame>
-           <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
-         </Frame>
-       </Collection>
-     </Hitboxes>
+        <SourceRect x="0" y="32" w="16" h="16"></SourceRect>
+        <Center x="0" y="0"></Center>
+      </Frame>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
     </Texture>
     <Texture name="heart" id="pickup">
       <Frame displayTime="0.1">
@@ -96,15 +96,15 @@
   </Spritesheet>
   //walk enemy
   <Spritesheet name="walkenemys" source="Sprite/enemyspritesheet">
-  <Texture name="walk" id="enemy">
-    <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="8" cx="0" cy="0"></Frameset>
-    <Hitboxes>
-      <Collection type="collision">
-        <Frameset x="8" y="0" w="16" h="32" amt="8"></Frameset>
-      </Collection>
-    </Hitboxes>
-  </Texture>
-</Spritesheet>
+    <Texture name="walk" id="enemy">
+      <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="8" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frameset x="8" y="0" w="16" h="32" amt="8"></Frameset>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+  </Spritesheet>
   //fish
   <Spritesheet name="fishidles" source="Sprite/fishidle">
     <Texture name="idle" id="fish">
@@ -139,7 +139,95 @@
   </Spritesheet>
   <Spritesheet name="slotappears" source="UI/invenappear">
     <Texture name="appear" id="slot" loop="false">
-      <Frameset delay="0.05" x="0" y="0" w="64" h="64" amt="5" cx="0" cy="0"></Frameset>     
+      <Frameset delay="0.05" x="0" y="0" w="64" h="64" amt="5" cx="0" cy="0"></Frameset>
+    </Texture>
+  </Spritesheet>
+  //Lotsa stuff
+  <Spritesheet name="miscsheet1" source="Sprite/spritesmisc">
+    //buttons
+    <Texture name="exitbutton" id="button">
+      <Frame displayTime="0.1">
+        <SourceRect x="32" y="32" w="44" h="15"></SourceRect>
+        <Center x="0" y="0"></Center>
+      </Frame>
+    </Texture>
+    <Texture name="nextbutton" id="button">
+      <Frame displayTime="0.1">
+        <SourceRect x="32" y="48" w="44" h="15"></SourceRect>
+        <Center x="0" y="0"></Center>
+      </Frame>
+    </Texture>
+    //player death
+    <Texture name="hit" id="player">
+      <Frameset delay="0.1" x="32" y="96" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frameset x="8" y="0" w="16" h="32" amt="4"></Frameset>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+
+    <Texture name="dead" id="player">
+      <Frameset delay="0.1" x="32" y="96" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
+    </Texture>
+    //pickups
+    <Texture name="coinp" id="pickup">
+      <Frameset delay="0.2" x="32" y="144" w="16" h="16" amt="4" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    <Texture name="gemp" id="pickup">
+      <Frameset delay="0.2" x="32" y="176" w="16" h="16" amt="4" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    <Texture name="pilep" id="pickup">
+      <Frameset delay="0.2" x="32" y="208" w="16" h="16" amt="4" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    <Texture name="bagp" id="pickup">
+      <Frameset delay="0.2" x="32" y="240" w="16" h="16" amt="4" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    <Texture name="swordp" id="pickup">
+      <Frameset delay="0.2" x="32" y="272" w="16" h="16" amt="4" cx="0" cy="0"></Frameset>
+      <Hitboxes>
+        <Collection type="collision">
+          <Frame>
+            <Hitbox x="0" y="0" w="16" h="16"></Hitbox>
+          </Frame>
+        </Collection>
+      </Hitboxes>
+    </Texture>
+    //blue enemy ded
+    <Texture name="dead" id="renemy">
+      <Frameset delay="0.1" x="32" y="320" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
+    </Texture>
+    //stun particles
+    <Texture name="stars" id="particle">
+      <Frameset delay="0.1" x="32" y="368" w="16" h="16" amt="4" cx="0" cy="0"></Frameset>
     </Texture>
   </Spritesheet>
 </Spritesheets>
