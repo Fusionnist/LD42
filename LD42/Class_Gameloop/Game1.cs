@@ -189,8 +189,8 @@ namespace LD42
                 }),
                 new UISystem(new List<Button>()
                 {
-                    new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/actualtitle"))),
-                    new Button("startGame", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"))),
+                    new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("UI/Image1"))),
+                    new Button("startGame", new Rectangle(168, 137, 44, 15), new TextureDrawer(Content.Load<Texture2D>("Sprite/spritesmisc")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"), new TextureFrame(new Rectangle(0, 15, 44, 15), Point.Zero))),
                 }),
             };
 
@@ -224,8 +224,13 @@ namespace LD42
         {
             if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("startGame"))
             {
-                gameState = GameState.TransitionM;
+                gameState = GameState.Tutorial;
+                currentUInb = 4;
                 SoundManager.PlaySong("gamesong");
+            }
+            if (gameState == GameState.Tutorial && uis[currentUInb].IssuedCommand("startGame"))
+            {
+                gameState = GameState.TransitionM;
                 easeIn.Reset();
             }
             else if (gameState == GameState.Menu && uis[currentUInb].IssuedCommand("quit"))
@@ -274,7 +279,8 @@ namespace LD42
         }
         protected void UpdateUIStuff()
         {
-            uis[currentUInb].HandleMouseInput(cursorManager, scenes.GetScene("main").ToVirtualPos(cursorManager.RawPos()));
+            if (gameState == GameState.Pause || gameState == GameState.Tutorial || gameState == GameState.Menu || gameState == GameState.Dead)
+                uis[currentUInb].HandleMouseInput(cursorManager, scenes.GetScene("main").ToVirtualPos(cursorManager.RawPos()));
             HandleGameStateChanges();
         }
         protected void UpdateGame(float es_)
@@ -419,6 +425,9 @@ namespace LD42
                 case GameState.Menu:
                     DrawUI();
                     break;
+                case GameState.Tutorial:
+                    DrawUI();
+                    break;
                 case GameState.Game:
                     DrawInventory();
                     DrawGame();
@@ -458,6 +467,9 @@ namespace LD42
             switch (gameState)
             {
                 case GameState.Menu:
+                    scenes.DrawScene(spriteBatch, "UI");
+                    break;
+                case GameState.Tutorial:
                     scenes.DrawScene(spriteBatch, "UI");
                     break;
                 case GameState.Game:

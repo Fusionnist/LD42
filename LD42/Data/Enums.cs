@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace LD42
 {
-    public enum GameState { Menu, Game, Pause, TransitionM, TransitionG, TransitionP, Dead, TransitionD };
+    public enum GameState { Menu, Game, Pause, TransitionM, TransitionG, TransitionP, Dead, TransitionD, Tutorial };
 }
