@@ -22,7 +22,7 @@
       <Texture name="coinp" id="pickup" sheetName="miscsheet1"></Texture>
     </Textures>
     <Properties></Properties>
-    <Entity add="false" context="eat my ass" name="heart"></Entity>
+    <Entity add="false" context="eat my ass" name="coin"></Entity>
   </Entity>
   //gem
   <Entity type="pickup" name="gempickup">
@@ -30,7 +30,7 @@
       <Texture name="gemp" id="pickup" sheetName="miscsheet1"></Texture>
     </Textures>
     <Properties></Properties>
-    <Entity add="false" context="eat my ass" name="heart"></Entity>
+    <Entity add="false" context="eat my ass" name="diamond"></Entity>
   </Entity>
   //coinpile
   <Entity type="pickup" name="pilepickup">
@@ -38,7 +38,7 @@
       <Texture name="pilep" id="pickup" sheetName="miscsheet1"></Texture>
     </Textures>
     <Properties></Properties>
-    <Entity add="false" context="eat my ass" name="heart"></Entity>
+    <Entity add="false" context="eat my ass" name="coinStack"></Entity>
   </Entity>
   //bag
   <Entity type="pickup" name="bagpickup">
@@ -46,7 +46,7 @@
       <Texture name="bagp" id="pickup" sheetName="miscsheet1"></Texture>
     </Textures>
     <Properties></Properties>
-    <Entity add="false" context="eat my ass" name="heart"></Entity>
+    <Entity add="false" context="eat my ass" name="bag"></Entity>
   </Entity>
   //sword
   <Entity type="pickup" name="swordpickup">
@@ -54,6 +54,20 @@
       <Texture name="swordp" id="pickup" sheetName="miscsheet1"></Texture>
     </Textures>
     <Properties></Properties>
-    <Entity add="false" context="eat my ass" name="heart"></Entity>
+    <Entity add="false" context="eat my ass" name="sword"></Entity>
+  </Entity>
+  <Entity type="pickup" name="maskpickup">
+    <Textures name ="textures">
+      <Texture name="maskp" id="pickup" sheetName="miscsheet2"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="mask"></Entity>
+  </Entity>
+  <Entity type="pickup" name="plantpickup">
+    <Textures name ="textures">
+      <Texture name="plantp" id="pickup" sheetName="miscsheet2"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="plant"></Entity>
   </Entity>
 </Entities>

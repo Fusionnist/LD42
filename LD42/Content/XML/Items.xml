@@ -10,7 +10,79 @@
   //HEART
   <Entity type="item" name="heart">
     <Textures name ="textures">
-      <Texture name="heart" id="item" sheetName="placeholderSheet"></Texture>
+      <Texture name="heart" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="coin">
+    <Textures name ="textures">
+      <Texture name="coin" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="coinStack">
+    <Textures name ="textures">
+      <Texture name="pile" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="bag">
+    <Textures name ="textures">
+      <Texture name="bag" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="chest">
+    <Textures name ="textures">
+      <Texture name="chest" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="crown">
+    <Textures name ="textures">
+      <Texture name="crown" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="plant">
+    <Textures name ="textures">
+      <Texture name="pot" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="goldenPlant">
+    <Textures name ="textures">
+      <Texture name="goldpot" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="swordPlant">
+    <Textures name ="textures">
+      <Texture name="swordpot" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="diamond">
+    <Textures name ="textures">
+      <Texture name="gem" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="mask">
+    <Textures name ="textures">
+      <Texture name="mask" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="kingOfPlants">
+    <Textures name ="textures">
+      <Texture name="crownpot" id="item" sheetName="miscsheet3"></Texture>
+    </Textures>
+    <Properties></Properties>
+  </Entity>
+  <Entity type="item" name="sword">
+    <Textures name ="textures">
+      <Texture name="sword" id="item" sheetName="miscsheet3"></Texture>
     </Textures>
     <Properties></Properties>
   </Entity>

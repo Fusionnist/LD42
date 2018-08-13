@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Pickups>
   //pickups
-  <Pickup name="heartpickup" prob="0.0000823045" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
-  <Pickup name="coinpickup" prob="0.0246914" cooldown="0" globalCooldown="10" necessarySpawns="0"></Pickup>
-  <Pickup name="gempickup" prob="0.000617284" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
-  <Pickup name="pilepickup" prob="0.000617284" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
-  <Pickup name="bagpickup" prob="0.0000823045" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
-  <Pickup name="swordpickup" prob="0.000617284" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
+  <Pickup name="heartpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
+  <Pickup name="coinpickup" prob="0.03" cooldown="0" globalCooldown="10" necessarySpawns="0"></Pickup>
+  <Pickup name="gempickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
+  <Pickup name="pilepickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
+  <Pickup name="bagpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
+  <Pickup name="swordpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
+  <Pickup name="maskpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
+  <Pickup name="plantpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
   //enemies
-  <Pickup name="renemy" prob="0.00823045" cooldown="0" globalCooldown="10" y="56"></Pickup>
-  <Pickup name="fenemy" prob="0.00823045" cooldown="0" globalCooldown="10" y="56"></Pickup>
-  <Pickup name="flyenemy" prob="0.00823045" cooldown="0" globalCooldown="10" y="16"></Pickup>
+  <Pickup name="renemy" prob="0.001" cooldown="0" globalCooldown="10" y="56"></Pickup>
+  <Pickup name="fenemy" prob="0.001" cooldown="0" globalCooldown="10" y="56"></Pickup>
+  <Pickup name="flyenemy" prob="0.001" cooldown="0" globalCooldown="10" y="16"></Pickup>
   //none
   <Pickup name="none" prob="0.94" cooldown="0" globalCooldown="0"></Pickup>
 </Pickups>
