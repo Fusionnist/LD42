@@ -11,6 +11,8 @@
     <Textures name ="default">
       <Texture name="run" id="player" sheetName="pruns"></Texture>
       <Texture name="jump" id="player" sheetName="pjumps"></Texture>
+      <Texture name="dead" id="player" sheetName="miscsheet1"></Texture>
+      <Texture name="hit" id="player" sheetName="miscsheet1"></Texture>
       <Texture name="shadow" id="shadow" sheetName="shadows"></Texture>
     </Textures>
     <Properties></Properties>
@@ -20,6 +22,7 @@
   <Entity type="renemy" name="renemy">
     <Textures name ="default">
       <Texture name="walk" id="enemy" sheetName="walkenemys"></Texture>
+      <Texture name="dead" id="renemy" sheetName="miscsheet1"></Texture>
       <Texture name="shadow" id="shadow" sheetName="shadows"></Texture>
     </Textures>
     <Properties></Properties>

@@ -127,6 +127,7 @@ namespace LD42
             RecipeBook.ReadDocument(XDocument.Load("Content/XML/Recipes.xml"));
             //LOAD TEXTURES
             ParticleSystem.AcquireTxture(SpriteSheetCollection.GetTex("appear", "slotappears", "slot"));
+            ParticleSystem.AcquireTxture(SpriteSheetCollection.GetTex("stars", "miscsheet1", "particle"));
             //LOAD SOUND
 
             //LOAD ENTITIES
@@ -298,8 +299,7 @@ namespace LD42
 
                 player.Update(es_);
                 EntityCollection.UpdateGroup("enemies", es_);
-
-                
+                EntityCollection.UpdateGroup("pickups", es_);
             }
             ParticleSystem.UpdateAll(es_);
 
@@ -339,6 +339,7 @@ namespace LD42
                     {
                         player.React("headJump");
                         en.React("headJump");
+                        ParticleSystem.CreateInstance(en.pos + new Vector2(8, -16), "stars");
                         SoundManager.PlayEffect("hit2");
                     }
                     else if(!player.invin)
@@ -513,6 +514,7 @@ namespace LD42
             //DRAW HERE
             ts.Draw(spriteBatch);
             EntityCollection.DrawGroup("enemies", spriteBatch);
+            ParticleSystem.DrawGroup("stars", spriteBatch);
             player.Draw(spriteBatch);
             spriteBatch.End();
         }
@@ -527,7 +529,7 @@ namespace LD42
             EntityCollection.DrawGroup("slots", spriteBatch);
             EntityCollection.DrawGroup("items", spriteBatch);
 
-            ParticleSystem.DrawAll(spriteBatch);
+            ParticleSystem.DrawGroup("appear", spriteBatch);
 
             spriteBatch.End();
         }

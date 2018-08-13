@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Entities>
+  //placeholder
 <Entity type="pickup" name="placeholderPickup">
   <Textures name ="textures">
     <Texture name="pickup" id="pickup" sheetName="placeholderSheet"></Texture>
@@ -7,9 +8,50 @@
   <Properties></Properties>
   <Entity add="false" context="eat my ass" name="placeholderItem"></Entity>
 </Entity>
+  //heart
   <Entity type="pickup" name="heartpickup">
     <Textures name ="textures">
       <Texture name="heart" id="pickup" sheetName="placeholderSheet"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="heart"></Entity>
+  </Entity>
+  //coin
+  <Entity type="pickup" name="coinpickup">
+    <Textures name ="textures">
+      <Texture name="coinp" id="pickup" sheetName="miscsheet1"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="heart"></Entity>
+  </Entity>
+  //gem
+  <Entity type="pickup" name="gempickup">
+    <Textures name ="textures">
+      <Texture name="gemp" id="pickup" sheetName="miscsheet1"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="heart"></Entity>
+  </Entity>
+  //coinpile
+  <Entity type="pickup" name="pilepickup">
+    <Textures name ="textures">
+      <Texture name="pilep" id="pickup" sheetName="miscsheet1"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="heart"></Entity>
+  </Entity>
+  //bag
+  <Entity type="pickup" name="bagpickup">
+    <Textures name ="textures">
+      <Texture name="bagp" id="pickup" sheetName="miscsheet1"></Texture>
+    </Textures>
+    <Properties></Properties>
+    <Entity add="false" context="eat my ass" name="heart"></Entity>
+  </Entity>
+  //sword
+  <Entity type="pickup" name="swordpickup">
+    <Textures name ="textures">
+      <Texture name="swordp" id="pickup" sheetName="miscsheet1"></Texture>
     </Textures>
     <Properties></Properties>
     <Entity add="false" context="eat my ass" name="heart"></Entity>

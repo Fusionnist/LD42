@@ -14,6 +14,7 @@ namespace LD42
 {
     public class RunEnemy : Enemy
     {
+        bool dedjump;
         public RunEnemy(DrawerCollection texes_, Vector2 pos_, List<Property> props_, string name_, string type_ = "enemy") : base(texes_, pos_, props_, name_, type_)
         {
             type = "enemy";
@@ -27,13 +28,30 @@ namespace LD42
 
         public override void Move()
         {
+            if(!isDestroyed)
             mov.X -= 50;
+            else { vel.Y += 5; }
+
+            if (dedjump)
+            {
+                vel.Y = -100;
+                dedjump = false;
+            }
             base.Move();
         }
 
         public override void Update(float elapsedTime_)
         {
             base.Update(elapsedTime_);
+        }
+
+        public override void React(string id_)
+        {
+            if(id_ == "headJump")
+            {
+                dedjump = true;
+            }
+            base.React(id_);
         }
     }
 }
