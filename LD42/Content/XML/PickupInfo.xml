@@ -10,9 +10,9 @@
   <Pickup name="maskpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
   <Pickup name="plantpickup" prob="0.001" cooldown="0" globalCooldown="10" necessarySpawns="10"></Pickup>
   //enemies
-  <Pickup name="renemy" prob="0.001" cooldown="0" globalCooldown="10" y="56"></Pickup>
-  <Pickup name="fenemy" prob="0.001" cooldown="0" globalCooldown="10" y="56"></Pickup>
-  <Pickup name="flyenemy" prob="0.001" cooldown="0" globalCooldown="10" y="16"></Pickup>
+  <Pickup name="renemy" prob="0.01" cooldown="0" globalCooldown="10" y="56"></Pickup>
+  <Pickup name="fenemy" prob="0.01" cooldown="0" globalCooldown="10" y="56"></Pickup>
+  <Pickup name="flyenemy" prob="0.01" cooldown="0" globalCooldown="10" y="16"></Pickup>
   //none
   <Pickup name="none" prob="0.94" cooldown="0" globalCooldown="0"></Pickup>
 </Pickups>
