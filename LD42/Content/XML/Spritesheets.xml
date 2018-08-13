@@ -78,7 +78,7 @@
       <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="8" cx="0" cy="0"></Frameset>
       <Hitboxes>
         <Collection type="collision">
-          <Frameset x="8" y="0" w="16" h="32" amt="8"></Frameset>
+          <Frameset x="8" y="8" w="16" h="24" amt="8"></Frameset>
         </Collection>
       </Hitboxes>
     </Texture>
@@ -89,7 +89,7 @@
       <Frameset delay="0.1" x="32" y="32" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
       <Hitboxes>
         <Collection type="collision">
-          <Frameset x="8" y="0" w="16" h="32" amt="4"></Frameset>
+          <Frameset x="8" y="8" w="16" h="24" amt="8"></Frameset>
         </Collection>
       </Hitboxes>
     </Texture>
@@ -162,7 +162,7 @@
       <Frameset delay="0.1" x="32" y="96" w="32" h="32" amt="4" cx="0" cy="0"></Frameset>
       <Hitboxes>
         <Collection type="collision">
-          <Frameset x="8" y="0" w="16" h="32" amt="4"></Frameset>
+          <Frameset x="8" y="8" w="16" h="24" amt="4"></Frameset>
         </Collection>
       </Hitboxes>
     </Texture>

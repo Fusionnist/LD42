@@ -241,6 +241,7 @@ namespace LD42
             {
                 gameState = GameState.Dead;
                 currentUInb = 3;
+                player.isDestroyed = true;
             }
             else if (gameState == GameState.Game && ipp.JustPressed("p"))
             {
@@ -325,27 +326,37 @@ namespace LD42
         }
         protected void HandleCollisions()
         {
+            
+
             foreach (var tile in EntityCollection.GetGroup("tiles"))
             {
                 CollisionSolver.SolveEntTileCollision(player, tile);
-                foreach(Entity enemy in EntityCollection.GetGroup("enemies"))
+                foreach (Entity enemy in EntityCollection.GetGroup("enemies"))
                 {
                     CollisionSolver.SolveEntTileCollision(enemy, tile);
                 }
-
+            }
+           
+            foreach (var tile in EntityCollection.GetGroup("tiles"))
+            {
                 CollisionSolver.SecondPassCollision(player, tile);
                 foreach (Entity enemy in EntityCollection.GetGroup("enemies"))
                 {
                     CollisionSolver.SecondPassCollision(enemy, tile);
                 }
             }
-            
+
             foreach (var tile in EntityCollection.GetGroup("slots"))
             {
-                CollisionSolver.SolveEntTileCollision(player, tile, tileTranslation_: new Vector2(player.pos.X + player.mov.X- 33,0));
-                CollisionSolver.SecondPassCollision(player, tile, tileTranslation_: new Vector2(player.pos.X + player.mov.X - 33, 0));
+                if (tile.PredictIntersect(player, new Vector2(player.pos.X + player.mov.X - 33, 0)))
+                {
+                    if(player.vel.Y < 0) { player.vel.Y = 0; player.pos.Y = 64; }
+                }
+
             }
-            foreach(Entity en in EntityCollection.GetGroup("enemies"))
+
+
+            foreach (Entity en in EntityCollection.GetGroup("enemies"))
             {
                 if(!en.isDestroyed && player.PredictIntersect(en) )
                 {
