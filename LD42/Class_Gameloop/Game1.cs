@@ -34,6 +34,9 @@ namespace LD42
         Inventory inven;
         Entity player;
         Timer dist;
+        FontDrawer fdrawer;
+        int score;
+
         UISystem[] uis;
         int currentUInb;
 
@@ -67,6 +70,7 @@ namespace LD42
 
             gameState = GameState.Menu;
             currentUInb = 0;
+            score = 0;
             IsMouseVisible = true;
             blackness = 0.5f;
             fading = true;
@@ -108,6 +112,18 @@ namespace LD42
             cursorManager = new CursorManager();
             KeyManager[] keyManagers = new KeyManager[] { };
             ipp = InputProfile.GetLetterProfile();
+            fdrawer = new FontDrawer();
+
+            List<TextureDrawer> chars = new List<TextureDrawer>();
+            string white = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789?!:;.-_@";
+            for (int i = 0; i < white.Length; i++)
+                chars.Add(new TextureDrawer(Content.Load<Texture2D>("Placeholder/font_white"), new TextureFrame(new Rectangle(i * 6, 0, 5, 11), Point.Zero), null, white[i].ToString()));
+            white = "abcdefghijklmnopqrstuvwxyz";
+            for (int i = 0; i < white.Length; i++)
+                chars.Add(new TextureDrawer(Content.Load<Texture2D>("Placeholder/font_white"), new TextureFrame(new Rectangle(i * 6, 13, 5, 11), Point.Zero), null, white[i].ToString()));
+
+            fdrawer.fonts = new List<DrawerCollection> { new DrawerCollection(chars, "whitefont") };
+
             ipp.AddArrowInput();
 
             base.Initialize();
@@ -560,6 +576,9 @@ namespace LD42
             scenes.SetupScene(spriteBatch, GraphicsDevice);
 
             uis[currentUInb].Draw(spriteBatch);
+
+            if (gameState == GameState.Dead)
+                fdrawer.DrawText("whitefont", score.ToString(), new Rectangle(0, 0, 224, 160), spriteBatch);
 
             spriteBatch.End();
         }

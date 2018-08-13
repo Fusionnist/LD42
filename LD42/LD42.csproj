@@ -129,6 +129,7 @@
     <Content Include="Content\Music\menusong.mp3" />
     <Content Include="Content\Placeholder\barint.png" />
     <Content Include="Content\Placeholder\black.png" />
+    <Content Include="Content\Placeholder\font_white.png" />
     <Content Include="Content\Placeholder\placeholder1.png" />
     <Content Include="Content\Music\dungeonrun.mp3" />
     <Content Include="Content\SFX\hit1.wav" />
