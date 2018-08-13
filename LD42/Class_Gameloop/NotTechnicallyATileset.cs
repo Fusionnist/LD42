@@ -373,7 +373,7 @@ namespace LD42
         {
             for (int i = 0; i < itemCooldowns.Count; i++)
             {
-                if (itemCooldowns[i] == 0 && itemSpawnCeilings[i] <= itemCount)
+                if (itemCooldowns[i] <= 0 && itemSpawnCeilings[i] <= itemCount)
                 { tempItems.Add(items[i]); tempItemProbs.Add(itemProbs[i]); totalProbs += itemProbs[i]; tempYs.Add(itemYs[i]); tempGlobalCountdowns.Add(baseglobalcds[i]); }
             }
             for (int i = 0; i < groupCooldowns.Count; i++)
