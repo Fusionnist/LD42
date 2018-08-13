@@ -154,6 +154,8 @@
     <Content Include="Content\UI\invenappear.png" />
     <Content Include="Content\UI\menuresume.png" />
     <Content Include="Content\UI\playbutton.png" />
+    <Content Include="Content\UI\retry.png" />
+    <Content Include="Content\UI\score.png" />
     <Content Include="Content\UI\title.png" />
     <Content Include="Content\XML\Items.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

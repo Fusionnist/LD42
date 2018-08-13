@@ -36,7 +36,7 @@ namespace LD42
         Timer dist;
         FontDrawer fdrawer;
         int score;
-
+        TextureDrawer scoretex;
         UISystem[] uis;
         int currentUInb;
 
@@ -49,6 +49,8 @@ namespace LD42
 
         public Game1()
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             //GAME VALUES
@@ -66,7 +68,7 @@ namespace LD42
             dist = new Timer(0.2f);
 
             easeOut = new Timer(5f);
-            easeIn = new Timer(2f);
+            easeIn = new Timer(3f);
 
             gameState = GameState.Menu;
             currentUInb = 0;
@@ -121,8 +123,17 @@ namespace LD42
             white = "abcdefghijklmnopqrstuvwxyz";
             for (int i = 0; i < white.Length; i++)
                 chars.Add(new TextureDrawer(Content.Load<Texture2D>("Placeholder/font_white"), new TextureFrame(new Rectangle(i * 6, 13, 5, 11), Point.Zero), null, white[i].ToString()));
+            //real font
+            List<TextureDrawer> char2s = new List<TextureDrawer>();
+            white = "01234";
+            for (int i = 0; i < white.Length; i++)
+                char2s.Add(new TextureDrawer(Content.Load<Texture2D>("UI/score"), new TextureFrame(new Rectangle(i * 16, 16, 16, 16), Point.Zero), null, white[i].ToString()));
+            white = "56789";
+            for (int i = 0; i < white.Length; i++)
+                char2s.Add(new TextureDrawer(Content.Load<Texture2D>("UI/score"), new TextureFrame(new Rectangle(i * 16, 32, 16, 16), Point.Zero), null, white[i].ToString()));
 
-            fdrawer.fonts = new List<DrawerCollection> { new DrawerCollection(chars, "whitefont") };
+
+            fdrawer.fonts = new List<DrawerCollection> { new DrawerCollection(chars, "whitefont"), new DrawerCollection(char2s, "realfont") };
 
             ipp.AddArrowInput();
 
@@ -154,6 +165,7 @@ namespace LD42
             //LOAD TEXTURES
             ParticleSystem.AcquireTxture(SpriteSheetCollection.GetTex("appear", "slotappears", "slot"));
             ParticleSystem.AcquireTxture(SpriteSheetCollection.GetTex("stars", "miscsheet1", "particle"));
+            scoretex = SpriteSheetCollection.GetTex("score", "score", "button");
             //LOAD SOUND
 
             //LOAD ENTITIES
@@ -197,26 +209,26 @@ namespace LD42
                 new UISystem(new List<Button>()
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/actualtitle"))),
-                    new Button("startGame", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"))),
-                    new Button("quit", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"))),
+                    new Button("startGame", new Rectangle(50, 140, 60, 20), SpriteSheetCollection.GetTex("play","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
+                    new Button("quit", new Rectangle(130, 140, 60, 20),  SpriteSheetCollection.GetTex("exitbutton","miscsheet1","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
                 }),
                 new UISystem(new List<Button>()),
                 new UISystem(new List<Button>()
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/pause"))),
-                    new Button("returnToMenu", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"))),
-                    new Button("retry", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint")))
+                    new Button("returnToMenu", new Rectangle(120, 100, 60, 20),  SpriteSheetCollection.GetTex("menu","menuresume","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
+                    new Button("retry", new Rectangle(40, 100, 60, 20),  SpriteSheetCollection.GetTex("retry","retry","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"))
                 }),
                 new UISystem(new List<Button>()
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("Placeholder/dead"))),
-                    new Button("returnToMenu", new Rectangle(120, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"))),
-                    new Button("retry", new Rectangle(40, 100, 60, 20), new TextureDrawer(Content.Load<Texture2D>("yesnpressed")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"))),
+                    new Button("returnToMenu", new Rectangle(120, 100, 60, 20), SpriteSheetCollection.GetTex("menu","menuresume","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
+                    new Button("retry", new Rectangle(40, 100, 60, 20), SpriteSheetCollection.GetTex("retry","retry","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
                 }),
                 new UISystem(new List<Button>()
                 {
                     new Button("null", new Rectangle(0, 0, 224, 160), new TextureDrawer(Content.Load<Texture2D>("UI/Image1"))),
-                    new Button("startGame", new Rectangle(168, 137, 44, 15), new TextureDrawer(Content.Load<Texture2D>("Sprite/spritesmisc")), new TextureDrawer(Content.Load<Texture2D>("Placeholder/barint"), new TextureFrame(new Rectangle(0, 15, 44, 15), Point.Zero))),
+                    new Button("startGame", new Rectangle(168, 137, 44, 15), SpriteSheetCollection.GetTex("play","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button"), SpriteSheetCollection.GetTex("pressed","playpressed","button")),
                 }),
             };
 
@@ -268,6 +280,7 @@ namespace LD42
                 gameState = GameState.Dead;
                 currentUInb = 3;
                 player.isDestroyed = true;
+                score = inven.GetScore();
             }
             else if (gameState == GameState.Game && ipp.JustPressed("p"))
             {
@@ -576,7 +589,10 @@ namespace LD42
             uis[currentUInb].Draw(spriteBatch);
 
             if (gameState == GameState.Dead)
-                fdrawer.DrawText("whitefont", score.ToString(), new Rectangle(0, 0, 224, 160), spriteBatch);
+            {
+                fdrawer.DrawText("realfont", score.ToString(), new Rectangle(144, 53, 224, 160), spriteBatch);
+                scoretex.Draw(spriteBatch, new Vector2(64, 53));
+            }
 
             spriteBatch.End();
         }

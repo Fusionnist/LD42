@@ -211,6 +211,16 @@ namespace LD42
             }
         }
 
+        public int GetScore()
+        {
+            int s = 0;
+            foreach(Item i in items)
+            {
+                s += i.IntProperty("worth");
+            }
+            return s;
+        }
+
         void CheckRecipes(List<string> pool)
         {
             Recipe r = RecipeBook.FindRecipe(pool);

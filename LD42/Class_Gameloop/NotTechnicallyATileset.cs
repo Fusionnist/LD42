@@ -227,13 +227,13 @@ namespace LD42
             List<Entity> ents = new List<Entity>();
             ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(12), new Vector2(0, 96), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
             ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(12), new Vector2(160, 96), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
-            for (int i = -10; i <= 20; i++)
+            for (int i = -10; i <= 30; i++)
             {
                 ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(6), new Vector2(32 * i, 0), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
             }
-            for (int i = -2; i <= 4; i++)
+            for (int i = -2; i <= 6; i++)
                 ents.Add(ebuilder.CreateEntity("tile", GetDrawerCollection(12), new Vector2(160 * i, 96), new List<Property>() { new Property("isTile", "isTile", "isTile") }, "tile"));
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Random r = new Random();
                 int x = r.Next(1, 5);
