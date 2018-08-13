@@ -155,7 +155,7 @@ namespace LD42
             EntityCollection.CreateGroup("player", "players");
 
             SetupUISystems();
-            ts = new NotTechnicallyATileset(new Texture2D[] { Content.Load<Texture2D>("yesnpressed"), Content.Load<Texture2D>("Placeholder/placeholder1") }, vdims, ebuilder, Content);
+            ts = new NotTechnicallyATileset(vdims, ebuilder, Content);
             player = Assembler.GetEnt(ElementCollection.GetEntRef("player"), new Vector2(64, 65), Content, ebuilder);
 
             inven = new Inventory(Content);

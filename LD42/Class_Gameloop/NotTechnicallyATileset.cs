@@ -33,7 +33,7 @@ namespace LD42
         Random r;
         int ticktock, itemCount, prevBg;
 
-        public NotTechnicallyATileset(Texture2D[] dick, Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
+        public NotTechnicallyATileset(Point vdims_, EntBuilder42 ebuilder_, ContentManager content_)
         {
             vdims = vdims_;
             addCeiling = true;
